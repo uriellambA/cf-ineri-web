@@ -791,35 +791,27 @@ document.getElementById('overview-grid').innerHTML = `
 // ── AI CHATBOT ─────────────────────────────────────────────────────────────
 const ligaResumen = Object.entries(ligaCounts).sort((a,b)=>b[1]-a[1]).map(([l,c])=>l+':'+c).join(', ');
 
-const CONTEXT = [
-  'Sos el asistente oficial del CF Ineri, club de fútbol de Roblox fundado en 2020 por Urielneta. 4 estrellas (títulos). Colores: verde, blanco, rojo. Escudo: León con corona.',
-  '',
-  'JUGADORES (goles/asistencias):',
-  STATS.map(s => s.jugador + ': ' + s.goles + 'g / ' + s.asistencias + 'a').join('\n'),
-  '',
-  'RESUMEN GENERAL:',
-  '- Total partidos: ' + totalPartidos + ' | Victorias: ' + victorias + ' | Derrotas: ' + derrotas + ' | Empates: ' + empates + ' | Win%: ' + winRate,
-  '- Goles a favor: ' + golesFavor + ' | Goles en contra: ' + golesContra,
-  '- Mayor victoria: ' + maxGol.resultado_ineri + '-' + maxGol.resultado_rival + ' vs ' + maxGol.rival + ' (' + maxGol.liga + ' ' + maxGol.año + ')',
-  '- Mayor derrota: ' + maxGolContra.resultado_ineri + '-' + maxGolContra.resultado_rival + ' vs ' + maxGolContra.rival + ' (' + maxGolContra.liga + ' ' + maxGolContra.año + ')',
-  '- Ligas: ' + ligaResumen + ' | Copas jugadas: ' + MATCHES.filter(function(m){return m.copa==='SI';}).length,
-  '',
-  'PARTIDOS POR AÑO:',
-  years.map(function(y) {
-    var ms = MATCHES.filter(function(m){return m.año===y;});
-    var v = ms.filter(function(m){return m.tipo==='victoria';}).length;
-    var d = ms.filter(function(m){return m.tipo==='derrota';}).length;
-    var e = ms.filter(function(m){return m.tipo==='empate';}).length;
-    return y + ': ' + ms.length + ' partidos | ' + v + 'V-' + d + 'D-' + e + 'E';
-  }).join('\n'),
-  '',
-  'LISTA COMPLETA DE PARTIDOS:',
-  MATCHES.map(function(m){
-    return '#' + m.id + ' ' + m.año + ' vs ' + m.rival + ': ' + m.resultado_ineri + '-' + m.resultado_rival + ' (' + m.tipo + ', ' + m.liga + ', ' + m.juego + (m.copa==='SI'?' COPA':'') + ')';
-  }).join('\n'),
-  '',
-  'INSTRUCCIONES: Respondé SOLO con los datos que aparecen arriba. No inventes ni supongas datos. Si no encontrás el dato exacto, decilo claramente. Respondé en español, de forma amigable y concisa.'
-].join('\n');
+const CONTEXT = (function() {
+  var jugadores = STATS.map(function(s){ return s.jugador+':'+s.goles+'g/'+s.asistencias+'a'; }).join('|');
+  var porAño = years.map(function(y){
+    var ms=MATCHES.filter(function(m){return m.año===y;});
+    var v=ms.filter(function(m){return m.tipo==='victoria';}).length;
+    var d=ms.filter(function(m){return m.tipo==='derrota';}).length;
+    var e=ms.filter(function(m){return m.tipo==='empate';}).length;
+    return y+'='+ms.length+'p/'+v+'V/'+d+'D/'+e+'E';
+  }).join('|');
+  var partidos = MATCHES.map(function(m){
+    return m.año+' '+m.rival+' '+m.resultado_ineri+'-'+m.resultado_rival+' '+m.tipo[0].toUpperCase()+' '+m.liga+(m.copa==='SI'?'*':'');
+  }).join('\n');
+  return 'CF Ineri: club Roblox fundado 2020. 4 titulos. Verde/blanco/rojo.\n'+
+    'STATS(goles/asis): '+jugadores+'\n'+
+    'GENERAL: '+totalPartidos+'partidos '+victorias+'V '+derrotas+'D '+empates+'E winrate'+winRate+'% GF'+golesFavor+' GC'+golesContra+'\n'+
+    'MayorVictoria: '+maxGol.resultado_ineri+'-'+maxGol.resultado_rival+' vs '+maxGol.rival+' '+maxGol.liga+' '+maxGol.año+'\n'+
+    'MayorDerrota: '+maxGolContra.resultado_ineri+'-'+maxGolContra.resultado_rival+' vs '+maxGolContra.rival+' '+maxGolContra.liga+' '+maxGolContra.año+'\n'+
+    'POR AÑO: '+porAño+'\n'+
+    'PARTIDOS(año rival res tipo liga *=copa):\n'+partidos+'\n'+
+    'REGLAS: Usa SOLO estos datos. No inventes. Responde en español, amigable y corto.';
+})();
 // ── LÍMITE 3 PREGUNTAS POR DÍA ──────────────────────────────────────────
 const CHAT_LIMIT = 3;
 function getChatUsage() {
