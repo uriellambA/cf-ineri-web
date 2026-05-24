@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CF Ineri — Club Oficial</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1a5c2a;
+    --verde-oscuro: #0d3317;
+    --verde-brillante: #27a645;
+    --rojo: #cc2222;
+    --blanco: #f0f0f0;
+    --gris: #8a8a8a;
+    --gris-oscuro: #1a1a1a;
+    --fondo: #0a0a0a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--fondo);
+    color: var(--blanco);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--verde);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 64px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .nav-logo img { height: 44px; border-radius: 50%; }
+  .nav-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 2px; color: var(--blanco); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gris); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--verde-brillante); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 60% 40%, #1a4a28 0%, #0d1f12 50%, #050a07 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; padding-top: 64px;
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(39,166,69,0.03) 40px, rgba(39,166,69,0.03) 41px);
+  }
+  .hero-content { text-align: center; position: relative; z-index: 2; }
+  .hero-logo {
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 4px solid var(--verde-brillante);
+    box-shadow: 0 0 60px rgba(39,166,69,0.4), 0 0 120px rgba(39,166,69,0.15);
+    animation: pulso 3s ease-in-out infinite;
+    margin-bottom: 32px;
+  }
+  @keyframes pulso {
+    0%,100% { box-shadow: 0 0 60px rgba(39,166,69,0.4), 0 0 120px rgba(39,166,69,0.15); }
+    50% { box-shadow: 0 0 80px rgba(39,166,69,0.6), 0 0 160px rgba(39,166,69,0.25); }
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    letter-spacing: 6px; line-height: 0.9;
+    background: linear-gradient(135deg, #fff 0%, #27a645 50%, #fff 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; letter-spacing: 8px; text-transform: uppercase;
+    color: var(--gris); margin: 16px 0 40px;
+  }
+  .hero-stats {
+    display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+    margin-top: 48px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem;
+    color: var(--verde-brillante); line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gris);
+    margin-top: 4px;
+  }
+  .stars-row { display: flex; gap: 8px; justify-content: center; margin: 24px 0 0; }
+  .star { color: var(--verde-brillante); font-size: 1.4rem; }
+
+  /* SECTIONS */
+  section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; letter-spacing: 4px;
+    color: var(--blanco); margin-bottom: 8px;
+  }
+  .section-line {
+    width: 80px; height: 4px;
+    background: linear-gradient(90deg, var(--verde-brillante), var(--rojo));
+    margin-bottom: 48px;
+  }
+
+  /* STATS PLAYERS */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+  }
+  .player-card {
+    background: linear-gradient(135deg, #111 0%, #1a2a1c 100%);
+    border: 1px solid #2a3a2c; border-radius: 12px; padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: default;
+  }
+  .player-card:hover { transform: translateY(-4px); border-color: var(--verde-brillante); }
+  .player-rank {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+    color: var(--verde-brillante); min-width: 40px;
+  }
+  .player-rank.gold { color: #f4c430; }
+  .player-rank.silver { color: #c0c0c0; }
+  .player-rank.bronze { color: #cd7f32; }
+  .player-info { flex: 1; }
+  .player-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.15rem; letter-spacing: 1px;
+  }
+  .player-stats-row { display: flex; gap: 16px; margin-top: 6px; }
+  .stat-chip {
+    font-size: 0.8rem; color: var(--gris);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .stat-chip span { color: var(--blanco); font-weight: 600; }
+  .stat-bar-wrap { width: 60px; }
+  .stat-bar { height: 4px; background: #222; border-radius: 2px; margin-top: 4px; }
+  .stat-bar-fill { height: 100%; border-radius: 2px; background: var(--verde-brillante); transition: width 1s; }
+
+  /* MATCHES */
+  .matches-filters {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px;
+  }
+  .filter-btn {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+    padding: 8px 18px; border-radius: 999px; border: 1px solid #333;
+    background: transparent; color: var(--gris); cursor: pointer; transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--verde); border-color: var(--verde-brillante); color: var(--blanco);
+  }
+  .matches-list { display: flex; flex-direction: column; gap: 10px; }
+  .match-row {
+    background: #111; border: 1px solid #222; border-radius: 10px;
+    padding: 16px 24px; display: flex; align-items: center; gap: 20px;
+    transition: border-color 0.2s;
+  }
+  .match-row:hover { border-color: #333; }
+  .match-row.victoria { border-left: 4px solid var(--verde-brillante); }
+  .match-row.derrota { border-left: 4px solid var(--rojo); }
+  .match-row.empate { border-left: 4px solid #888; }
+  .match-tipo {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    min-width: 24px;
+  }
+  .match-tipo.victoria { color: var(--verde-brillante); }
+  .match-tipo.derrota { color: var(--rojo); }
+  .match-tipo.empate { color: #888; }
+  .match-rival { flex: 1; font-weight: 600; font-size: 0.95rem; }
+  .match-score {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px;
+  }
+  .match-meta {
+    font-size: 0.75rem; color: var(--gris);
+    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px;
+    text-align: right; min-width: 90px;
+  }
+  .match-copa { color: #f4c430; font-size: 0.8rem; }
+  .matches-pagination { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+  .page-btn {
+    width: 36px; height: 36px; border-radius: 8px; border: 1px solid #333;
+    background: transparent; color: var(--gris); cursor: pointer; font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; transition: all 0.2s;
+  }
+  .page-btn:hover, .page-btn.active { background: var(--verde); color: var(--blanco); border-color: var(--verde-brillante); }
+
+  /* OVERVIEW CHARTS */
+  .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 700px) { .overview-grid { grid-template-columns: 1fr; } }
+  .chart-card {
+    background: #111; border: 1px solid #222; border-radius: 12px; padding: 28px;
+  }
+  .chart-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--gris); margin-bottom: 20px;
+  }
+  .donut-wrap { display: flex; align-items: center; gap: 28px; }
+  .donut-labels { display: flex; flex-direction: column; gap: 10px; }
+  .donut-label { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .bar-chart { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+  .bar-label { font-size: 0.8rem; color: var(--gris); min-width: 70px; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; }
+  .bar-outer { flex: 1; height: 10px; background: #1e1e1e; border-radius: 5px; }
+  .bar-inner { height: 100%; border-radius: 5px; background: var(--verde-brillante); }
+  .bar-val { font-size: 0.8rem; color: var(--blanco); min-width: 28px; text-align: right; font-weight: 600; }
+
+  /* AI CHATBOT */
+  #ia { background: linear-gradient(180deg, #050a07 0%, #0a0a0a 100%); }
+  .chat-container {
+    background: #0e0e0e; border: 1px solid #1f3a22; border-radius: 16px;
+    overflow: hidden; max-width: 800px; margin: 0 auto;
+    box-shadow: 0 0 60px rgba(39,166,69,0.1);
+  }
+  .chat-header {
+    background: linear-gradient(90deg, #0d3317, #1a5c2a);
+    padding: 20px 28px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid #1f3a22;
+  }
+  .chat-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 2px solid var(--verde-brillante);
+  }
+  .chat-header-info h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px;
+  }
+  .chat-header-info p { font-size: 0.78rem; color: #6ec97a; }
+  .chat-status { width: 8px; height: 8px; background: var(--verde-brillante); border-radius: 50%; margin-left: auto; box-shadow: 0 0 8px var(--verde-brillante); }
+  .chat-messages {
+    height: 420px; overflow-y: auto; padding: 24px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: #111; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--verde); border-radius: 2px; }
+  .msg { display: flex; gap: 12px; max-width: 85%; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg-bubble {
+    padding: 12px 16px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5;
+  }
+  .msg.bot .msg-bubble { background: #1a2a1c; border: 1px solid #2a3a2c; }
+  .msg.user .msg-bubble { background: var(--verde); color: #fff; }
+  .msg-icon { font-size: 1.4rem; margin-top: 2px; }
+  .chat-input-row {
+    display: flex; gap: 12px; padding: 20px 24px;
+    border-top: 1px solid #1f3a22; background: #0a0a0a;
+  }
+  .chat-input {
+    flex: 1; background: #151515; border: 1px solid #2a3a2c; border-radius: 10px;
+    padding: 12px 16px; color: var(--blanco); font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+  }
+  .chat-input:focus { border-color: var(--verde-brillante); }
+  .chat-input::placeholder { color: #444; }
+  .chat-send {
+    background: var(--verde); border: none; border-radius: 10px;
+    padding: 12px 22px; color: #fff; font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .chat-send:hover { background: var(--verde-brillante); }
+  .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+  .suggested-qs { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 24px 16px; }
+  .sq {
+    font-size: 0.78rem; padding: 6px 12px; border-radius: 999px;
+    border: 1px solid #2a3a2c; background: transparent; color: #6ec97a;
+    cursor: pointer; font-family: 'Barlow', sans-serif; transition: all 0.2s;
+  }
+  .sq:hover { background: #1a2a1c; color: var(--blanco); }
+  .typing { display: flex; gap: 4px; align-items: center; padding: 4px 0; }
+  .typing span { width: 6px; height: 6px; background: var(--verde-brillante); border-radius: 50%; animation: blink 1s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
+
+  /* FOOTER */
+  footer {
+    background: #050505; border-top: 1px solid #1a2a1c;
+    text-align: center; padding: 40px;
+    font-family: 'Barlow Condensed', sans-serif; color: var(--gris);
+    font-size: 0.85rem; letter-spacing: 1px;
+  }
+  footer img { height: 48px; border-radius: 50%; margin-bottom: 12px; }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    nav { padding: 0 16px; }
+    .nav-links { display: none; }
+    section { padding: 60px 16px; }
+    .hero-stats { gap: 24px; }
+  }
+
+  /* ANIMATE IN */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="https://i.imgur.com/placeholder.png" id="nav-logo-img" alt="CF Ineri">
+    <span class="nav-brand">CF INERI</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#estadisticas">Estadísticas</a></li>
+    <li><a href="#partidos">Partidos</a></li>
+    <li><a href="#general">General</a></li>
+    <li><a href="#ia">IA</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="inicio" class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <img src="https://i.imgur.com/placeholder.png" id="hero-logo" class="hero-logo" alt="CF Ineri">
+    <h1>CF INERI</h1>
+    <p class="hero-sub">Urielneta · Fundado 2021 · TPS-Touch Football-ATF Matchpitch</p>
+    <div class="stars-row" id="stars-row"></div>
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+</div>
+
+<!-- ESTADÍSTICAS DE JUGADORES -->
+<section id="estadisticas">
+  <div class="fade-in">
+    <h2 class="section-title">Estadísticas</h2>
+    <div class="section-line"></div>
+    <div class="matches-filters" id="stat-filters">
+      <button class="filter-btn active" data-stat="goles">⚽ Goles</button>
+      <button class="filter-btn" data-stat="asistencias">🎯 Asistencias</button>
+      <button class="filter-btn" data-stat="total">📊 Total (G+A)</button>
+    </div>
+    <div class="stats-grid" id="stats-grid"></div>
+  </div>
+</section>
+
+<!-- PARTIDOS -->
+<section id="partidos">
+  <div class="fade-in">
+    <h2 class="section-title">Partidos</h2>
+    <div class="section-line"></div>
+    <div class="matches-filters" id="match-filters">
+      <button class="filter-btn active" data-f="all">Todos</button>
+      <button class="filter-btn" data-f="victoria">Victorias</button>
+      <button class="filter-btn" data-f="derrota">Derrotas</button>
+      <button class="filter-btn" data-f="empate">Empates</button>
+      <button class="filter-btn" data-f="copa">Copa 🏆</button>
+    </div>
+    <div id="match-year-filters" class="matches-filters" style="margin-top:-16px"></div>
+    <div class="matches-list" id="matches-list"></div>
+    <div class="matches-pagination" id="pagination"></div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="general">
+  <div class="fade-in">
+    <h2 class="section-title">Resumen General</h2>
+    <div class="section-line"></div>
+    <div class="overview-grid" id="overview-grid"></div>
+  </div>
+</section>
+
+<!-- IA CHATBOT -->
+<section id="ia" style="max-width:100%; padding:100px 40px; background:linear-gradient(180deg,#050a07,#0a0a0a);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="fade-in">
+      <h2 class="section-title">Asistente IA</h2>
+      <div class="section-line"></div>
+      <p style="color:var(--gris);margin-bottom:32px;font-size:0.95rem;">Preguntale cualquier cosa sobre el CF Ineri. Conoce todos los partidos, jugadores y estadísticas del club.</p>
+      <div class="chat-container">
+        <div class="chat-header">
+          <img src="https://i.imgur.com/placeholder.png" class="chat-avatar" id="chat-avatar" alt="Ineri Bot">
+          <div class="chat-header-info">
+            <h3>INERI BOT</h3>
+            <p>Asistente oficial del club · En línea</p>
+          </div>
+          <div class="chat-status"></div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <div class="msg bot">
+            <div class="msg-icon">🦁</div>
+            <div class="msg-bubble">¡Hola! Soy el asistente oficial del <strong>CF Ineri</strong>. Conozco todos los partidos, estadísticas y datos del club. ¿Qué querés saber?</div>
+          </div>
+        </div>
+        <div class="suggested-qs" id="suggested-qs">
+          <button class="sq" onclick="askSuggested('¿Quién es el máximo goleador?')">⚽ Máximo goleador</button>
+          <button class="sq" onclick="askSuggested('¿Cuántas victorias tiene el equipo?')">📊 Victorias totales</button>
+          <button class="sq" onclick="askSuggested('¿Cuál fue la mayor goleada?')">🔥 Mayor goleada</button>
+          <button class="sq" onclick="askSuggested('¿Cuántos partidos se jugaron en 2025?')">📅 Partidos 2025</button>
+        </div>
+        <div style="text-align:right; padding: 4px 8px 0;">
+          <span id="chat-limit-badge" style="font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; letter-spacing:1px;"></span>
+        </div>
+        <div class="chat-input-row">
+          <input class="chat-input" id="chat-input" type="text" placeholder="Preguntá sobre el CF Ineri..." maxlength="300">
+          <button class="chat-send" id="chat-send" onclick="sendMessage()">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="https://i.imgur.com/placeholder.png" id="footer-logo" alt="CF Ineri">
+  <div>CF INERI · URIELNETA</div>
+  <div style="margin-top:8px;font-size:0.75rem;opacity:0.5;">Equipo de Roblox · Fundado 2020</div>
+</footer>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const LOGO_URL = 'CFIneri.png';
+
+// Try to load local logo, fallback to a lion emoji SVG
+function setLogos() {
+  const logoSrc = 'data:image/png;base64,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';
+  ['nav-logo-img','hero-logo','chat-avatar','footer-logo'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.src = logoSrc;
+  });
+}
+setLogos();
+
+const STATS = [
+  {"jugador":"Azion","goles":152+1,"asistencias":50},
+  {"jugador":"Rvssian","goles":96+20,"asistencias":85+8},
+  {"jugador":"Jebedias","goles":76+8,"asistencias":82+4},
+  {"jugador":"Uriel","goles":67+1,"asistencias":40+4},
+  {"jugador":"Leo","goles":56,"asistencias":8},
+  {"jugador":"Goteras","goles":39+6,"asistencias":49+6},
+  {"jugador":"Hiiro","goles":19,"asistencias":32+1},
+  {"jugador":"Coco","goles":20,"asistencias":8},
+  {"jugador":"Gigi","goles":18,"asistencias":7},
+  {"jugador":"Adri","goles":13,"asistencias":8},
+  {"jugador":"Gabe","goles":10,"asistencias":8},
+  {"jugador":"Wicho","goles":13,"asistencias":4},
+  {"jugador":"Somating","goles":9,"asistencias":16},
+  {"jugador":"Camilo","goles":8,"asistencias":16},
+  {"jugador":"Nhelv","goles":8,"asistencias":1},
+  {"jugador":"Frizao","goles":8,"asistencias":6},
+  {"jugador":"Golem","goles":6,"asistencias":7},
+  {"jugador":"44aaron","goles":14,"asistencias":3},
+  {"jugador":"Bluexihno","goles":10,"asistencias":14},
+  {"jugador":"17jxvrix","goles":12,"asistencias":3},
+  {"jugador":"Xuriel","goles":3,"asistencias":8},
+  {"jugador":"ynacho","goles":4,"asistencias":2},
+  {"jugador":"Hydro","goles":3,"asistencias":1},
+  {"jugador":"14skxz","goles":2,"asistencias":3},
+  {"jugador":"ElBiza","goles":3,"asistencias":1},
+  {"jugador":"rxf","goles":2,"asistencias":0},
+  {"jugador":"Samuswp","goles":0,"asistencias":2},
+  {"jugador":"Bizaa","goles":6,"asistencias":2},
+  {"jugador":"Josh723","goles":1,"asistencias":1},
+  {"jugador":"Fabian","goles":0,"asistencias":1},
+  {"jugador":"Aimep3","goles":1,"asistencias":0},
+  {"jugador":"John","goles":1,"asistencias":0},
+  {"jugador":"2klnco","goles":1,"asistencias":0},
+  {"jugador":"Chees","goles":1,"asistencias":3},
+  {"jugador":"Iker","goles":0,"asistencias":4},
+  {"jugador":"Lamryze","goles":0,"asistencias":2},
+  {"jugador":"Kairoxxss","goles":2,"asistencias":0},
+  {"jugador":"Pemegamer6","goles":4,"asistencias":1},
+  {"jugador":"UsuarioDesconocido","goles":2,"asistencias":1}
+];
+
+const MATCHES = [{"id":1,"rival":"River Plate","resultado_ineri":2,"resultado_rival":20,"juego":"TPS","tipo":"derrota","año":"2023","liga":"TSL","copa":"NO"},
+  {"id":2,"rival":"America","resultado_ineri":4,"resultado_rival":18,"juego":"TPS","tipo":"derrota","año":"2023","liga":"TSL","copa":"NO"},
+  {"id":3,"rival":"Atletico de Madrid","resultado_ineri":3,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2023","liga":"TSL","copa":"NO"},
+  {"id":4,"rival":"Ajax","resultado_ineri":2,"resultado_rival":6,"juego":"TPS","tipo":"derrota","año":"2023","liga":"TSL","copa":"NO"},
+  {"id":5,"rival":"Marruecos","resultado_ineri":18,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2023","liga":"CWL","copa":"NO"},
+  {"id":6,"rival":"Argentina","resultado_ineri":11,"resultado_rival":9,"juego":"TPS","tipo":"victoria","año":"2023","liga":"CWL","copa":"NO"},
+  {"id":7,"rival":"Corea del Sur","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2023","liga":"CWL","copa":"SI"},
+  {"id":8,"rival":"España","resultado_ineri":4,"resultado_rival":12,"juego":"TPS","tipo":"derrota","año":"2023","liga":"CWL","copa":"NO"},
+  {"id":9,"rival":"Parma","resultado_ineri":3,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2023","liga":"TSL","copa":"NO"},
+  {"id":10,"rival":"Town FC","resultado_ineri":2,"resultado_rival":3,"juego":"TPS","tipo":"derrota","año":"2023","liga":"TSL","copa":"NO"},
+  {"id":11,"rival":"Paraguay","resultado_ineri":0,"resultado_rival":3,"juego":"TPS","tipo":"derrota","año":"2021","liga":"MOS","copa":"NO"},
+  {"id":12,"rival":"Otaku FC","resultado_ineri":0,"resultado_rival":1,"juego":"TPS","tipo":"derrota","año":"2021","liga":"MOS","copa":"NO"},
+  {"id":13,"rival":"Otaku FC","resultado_ineri":2,"resultado_rival":3,"juego":"TPS","tipo":"derrota","año":"2021","liga":"MOS","copa":"NO"},
+  {"id":14,"rival":"Estados Unidos","resultado_ineri":14,"resultado_rival":8,"juego":"TPS","tipo":"victoria","año":"2023","liga":"MOS","copa":"NO"},
+  {"id":15,"rival":"G2","resultado_ineri":3,"resultado_rival":3,"juego":"Touch","tipo":"empate","año":"2024","liga":"ATF","copa":"NO"},
+  {"id":16,"rival":"Team Random","resultado_ineri":4,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},
+  {"id":17,"rival":"Moron Celtics","resultado_ineri":5,"resultado_rival":2,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},
+  {"id":18,"rival":"Atletico Berlin","resultado_ineri":0,"resultado_rival":3,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},
+  {"id":19,"rival":"Novorizontino","resultado_ineri":1,"resultado_rival":5,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},
+  {"id":20,"rival":"Bloxyneta","resultado_ineri":7,"resultado_rival":2,"juego":"Touch","tipo":"victoria","año":"2025","liga":"ATF","copa":"NO"},
+  {"id":21,"rival":"Fantasy FC","resultado_ineri":4,"resultado_rival":5,"juego":"Touch","tipo":"derrota","año":"2025","liga":"ATF","copa":"NO"},
+  {"id":22,"rival":"Da Pushis","resultado_ineri":4,"resultado_rival":7,"juego":"Touch","tipo":"derrota","año":"2025","liga":"ATF","copa":"NO"},
+  {"id":23,"rival":"Nacional","resultado_ineri":4,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2025","liga":"ATF","copa":"NO"},
+  {"id":24,"rival":"Racing Club","resultado_ineri":0,"resultado_rival":6,"juego":"Touch","tipo":"derrota","año":"2025","liga":"ATF","copa":"NO"},
+  {"id":25,"rival":"Atletico Nacional","resultado_ineri":0,"resultado_rival":2,"juego":"Touch","tipo":"derrota","año":"2025","liga":"ATF","copa":"NO"},{"id":26,"rival":"Nacional","resultado_ineri":6,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2025","liga":"ATF","copa":"NO"},{"id":27,"rival":"Racing Club","resultado_ineri":3,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2025","liga":"ATF","copa":"NO"},{"id":28,"rival":"Atletico Nacional","resultado_ineri":2,"resultado_rival":10,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},{"id":29,"rival":"Atletico Nacional","resultado_ineri":0,"resultado_rival":3,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},{"id":30,"rival":"Bucaramanga","resultado_ineri":8,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},{"id":31,"rival":"Sugar FC","resultado_ineri":2,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},{"id":32,"rival":"Faustoneta","resultado_ineri":2,"resultado_rival":6,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},{"id":33,"rival":"The Sylars","resultado_ineri":4,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},{"id":34,"rival":"DSC","resultado_ineri":1,"resultado_rival":5,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},{"id":35,"rival":"U De CALI","resultado_ineri":0,"resultado_rival":0,"juego":"Touch","tipo":"empate","año":"2024","liga":"ATF","copa":"NO"},{"id":36,"rival":"Sao Cayetano","resultado_ineri":0,"resultado_rival":1,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},{"id":37,"rival":"Skanvia","resultado_ineri":3,"resultado_rival":6,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},{"id":38,"rival":"Fantasy FC","resultado_ineri":2,"resultado_rival":9,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},{"id":39,"rival":"Atletico Berlin","resultado_ineri":1,"resultado_rival":4,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},{"id":40,"rival":"Skanvia","resultado_ineri":3,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},{"id":41,"rival":"Racing Club","resultado_ineri":3,"resultado_rival":3,"juego":"Touch","tipo":"empate","año":"2024","liga":"ATF","copa":"NO"},{"id":42,"rival":"Rosario Central","resultado_ineri":2,"resultado_rival":4,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},{"id":43,"rival":"Estudiantes de la Plata","resultado_ineri":3,"resultado_rival":14,"juego":"Touch","tipo":"derrota","año":"2024","liga":"ATF","copa":"NO"},{"id":44,"rival":"River Plate","resultado_ineri":11,"resultado_rival":7,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},{"id":45,"rival":"Da Pushis","resultado_ineri":6,"resultado_rival":3,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},{"id":46,"rival":"Sugar FC","resultado_ineri":4,"resultado_rival":2,"juego":"Touch","tipo":"victoria","año":"2024","liga":"ATF","copa":"NO"},{"id":47,"rival":"Galindos FC","resultado_ineri":3,"resultado_rival":7,"juego":"Touch","tipo":"derrota","año":"2025","liga":"ATF","copa":"NO"},{"id":48,"rival":"Jamaica","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"NO"},{"id":49,"rival":"Marruecos","resultado_ineri":0,"resultado_rival":5,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":50,"rival":"Canada","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"NO"},{"id":51,"rival":"Brasil","resultado_ineri":1,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Amistoso","copa":"NO"},{"id":52,"rival":"Francia","resultado_ineri":6,"resultado_rival":8,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":53,"rival":"Venezuela","resultado_ineri":6,"resultado_rival":14,"juego":"TPS","tipo":"derrota","año":"2025","liga":"TSL","copa":"NO"},{"id":54,"rival":"Suiza","resultado_ineri":6,"resultado_rival":14,"juego":"TPS","tipo":"derrota","año":"2025","liga":"TSL","copa":"NO"},{"id":55,"rival":"Team Random","resultado_ineri":0,"resultado_rival":0,"juego":"TPS","tipo":"empate","año":"2025","liga":"UL","copa":"NO"},{"id":56,"rival":"Sol FC","resultado_ineri":3,"resultado_rival":3,"juego":"TPS","tipo":"empate","año":"2025","liga":"UL","copa":"NO"},{"id":57,"rival":"Otaku FC","resultado_ineri":14,"resultado_rival":11,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"NO"},{"id":58,"rival":"Independiente","resultado_ineri":3,"resultado_rival":3,"juego":"TPS","tipo":"empate","año":"2025","liga":"UL","copa":"NO"},{"id":59,"rival":"Paraguay","resultado_ineri":10,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Amistoso","copa":"NO"},{"id":60,"rival":"Brasil","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Amistoso","copa":"NO"},{"id":61,"rival":"Estados Unidos","resultado_ineri":3,"resultado_rival":12,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Amistoso","copa":"NO"},{"id":62,"rival":"Barcelona FC","resultado_ineri":0,"resultado_rival":1,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":63,"rival":"Team Random","resultado_ineri":6,"resultado_rival":6,"juego":"TPS","tipo":"empate","año":"2025","liga":"Amistoso","copa":"NO"},{"id":64,"rival":"Team Random","resultado_ineri":3,"resultado_rival":6,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Amistoso","copa":"NO"},{"id":65,"rival":"Otaku FC","resultado_ineri":3,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":66,"rival":"Ecuador","resultado_ineri":2,"resultado_rival":5,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Amistoso","copa":"NO"},{"id":67,"rival":"Brasil","resultado_ineri":9,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Amistoso","copa":"NO"},{"id":68,"rival":"Team Random","resultado_ineri":1,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":69,"rival":"Team Random","resultado_ineri":1,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":70,"rival":"Milan FC","resultado_ineri":2,"resultado_rival":10,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":71,"rival":"Liga de Quito","resultado_ineri":6,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":72,"rival":"Retolam FC","resultado_ineri":2,"resultado_rival":5,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":73,"rival":"Universitario","resultado_ineri":16,"resultado_rival":16,"juego":"TPS","tipo":"empate","año":"2025","liga":"FTC","copa":"NO"},{"id":74,"rival":"Saiyans FC","resultado_ineri":11,"resultado_rival":6,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"NO"},{"id":75,"rival":"PXG","resultado_ineri":5,"resultado_rival":13,"juego":"TPS","tipo":"derrota","año":"2025","liga":"FTC","copa":"NO"},{"id":76,"rival":"Uruguay","resultado_ineri":6,"resultado_rival":13,"juego":"TPS","tipo":"derrota","año":"2025","liga":"LMS","copa":"NO"},{"id":77,"rival":"Ecuador","resultado_ineri":1,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2025","liga":"LMS","copa":"NO"},{"id":78,"rival":"Mushuc","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"NO"},{"id":79,"rival":"Santos","resultado_ineri":6,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":80,"rival":"Japon","resultado_ineri":3,"resultado_rival":8,"juego":"TPS","tipo":"derrota","año":"2025","liga":"LMS","copa":"NO"},{"id":81,"rival":"Team Random","resultado_ineri":9,"resultado_rival":9,"juego":"TPS","tipo":"empate","año":"2025","liga":"Amistoso","copa":"NO"},{"id":82,"rival":"America","resultado_ineri":9,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":83,"rival":"Corinthians","resultado_ineri":9,"resultado_rival":6,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":84,"rival":"Eintracht","resultado_ineri":5,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":85,"rival":"Kickers","resultado_ineri":4,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":86,"rival":"Otaku FC","resultado_ineri":8,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":87,"rival":"Atletico Nacional","resultado_ineri":3,"resultado_rival":7,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":88,"rival":"Team Random","resultado_ineri":5,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Amistoso","copa":"NO"},{"id":89,"rival":"Estudiantes de la Plata","resultado_ineri":6,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":90,"rival":"Kickers","resultado_ineri":9,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":91,"rival":"Alianza Lima","resultado_ineri":7,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":92,"rival":"Corinthians","resultado_ineri":3,"resultado_rival":5,"juego":"TPS","tipo":"derrota","año":"2025","liga":"FTC","copa":"NO"},{"id":93,"rival":"Eintracht","resultado_ineri":3,"resultado_rival":1,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":94,"rival":"Estudiantes de la Plata","resultado_ineri":5,"resultado_rival":6,"juego":"TPS","tipo":"derrota","año":"2025","liga":"FTC","copa":"NO"},{"id":95,"rival":"Kickers","resultado_ineri":11,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":96,"rival":"Michi Team","resultado_ineri":4,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":97,"rival":"Team Random","resultado_ineri":5,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":98,"rival":"Atletico Nacional","resultado_ineri":2,"resultado_rival":8,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":99,"rival":"Corinthians","resultado_ineri":9,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":100,"rival":"Kazbra FC","resultado_ineri":3,"resultado_rival":12,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":101,"rival":"Mushuc","resultado_ineri":5,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"NO"},{"id":102,"rival":"Kickers","resultado_ineri":7,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":103,"rival":"Saiyans FC","resultado_ineri":6,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"NO"},{"id":104,"rival":"Team Random","resultado_ineri":3,"resultado_rival":5,"juego":"TPS","tipo":"derrota","año":"2025","liga":"LNH","copa":"NO"},{"id":105,"rival":"Atletico Nacional","resultado_ineri":5,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":106,"rival":"Corinthians","resultado_ineri":12,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":107,"rival":"Santos","resultado_ineri":5,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"SI"},{"id":108,"rival":"Universitario","resultado_ineri":9,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":109,"rival":"Palmeiras","resultado_ineri":8,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":110,"rival":"Kickers","resultado_ineri":6,"resultado_rival":1,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":111,"rival":"Kickers","resultado_ineri":5,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":112,"rival":"Alianza Lima","resultado_ineri":11,"resultado_rival":6,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":113,"rival":"Universitario","resultado_ineri":3,"resultado_rival":7,"juego":"TPS","tipo":"derrota","año":"2025","liga":"FTC","copa":"NO"},{"id":114,"rival":"Saiyans FC","resultado_ineri":4,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"SI"},{"id":115,"rival":"Guadalajara","resultado_ineri":8,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":116,"rival":"Team Random","resultado_ineri":3,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2025","liga":"LNH","copa":"NO"},{"id":117,"rival":"Kickers","resultado_ineri":4,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":118,"rival":"Otaku FC","resultado_ineri":5,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":119,"rival":"Michi Team","resultado_ineri":8,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":120,"rival":"Athletico Paranaense","resultado_ineri":8,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":121,"rival":"Santos","resultado_ineri":8,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":122,"rival":"Saiyans FC","resultado_ineri":9,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"NO"},{"id":123,"rival":"Guadalajara","resultado_ineri":4,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":124,"rival":"Kazbra FC","resultado_ineri":5,"resultado_rival":8,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":125,"rival":"Athletico Paranaense","resultado_ineri":4,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":126,"rival":"Corinthians","resultado_ineri":8,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":127,"rival":"Estudiantes de la Plata","resultado_ineri":7,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":128,"rival":"Alianza Lima","resultado_ineri":6,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":129,"rival":"Universitario","resultado_ineri":8,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":130,"rival":"Athletico Paranaense","resultado_ineri":5,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"SI"},{"id":131,"rival":"Kazbra FC","resultado_ineri":3,"resultado_rival":6,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":132,"rival":"Guadalajara","resultado_ineri":6,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":133,"rival":"Universitario","resultado_ineri":9,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":134,"rival":"Corinthians","resultado_ineri":4,"resultado_rival":8,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":135,"rival":"Palmeiras","resultado_ineri":4,"resultado_rival":7,"juego":"TPS","tipo":"derrota","año":"2025","liga":"FTC","copa":"NO"},{"id":136,"rival":"Alianza Lima","resultado_ineri":7,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"SI"},{"id":137,"rival":"Team Random","resultado_ineri":6,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":138,"rival":"Kickers","resultado_ineri":9,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"SI"},{"id":139,"rival":"Team Random","resultado_ineri":6,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Amistoso","copa":"NO"},{"id":140,"rival":"Athletico Paranaense","resultado_ineri":5,"resultado_rival":7,"juego":"TPS","tipo":"derrota","año":"2025","liga":"FTC","copa":"NO"},{"id":141,"rival":"Saiyans FC","resultado_ineri":9,"resultado_rival":6,"juego":"TPS","tipo":"victoria","año":"2025","liga":"UL","copa":"SI"},{"id":142,"rival":"Atletico Nacional","resultado_ineri":6,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":143,"rival":"Universitario","resultado_ineri":6,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":144,"rival":"Athletico Paranaense","resultado_ineri":3,"resultado_rival":5,"juego":"TPS","tipo":"derrota","año":"2025","liga":"FTC","copa":"NO"},{"id":145,"rival":"Alianza Lima","resultado_ineri":5,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":146,"rival":"Guadalajara","resultado_ineri":6,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"SI"},{"id":147,"rival":"Corinthians","resultado_ineri":4,"resultado_rival":6,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":148,"rival":"Santos","resultado_ineri":5,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":149,"rival":"Corinthians","resultado_ineri":6,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"SI"},{"id":150,"rival":"PXG","resultado_ineri":5,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":151,"rival":"Universitario","resultado_ineri":5,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":152,"rival":"Santos","resultado_ineri":8,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":153,"rival":"Guadalajara","resultado_ineri":5,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":154,"rival":"Athletico Paranaense","resultado_ineri":6,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Amistoso","copa":"NO"},{"id":155,"rival":"Otaku FC","resultado_ineri":8,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":156,"rival":"Team Random","resultado_ineri":8,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Amistoso","copa":"NO"},{"id":157,"rival":"Atlante FC","resultado_ineri":5,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":158,"rival":"Otaku FC","resultado_ineri":3,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2025","liga":"LNH","copa":"NO"},{"id":159,"rival":"Ecuador","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Banana League","copa":"NO"},{"id":160,"rival":"Guadalajara","resultado_ineri":12,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"SI"},{"id":161,"rival":"Palmeiras","resultado_ineri":8,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":162,"rival":"Chelsea","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":163,"rival":"Belgica","resultado_ineri":0,"resultado_rival":0,"juego":"TPS","tipo":"empate","año":"2025","liga":"Banana League","copa":"NO"},{"id":164,"rival":"Peñarol","resultado_ineri":12,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":165,"rival":"Alianza Lima","resultado_ineri":9,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":166,"rival":"SportsBoys","resultado_ineri":5,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2025","liga":"LMS","copa":"NO"},{"id":167,"rival":"Team Random","resultado_ineri":6,"resultado_rival":8,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Amistoso","copa":"NO"},{"id":168,"rival":"Colo Colo","resultado_ineri":6,"resultado_rival":7,"juego":"TPS","tipo":"derrota","año":"2025","liga":"FTC","copa":"NO"},{"id":169,"rival":"Inglaterra","resultado_ineri":5,"resultado_rival":6,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Banana League","copa":"NO"},{"id":170,"rival":"Kazbra FC","resultado_ineri":8,"resultado_rival":14,"juego":"TPS","tipo":"derrota","año":"2025","liga":"SLM","copa":"NO"},{"id":171,"rival":"Holanda","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Banana League","copa":"NO"},{"id":172,"rival":"Colo Colo","resultado_ineri":4,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":173,"rival":"Boca Juniors","resultado_ineri":13,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":174,"rival":"Peru","resultado_ineri":7,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Banana League","copa":"NO"},{"id":175,"rival":"Boca Juniors","resultado_ineri":14,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"NO"},{"id":176,"rival":"Palmeiras","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":177,"rival":"Team Random","resultado_ineri":8,"resultado_rival":6,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":178,"rival":"Michi Team","resultado_ineri":6,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":179,"rival":"Team Random","resultado_ineri":4,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"LNH","copa":"NO"},{"id":180,"rival":"Francia","resultado_ineri":8,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Banana League","copa":"NO"},{"id":181,"rival":"Independiente","resultado_ineri":8,"resultado_rival":7,"juego":"TPS","tipo":"victoria","año":"2025","liga":"FTC","copa":"SI"},{"id":182,"rival":"Pachuca","resultado_ineri":9,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":183,"rival":"Team Random","resultado_ineri":2,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2025","liga":"Amistoso","copa":"NO"},{"id":184,"rival":"Sporting","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":185,"rival":"Brentford","resultado_ineri":6,"resultado_rival":16,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":186,"rival":"Roma FC","resultado_ineri":4,"resultado_rival":3,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":187,"rival":"Team Random","resultado_ineri":8,"resultado_rival":6,"juego":"TPS","tipo":"victoria","año":"2025","liga":"Amistoso","copa":"NO"},{"id":188,"rival":"Team Random","resultado_ineri":7,"resultado_rival":7,"juego":"TPS","tipo":"empate","año":"2025","liga":"UL","copa":"NO"},{"id":189,"rival":"Auckland City","resultado_ineri":12,"resultado_rival":9,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":190,"rival":"Auckland City","resultado_ineri":12,"resultado_rival":9,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"NO"},{"id":191,"rival":"Auckland City","resultado_ineri":7,"resultado_rival":6,"juego":"TPS","tipo":"victoria","año":"2025","liga":"SLM","copa":"SI"},{"id":192,"rival":"Team Random","resultado_ineri":1,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2025","liga":"UL","copa":"NO"},{"id":193,"rival":"Estados Unidos","resultado_ineri":14,"resultado_rival":8,"juego":"TPS","tipo":"victoria","año":"2023","liga":"MOS","copa":"SI"},
+  {"id":194,"rival":"Atletico Nacional","resultado_ineri":1,"resultado_rival":6,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":195,"rival":"Atletico Nacional","resultado_ineri":0,"resultado_rival":3,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":196,"rival":"Team Random","resultado_ineri":0,"resultado_rival":6,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":197,"rival":"Team Random","resultado_ineri":2,"resultado_rival":5,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":198,"rival":"Team Random","resultado_ineri":1,"resultado_rival":2,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":199,"rival":"Team Random","resultado_ineri":0,"resultado_rival":0,"juego":"Touch","tipo":"empate","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":200,"rival":"Team Random","resultado_ineri":1,"resultado_rival":4,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":201,"rival":"Team Random","resultado_ineri":4,"resultado_rival":3,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":202,"rival":"Team Random","resultado_ineri":4,"resultado_rival":2,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":203,"rival":"Team Random","resultado_ineri":4,"resultado_rival":3,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":204,"rival":"Team Random","resultado_ineri":3,"resultado_rival":2,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":205,"rival":"Team Random","resultado_ineri":3,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":206,"rival":"Team Random","resultado_ineri":0,"resultado_rival":4,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":207,"rival":"Team Random","resultado_ineri":0,"resultado_rival":3,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":208,"rival":"Team Random","resultado_ineri":2,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":209,"rival":"Team Random","resultado_ineri":4,"resultado_rival":3,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":210,"rival":"Team Random","resultado_ineri":5,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":211,"rival":"Team Random","resultado_ineri":10,"resultado_rival":3,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":212,"rival":"Team Random","resultado_ineri":1,"resultado_rival":2,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":213,"rival":"Team Random","resultado_ineri":1,"resultado_rival":2,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":214,"rival":"Team Random","resultado_ineri":4,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":215,"rival":"Concepcion","resultado_ineri":1,"resultado_rival":3,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":216,"rival":"Red Bull","resultado_ineri":1,"resultado_rival":3,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":217,"rival":"Team Random","resultado_ineri":1,"resultado_rival":3,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":218,"rival":"Brazukinho","resultado_ineri":5,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":219,"rival":"Red Bull","resultado_ineri":4,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":220,"rival":"Team Random","resultado_ineri":5,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":221,"rival":"Team Random","resultado_ineri":5,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":222,"rival":"Team Random","resultado_ineri":2,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":223,"rival":"Team Random","resultado_ineri":5,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":224,"rival":"Team Random","resultado_ineri":5,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":225,"rival":"Team Random","resultado_ineri":2,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":226,"rival":"Red Bull","resultado_ineri":7,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":227,"rival":"Team Random","resultado_ineri":0,"resultado_rival":3,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":228,"rival":"Red Waffles","resultado_ineri":3,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":229,"rival":"Team Random","resultado_ineri":3,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":230,"rival":"Black Mans FC","resultado_ineri":2,"resultado_rival":1,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":231,"rival":"Black Mans FC","resultado_ineri":5,"resultado_rival":0,"juego":"Touch","tipo":"victoria","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":232,"rival":"Galindos FC","resultado_ineri":1,"resultado_rival":1,"juego":"Touch","tipo":"empate","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":233,"rival":"Galindos FC","resultado_ineri":0,"resultado_rival":0,"juego":"Touch","tipo":"empate","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":234,"rival":"CJA","resultado_ineri":1,"resultado_rival":4,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":235,"rival":"CJA","resultado_ineri":2,"resultado_rival":5,"juego":"Touch","tipo":"derrota","año":"2026","liga":"ATF","copa":"NO"},
+  {"id":236,"rival":"Santos","resultado_ineri":8,"resultado_rival":1,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":237,"rival":"Manchester Piggy","resultado_ineri":3,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":238,"rival":"Bayern Munich","resultado_ineri":3,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":239,"rival":"Neo United","resultado_ineri":3,"resultado_rival":0,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":240,"rival":"Real Esteli","resultado_ineri":10,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":241,"rival":"Golemneta","resultado_ineri":2,"resultado_rival":1,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":242,"rival":"Independiente","resultado_ineri":4,"resultado_rival":1,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":243,"rival":"Independiente","resultado_ineri":9,"resultado_rival":7,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":244,"rival":"San Lorenzo","resultado_ineri":8,"resultado_rival":9,"juego":"TPS","tipo":"derrota","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":245,"rival":"FxckAll","resultado_ineri":10,"resultado_rival":2,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":246,"rival":"Cambridge","resultado_ineri":3,"resultado_rival":11,"juego":"TPS","tipo":"derrota","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":247,"rival":"Real Madrid","resultado_ineri":9,"resultado_rival":1,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":248,"rival":"Arsenal","resultado_ineri":3,"resultado_rival":4,"juego":"TPS","tipo":"derrota","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":249,"rival":"Team Random","resultado_ineri":5,"resultado_rival":4,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":250,"rival":"Team Random","resultado_ineri":6,"resultado_rival":5,"juego":"TPS","tipo":"victoria","año":"2026","liga":"ULS","copa":"NO"},
+  {"id":251,"rival":"Team Random","resultado_ineri":7,"resultado_rival":7,"juego":"TPS","tipo":"empate","año":"2026","liga":"ULS","copa":"NO"}
+];
+
+// ── COMPUTED STATS ────────────────────────────────────────────────────────
+const totalPartidos = MATCHES.length;
+const victorias = MATCHES.filter(m => m.tipo === 'victoria').length;
+const derrotas = MATCHES.filter(m => m.tipo === 'derrota').length;
+const empates = MATCHES.filter(m => m.tipo === 'empate').length;
+const golesFavor = MATCHES.reduce((a,m) => a + m.resultado_ineri, 0);
+const golesContra = MATCHES.reduce((a,m) => a + m.resultado_rival, 0);
+const maxGol = MATCHES.reduce((a,m) => m.resultado_ineri > a.resultado_ineri ? m : a, MATCHES[0]);
+const maxGolContra = MATCHES.reduce((a,m) => m.resultado_rival > a.resultado_rival ? m : a, MATCHES[0]);
+
+// ── HERO ──────────────────────────────────────────────────────────────────
+document.getElementById('stars-row').innerHTML = '⭐⭐⭐⭐'.split('').map(() => '<span class="star">★</span>').join('');
+document.getElementById('hero-stats').innerHTML = `
+  <div class="hero-stat"><div class="hero-stat-num">${totalPartidos}</div><div class="hero-stat-label">Partidos</div></div>
+  <div class="hero-stat"><div class="hero-stat-num">${victorias}</div><div class="hero-stat-label">Victorias</div></div>
+  <div class="hero-stat"><div class="hero-stat-num">${golesFavor}</div><div class="hero-stat-label">Goles a favor</div></div>
+  <div class="hero-stat"><div class="hero-stat-num">${STATS.reduce((a,s)=>a+s.goles,0)}</div><div class="hero-stat-label">Goles totales</div></div>
+`;
+
+// ── PLAYER STATS ─────────────────────────────────────────────────────────
+let currentStat = 'goles';
+function renderStats() {
+  const sorted = [...STATS].sort((a,b) => {
+    if (currentStat === 'total') return (b.goles+b.asistencias) - (a.goles+a.asistencias);
+    return b[currentStat] - a[currentStat];
+  });
+  const maxVal = currentStat === 'total' ? Math.max(...sorted.map(s=>s.goles+s.asistencias)) : Math.max(...sorted.map(s=>s[currentStat]));
+  const rankClass = (i) => i===0?'gold':i===1?'silver':i===2?'bronze':'';
+  document.getElementById('stats-grid').innerHTML = sorted.map((p,i) => {
+    const val = currentStat === 'total' ? p.goles+p.asistencias : p[currentStat];
+    const pct = maxVal > 0 ? Math.round(val/maxVal*100) : 0;
+    return `<div class="player-card">
+      <div class="player-rank ${rankClass(i)}">${i+1}</div>
+      <div class="player-info">
+        <div class="player-name">${p.jugador}</div>
+        <div class="player-stats-row">
+          <div class="stat-chip">⚽ <span>${p.goles}</span></div>
+          <div class="stat-chip">🎯 <span>${p.asistencias}</span></div>
+          <div class="stat-chip">📊 <span>${p.goles+p.asistencias}</span></div>
+        </div>
+      </div>
+      <div class="stat-bar-wrap">
+        <div style="text-align:right;font-size:0.9rem;font-weight:700;color:var(--verde-brillante)">${val}</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:${pct}%"></div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+renderStats();
+document.getElementById('stat-filters').querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#stat-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentStat = btn.dataset.stat;
+    renderStats();
+  });
+});
+
+// ── MATCHES ───────────────────────────────────────────────────────────────
+let matchFilter = 'all';
+let yearFilter = 'all';
+let currentPage = 1;
+const PER_PAGE = 15;
+
+const years = [...new Set(MATCHES.map(m => m.año))].sort();
+document.getElementById('match-year-filters').innerHTML =
+  `<button class="filter-btn active" data-y="all">Todos los años</button>` +
+  years.map(y => `<button class="filter-btn" data-y="${y}">${y}</button>`).join('');
+
+function getFilteredMatches() {
+  return MATCHES.filter(m => {
+    const typeOk = matchFilter === 'all' || (matchFilter === 'copa' ? m.copa === 'SI' : m.tipo === matchFilter);
+    const yearOk = yearFilter === 'all' || m.año === yearFilter;
+    return typeOk && yearOk;
+  }).reverse();
+}
+
+function renderMatches() {
+  const filtered = getFilteredMatches();
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  const start = (currentPage-1)*PER_PAGE;
+  const page = filtered.slice(start, start+PER_PAGE);
+
+  document.getElementById('matches-list').innerHTML = page.map(m => `
+    <div class="match-row ${m.tipo}">
+      <div class="match-tipo ${m.tipo}">${m.tipo[0].toUpperCase()}</div>
+      <div class="match-rival">${m.rival} ${m.copa==='SI'?'<span class="match-copa">🏆</span>':''}</div>
+      <div class="match-score" style="color:${m.tipo==='victoria'?'var(--verde-brillante)':m.tipo==='derrota'?'var(--rojo)':'#888'}">
+        ${m.resultado_ineri} – ${m.resultado_rival}
+      </div>
+      <div class="match-meta">${m.liga}<br>${m.año} · ${m.juego}</div>
+    </div>
+  `).join('');
+
+  const pages = document.getElementById('pagination');
+  pages.innerHTML = '';
+  for(let i=1;i<=totalPages;i++){
+    const btn = document.createElement('button');
+    btn.className = 'page-btn' + (i===currentPage?' active':'');
+    btn.textContent = i;
+    btn.onclick = () => { currentPage=i; renderMatches(); };
+    pages.appendChild(btn);
+  }
+}
+renderMatches();
+
+document.getElementById('match-filters').querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#match-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    matchFilter = btn.dataset.f;
+    currentPage = 1;
+    renderMatches();
+  });
+});
+document.getElementById('match-year-filters').querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#match-year-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    yearFilter = btn.dataset.y;
+    currentPage = 1;
+    renderMatches();
+  });
+});
+
+// ── OVERVIEW CHARTS ───────────────────────────────────────────────────────
+const winRate = Math.round(victorias/totalPartidos*100);
+const ligaCounts = {};
+MATCHES.forEach(m => { ligaCounts[m.liga] = (ligaCounts[m.liga]||0)+1; });
+const topLigas = Object.entries(ligaCounts).sort((a,b)=>b[1]-a[1]).slice(0,6);
+const maxLiga = topLigas[0][1];
+
+const svgDonut = (() => {
+  const cx=70,cy=70,r=50,stroke=16;
+  const total=totalPartidos;
+  const segs=[
+    {val:victorias,color:'var(--verde-brillante)',label:'Victorias'},
+    {val:derrotas,color:'var(--rojo)',label:'Derrotas'},
+    {val:empates,color:'#666',label:'Empates'},
+  ];
+  let offset=0;
+  const circumference=2*Math.PI*r;
+  const paths = segs.map(s=>{
+    const pct=s.val/total;
+    const dash=pct*circumference;
+    const gap=circumference-dash;
+    const path=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="${stroke}" stroke-dasharray="${dash} ${gap}" stroke-dashoffset="${-offset*circumference}" transform="rotate(-90 ${cx} ${cy})"/>`;
+    offset+=pct;
+    return path;
+  }).join('');
+  return `<svg viewBox="0 0 140 140" width="140" height="140">${paths}<text x="${cx}" y="${cy-6}" text-anchor="middle" fill="#fff" font-family="Bebas Neue,sans-serif" font-size="22">${winRate}%</text><text x="${cx}" y="${cy+14}" text-anchor="middle" fill="#888" font-family="Barlow Condensed,sans-serif" font-size="10" letter-spacing="1">WIN RATE</text></svg>`;
+})();
+
+document.getElementById('overview-grid').innerHTML = `
+  <div class="chart-card">
+    <div class="chart-title">Resultados</div>
+    <div class="donut-wrap">
+      ${svgDonut}
+      <div class="donut-labels">
+        <div class="donut-label"><div class="dot" style="background:var(--verde-brillante)"></div>Victorias: <strong>${victorias}</strong></div>
+        <div class="donut-label"><div class="dot" style="background:var(--rojo)"></div>Derrotas: <strong>${derrotas}</strong></div>
+        <div class="donut-label"><div class="dot" style="background:#666"></div>Empates: <strong>${empates}</strong></div>
+        <div class="donut-label"><div class="dot" style="background:#444"></div>Totales: <strong>${totalPartidos}</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Goles</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">A favor</div>
+        <div class="bar-outer"><div class="bar-inner" style="width:${Math.round(golesFavor/Math.max(golesFavor,golesContra)*100)}%;background:var(--verde-brillante)"></div></div>
+        <div class="bar-val">${golesFavor}</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">En contra</div>
+        <div class="bar-outer"><div class="bar-inner" style="width:${Math.round(golesContra/Math.max(golesFavor,golesContra)*100)}%;background:var(--rojo)"></div></div>
+        <div class="bar-val">${golesContra}</div>
+      </div>
+      <div style="margin-top:16px" class="chart-title">Partidos por liga</div>
+      ${topLigas.map(([liga,count])=>`
+        <div class="bar-row">
+          <div class="bar-label">${liga}</div>
+          <div class="bar-outer"><div class="bar-inner" style="width:${Math.round(count/maxLiga*100)}%"></div></div>
+          <div class="bar-val">${count}</div>
+        </div>`).join('')}
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Récords</div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div>
+        <div style="font-size:0.75rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Mayor victoria</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--verde-brillante)">${maxGol.resultado_ineri} – ${maxGol.resultado_rival} vs ${maxGol.rival}</div>
+        <div style="font-size:0.78rem;color:var(--gris)">${maxGol.liga} · ${maxGol.año}</div>
+      </div>
+      <div>
+        <div style="font-size:0.75rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Mayor derrota</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--rojo)">${maxGolContra.resultado_ineri} – ${maxGolContra.resultado_rival} vs ${maxGolContra.rival}</div>
+        <div style="font-size:0.78rem;color:var(--gris)">${maxGolContra.liga} · ${maxGolContra.año}</div>
+      </div>
+      <div>
+        <div style="font-size:0.75rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Máximo goleador</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#f4c430">Azion · 150 goles</div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Por juego</div>
+    <div class="bar-chart">
+      ${['TPS','Touch'].map(j=>{
+        const c=MATCHES.filter(m=>m.juego===j).length;
+        const v=MATCHES.filter(m=>m.juego===j&&m.tipo==='victoria').length;
+        return `<div class="bar-row"><div class="bar-label">${j}</div><div class="bar-outer"><div class="bar-inner" style="width:${Math.round(c/totalPartidos*100)}%"></div></div><div class="bar-val">${c}</div></div>
+        <div style="font-size:0.75rem;color:var(--gris);margin:-6px 0 8px 82px">${v} victorias (${Math.round(v/c*100)}%)</div>`;
+      }).join('')}
+      <div style="margin-top:8px" class="chart-title">Por año</div>
+      ${years.map(y=>{
+        const c=MATCHES.filter(m=>m.año===y).length;
+        return `<div class="bar-row"><div class="bar-label">${y}</div><div class="bar-outer"><div class="bar-inner" style="width:${Math.round(c/MATCHES.filter(m=>m.año===years[0]).length*100)}%"></div></div><div class="bar-val">${c}</div></div>`;
+      }).join('')}
+    </div>
+  </div>
+`;
+
+// ── AI CHATBOT ─────────────────────────────────────────────────────────────
+const ligaResumen = Object.entries(ligaCounts).sort((a,b)=>b[1]-a[1]).map(([l,c])=>l+':'+c).join(', ');
+
+const CONTEXT = [
+  'Sos el asistente oficial del CF Ineri, club de fútbol de Roblox fundado en 2020 por Urielneta. 4 estrellas (títulos). Colores: verde, blanco, rojo. Escudo: León con corona.',
+  '',
+  'JUGADORES (goles/asistencias):',
+  STATS.map(s => s.jugador + ': ' + s.goles + 'g / ' + s.asistencias + 'a').join('\n'),
+  '',
+  'RESUMEN GENERAL:',
+  '- Total partidos: ' + totalPartidos + ' | Victorias: ' + victorias + ' | Derrotas: ' + derrotas + ' | Empates: ' + empates + ' | Win%: ' + winRate,
+  '- Goles a favor: ' + golesFavor + ' | Goles en contra: ' + golesContra,
+  '- Mayor victoria: ' + maxGol.resultado_ineri + '-' + maxGol.resultado_rival + ' vs ' + maxGol.rival + ' (' + maxGol.liga + ' ' + maxGol.año + ')',
+  '- Mayor derrota: ' + maxGolContra.resultado_ineri + '-' + maxGolContra.resultado_rival + ' vs ' + maxGolContra.rival + ' (' + maxGolContra.liga + ' ' + maxGolContra.año + ')',
+  '- Ligas: ' + ligaResumen + ' | Copas jugadas: ' + MATCHES.filter(function(m){return m.copa==='SI';}).length,
+  '',
+  'PARTIDOS POR AÑO:',
+  years.map(function(y) {
+    var ms = MATCHES.filter(function(m){return m.año===y;});
+    var v = ms.filter(function(m){return m.tipo==='victoria';}).length;
+    var d = ms.filter(function(m){return m.tipo==='derrota';}).length;
+    var e = ms.filter(function(m){return m.tipo==='empate';}).length;
+    return y + ': ' + ms.length + ' partidos | ' + v + 'V-' + d + 'D-' + e + 'E';
+  }).join('\n'),
+  '',
+  'LISTA COMPLETA DE PARTIDOS:',
+  MATCHES.map(function(m){
+    return '#' + m.id + ' ' + m.año + ' vs ' + m.rival + ': ' + m.resultado_ineri + '-' + m.resultado_rival + ' (' + m.tipo + ', ' + m.liga + ', ' + m.juego + (m.copa==='SI'?' COPA':'') + ')';
+  }).join('\n'),
+  '',
+  'INSTRUCCIONES: Respondé SOLO con los datos que aparecen arriba. No inventes ni supongas datos. Si no encontrás el dato exacto, decilo claramente. Respondé en español, de forma amigable y concisa.'
+].join('\n');
+// ── LÍMITE 3 PREGUNTAS POR DÍA ──────────────────────────────────────────
+const CHAT_LIMIT = 3;
+function getChatUsage() {
+  const today = new Date().toDateString();
+  try {
+    const stored = JSON.parse(localStorage.getItem('cfineri_chat') || '{}');
+    if (stored.date !== today) return { date: today, count: 0 };
+    return stored;
+  } catch(e) { return { date: today, count: 0 }; }
+}
+function incrementChatUsage() {
+  const usage = getChatUsage();
+  usage.count++;
+  localStorage.setItem('cfineri_chat', JSON.stringify(usage));
+}
+function getRemainingQuestions() {
+  return Math.max(0, CHAT_LIMIT - getChatUsage().count);
+}
+function updateLimitUI() {
+  const rem = getRemainingQuestions();
+  const badge = document.getElementById('chat-limit-badge');
+  const sendBtn = document.getElementById('chat-send');
+  const input = document.getElementById('chat-input');
+  if (badge) {
+    badge.textContent = rem > 0 ? `${rem} pregunta${rem !== 1 ? 's' : ''} restante${rem !== 1 ? 's' : ''} hoy` : '⛔ Límite diario alcanzado';
+    badge.style.color = rem > 0 ? (rem === 1 ? '#f4c430' : 'var(--verde-brillante)') : 'var(--rojo)';
+  }
+  if (sendBtn) sendBtn.disabled = rem === 0;
+  if (input) input.disabled = rem === 0;
+  if (rem === 0 && input) input.placeholder = 'Volvé mañana para más preguntas 🦁';
+}
+
+let chatHistory = [];
+// Init limit UI after DOM ready
+document.addEventListener('DOMContentLoaded', updateLimitUI);
+
+function addMessage(text, isUser) {
+  const container = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `msg ${isUser ? 'user' : 'bot'}`;
+  div.innerHTML = isUser
+    ? `<div class="msg-bubble">${text}</div>`
+    : `<div class="msg-icon">🦁</div><div class="msg-bubble">${text}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function addTyping() {
+  const container = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg bot'; div.id = 'typing-indicator';
+  div.innerHTML = `<div class="msg-icon">🦁</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  if (getRemainingQuestions() <= 0) {
+    addMessage('⛔ Ya usaste tus 3 preguntas de hoy. ¡Volvé mañana!', false);
+    return;
+  }
+  input.value = '';
+  document.getElementById('chat-send').disabled = true;
+  document.getElementById('suggested-qs').style.display = 'none';
+
+  addMessage(text, true);
+  chatHistory.push({ role: 'user', content: text });
+  addTyping();
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: [
+          { role: 'system', content: CONTEXT },
+          ...chatHistory
+        ]
+      })
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error?.message || 'Error ' + res.status);
+    }
+    const data = await res.json();
+    const reply = data.choices?.[0]?.message?.content?.trim() || 'No pude procesar la respuesta.';
+    document.getElementById('typing-indicator')?.remove();
+    addMessage(reply, false);
+    chatHistory.push({ role: 'assistant', content: reply });
+    incrementChatUsage();
+    updateLimitUI();
+  } catch(e) {
+    document.getElementById('typing-indicator')?.remove();
+    addMessage('⚠️ Error: ' + e.message, false);
+    console.error('Chat error:', e);
+  }
+  document.getElementById('chat-send').disabled = false;
+}
+
+function askSuggested(q) {
+  document.getElementById('chat-input').value = q;
+  sendMessage();
+}
+
+document.getElementById('chat-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendMessage();
+});
+updateLimitUI();
+
+// ── FADE IN ───────────────────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
