@@ -319,7 +319,7 @@
     <li><a href="#estadisticas">Estadísticas</a></li>
     <li><a href="#partidos">Partidos</a></li>
     <li><a href="#general">General</a></li>
-    <li><a href="#ia">IA</a></li>
+    <li><a href="#awards">Awards</a></li>
   </ul>
 </nav>
 
@@ -376,45 +376,244 @@
   </div>
 </section>
 
-<!-- IA CHATBOT -->
-<section id="ia" style="max-width:100%; padding:100px 40px; background:linear-gradient(180deg,#050a07,#0a0a0a);">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div class="fade-in">
-      <h2 class="section-title">Asistente IA</h2>
-      <div class="section-line"></div>
-      <p style="color:var(--gris);margin-bottom:32px;font-size:0.95rem;">Preguntale cualquier cosa sobre el CF Ineri. Conoce todos los partidos, jugadores y estadísticas del club.</p>
-      <div class="chat-container">
-        <div class="chat-header">
-          <img src="https://i.imgur.com/placeholder.png" class="chat-avatar" id="chat-avatar" alt="Ineri Bot">
-          <div class="chat-header-info">
-            <h3>INERI BOT</h3>
-            <p>Asistente oficial del club · En línea</p>
+<!-- URIELNETA AWARDS -->
+<section id="awards" style="max-width:100%; padding:100px 40px; background:linear-gradient(180deg,#020a04,#050e06,#0a0a0a); position:relative; overflow:hidden;">
+
+<!-- Partículas de fondo -->
+<div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
+  <div style="position:absolute;top:10%;left:5%;width:2px;height:2px;background:#c9a84c;border-radius:50%;box-shadow:0 0 6px #c9a84c;animation:floatStar 8s infinite;opacity:0.6;"></div>
+  <div style="position:absolute;top:30%;left:90%;width:3px;height:3px;background:#c9a84c;border-radius:50%;box-shadow:0 0 8px #c9a84c;animation:floatStar 11s infinite 2s;opacity:0.5;"></div>
+  <div style="position:absolute;top:70%;left:15%;width:2px;height:2px;background:#c9a84c;border-radius:50%;box-shadow:0 0 5px #c9a84c;animation:floatStar 9s infinite 4s;opacity:0.7;"></div>
+  <div style="position:absolute;top:50%;left:75%;width:2px;height:2px;background:#c9a84c;border-radius:50%;box-shadow:0 0 6px #c9a84c;animation:floatStar 12s infinite 1s;opacity:0.4;"></div>
+  <div style="position:absolute;top:85%;left:50%;width:3px;height:3px;background:#c9a84c;border-radius:50%;box-shadow:0 0 8px #c9a84c;animation:floatStar 7s infinite 3s;opacity:0.6;"></div>
+</div>
+
+<style>
+@keyframes floatStar {
+  0%,100%{transform:translateY(0) scale(1);opacity:0.6;}
+  50%{transform:translateY(-20px) scale(1.5);opacity:1;}
+}
+@keyframes trophySpin {
+  0%{transform:rotateY(0deg) rotateZ(-8deg);}
+  50%{transform:rotateY(180deg) rotateZ(-8deg);}
+  100%{transform:rotateY(360deg) rotateZ(-8deg);}
+}
+@keyframes trophyGlow {
+  0%,100%{filter:drop-shadow(0 0 15px rgba(201,168,76,0.4)) drop-shadow(0 0 30px rgba(201,168,76,0.2));}
+  50%{filter:drop-shadow(0 0 25px rgba(201,168,76,0.8)) drop-shadow(0 0 50px rgba(201,168,76,0.4));}
+}
+@keyframes goldShimmer {
+  0%{background-position:200% center;}
+  100%{background-position:-200% center;}
+}
+.award-card {
+  background:linear-gradient(135deg,rgba(15,25,15,0.95),rgba(10,15,10,0.98));
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:12px;
+  padding:20px;
+  transition:all 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.award-card::before {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#c9a84c,transparent);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.award-card:hover {
+  border-color:rgba(201,168,76,0.5);
+  transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(201,168,76,0.15);
+}
+.award-card:hover::before{opacity:1;}
+.award-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:0.7rem;
+  letter-spacing:3px;
+  color:#c9a84c;
+  text-transform:uppercase;
+  margin-bottom:6px;
+  opacity:0.8;
+}
+.award-winner {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.4rem;
+  letter-spacing:2px;
+  background:linear-gradient(90deg,#c9a84c,#f5e6a3,#c9a84c,#f5e6a3,#c9a84c);
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:goldShimmer 4s linear infinite;
+}
+.edition-badge {
+  display:inline-block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:0.75rem;
+  letter-spacing:3px;
+  color:#0a0a0a;
+  background:#c9a84c;
+  padding:4px 16px;
+  border-radius:20px;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:28px;
+}
+.soon-text {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,8vw,6rem);
+  letter-spacing:8px;
+  text-align:center;
+  margin-top:80px;
+  background:linear-gradient(90deg,rgba(201,168,76,0.3),rgba(201,168,76,0.9),rgba(201,168,76,0.3));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.soon-date {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(1rem,3vw,1.6rem);
+  letter-spacing:6px;
+  color:rgba(201,168,76,0.6);
+  text-align:center;
+  margin-top:12px;
+}
+</style>
+
+<div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+  <div class="fade-in">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:60px;">
+      <!-- Trofeo 3D girando -->
+      <div style="display:flex;justify-content:center;margin-bottom:32px;">
+        <div style="width:180px;height:220px;perspective:600px;cursor:pointer;" title="Urielneta Awards">
+          <div style="animation:trophySpin 8s linear infinite,trophyGlow 3s ease-in-out infinite;transform-style:preserve-3d;">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" 
+                 id="trophy-img"
+                 style="width:180px;height:220px;object-fit:contain;display:block;"
+                 alt="Urielneta Awards Trophy">
           </div>
-          <div class="chat-status"></div>
         </div>
-        <div class="chat-messages" id="chat-messages">
-          <div class="msg bot">
-            <div class="msg-icon">🦁</div>
-            <div class="msg-bubble">¡Hola! Soy el asistente oficial del <strong>CF Ineri</strong>. Conozco todos los partidos, estadísticas y datos del club. ¿Qué querés saber?</div>
+      </div>
+
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);letter-spacing:6px;color:#fff;margin:0 0 8px;">
+        URIELNETA <span style="background:linear-gradient(90deg,#c9a84c,#f5e6a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AWARDS</span>
+      </h2>
+      <div style="width:80px;height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin:16px auto 24px;"></div>
+      <p style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;letter-spacing:3px;color:rgba(255,255,255,0.4);text-transform:uppercase;">Los premios oficiales del CF Ineri</p>
+    </div>
+
+    <!-- Edición 1 -->
+    <div style="margin-bottom:60px;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;">
+        <span class="edition-badge">Edición N°1</span>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,0.4),transparent);"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;">
+        <div class="award-card"><div class="award-label">Banca D'Or</div><div class="award-winner">Alone</div></div>
+        <div class="award-card"><div class="award-label">Aguatero D'Or</div><div class="award-winner">Toti</div></div>
+        <div class="award-card"><div class="award-label">Future Star</div><div class="award-winner">Gabe</div></div>
+        <div class="award-card"><div class="award-label">Old Star</div><div class="award-winner">Mike</div></div>
+        <div class="award-card"><div class="award-label">Puskas</div><div class="award-winner">Khazir</div></div>
+        <div class="award-card" style="border-color:rgba(201,168,76,0.5);background:linear-gradient(135deg,rgba(20,18,8,0.98),rgba(10,8,2,0.99));">
+          <div class="award-label">🏆 Ballon D'Or</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1.2rem;">🥇</span><span class="award-winner" style="font-size:1.6rem;">Coco</span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1rem;">🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;color:rgba(201,168,76,0.7);letter-spacing:2px;">Khazir</span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1rem;">🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;color:rgba(201,168,76,0.5);letter-spacing:2px;">Gabe</span></div>
           </div>
-        </div>
-        <div class="suggested-qs" id="suggested-qs">
-          <button class="sq" onclick="askSuggested('¿Quién es el máximo goleador?')">⚽ Máximo goleador</button>
-          <button class="sq" onclick="askSuggested('¿Cuántas victorias tiene el equipo?')">📊 Victorias totales</button>
-          <button class="sq" onclick="askSuggested('¿Cuál fue la mayor goleada?')">🔥 Mayor goleada</button>
-          <button class="sq" onclick="askSuggested('¿Cuántos partidos se jugaron en 2025?')">📅 Partidos 2025</button>
-        </div>
-        <div style="text-align:right; padding: 4px 8px 0;">
-          <span id="chat-limit-badge" style="font-family:'Barlow Condensed',sans-serif; font-size:0.78rem; letter-spacing:1px;"></span>
-        </div>
-        <div class="chat-input-row">
-          <input class="chat-input" id="chat-input" type="text" placeholder="Preguntá sobre el CF Ineri..." maxlength="300">
-          <button class="chat-send" id="chat-send" onclick="sendMessage()">Enviar</button>
         </div>
       </div>
     </div>
+
+    <!-- Edición 2 -->
+    <div style="margin-bottom:60px;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;">
+        <span class="edition-badge">Edición N°2</span>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,0.4),transparent);"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;">
+        <div class="award-card"><div class="award-label">Más Activo</div><div class="award-winner">Jebedias</div></div>
+        <div class="award-card"><div class="award-label">Fantasmas del Año</div><div class="award-winner">Joseluisperez / Osvaldo</div></div>
+        <div class="award-card"><div class="award-label">Balón de Playa</div><div class="award-winner">Goteras</div></div>
+        <div class="award-card"><div class="award-label">Balón de Reach</div><div class="award-winner">Uriel</div></div>
+        <div class="award-card"><div class="award-label">Aguatero de Oro</div><div class="award-winner">EteMike</div></div>
+        <div class="award-card"><div class="award-label">Banca D'Or</div><div class="award-winner">Chess</div></div>
+        <div class="award-card"><div class="award-label">Old Star</div><div class="award-winner">Uriel</div></div>
+        <div class="award-card"><div class="award-label">Future Star</div><div class="award-winner">Gabe</div></div>
+        <div class="award-card"><div class="award-label">Premio Mamita</div><div class="award-winner">Iker</div></div>
+        <div class="award-card"><div class="award-label">Premio Khazir</div><div class="award-winner">Jebedias</div></div>
+        <div class="award-card"><div class="award-label">Momento del Año</div><div class="award-winner">Uriel</div></div>
+        <div class="award-card" style="border-color:rgba(201,168,76,0.5);background:linear-gradient(135deg,rgba(20,18,8,0.98),rgba(10,8,2,0.99));">
+          <div class="award-label">🏆 Balón de Oro</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1.2rem;">🥇</span><span class="award-winner" style="font-size:1.6rem;">Gabe</span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1rem;">🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;color:rgba(201,168,76,0.7);letter-spacing:2px;">Jebedias</span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1rem;">🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;color:rgba(201,168,76,0.5);letter-spacing:2px;">Goteras</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edición 3 -->
+    <div style="margin-bottom:60px;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;">
+        <span class="edition-badge">Edición N°3</span>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,0.4),transparent);"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;">
+        <div class="award-card"><div class="award-label">Más Activo</div><div class="award-winner">Rvssian</div></div>
+        <div class="award-card"><div class="award-label">Fantasma del Año</div><div class="award-winner">Rvssian</div></div>
+        <div class="award-card"><div class="award-label">Balón de Playa</div><div class="award-winner">Azion</div></div>
+        <div class="award-card"><div class="award-label">Balón de Reach</div><div class="award-winner">Uriel / Jebedias</div></div>
+        <div class="award-card"><div class="award-label">Aguatero del Año</div><div class="award-winner">EteMike</div></div>
+        <div class="award-card"><div class="award-label">Banca D'Or</div><div class="award-winner">Rvssian</div></div>
+        <div class="award-card"><div class="award-label">Old Star</div><div class="award-winner">Jebedias</div></div>
+        <div class="award-card"><div class="award-label">Future Star</div><div class="award-winner">17fxbri</div></div>
+        <div class="award-card"><div class="award-label">Premio Mamita</div><div class="award-winner">Ryze</div></div>
+        <div class="award-card">
+          <div class="award-label">Premio Khazir</div>
+          <div class="award-winner">Uriel</div>
+          <a href="https://medal.tv/es/games/roblox/clips/ljhhrDPsqmwUyqpx5?invite=cr-MSxpOFosMTgzNTM2MDc3" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:2px;color:#c9a84c;text-decoration:none;border:1px solid rgba(201,168,76,0.3);padding:4px 10px;border-radius:4px;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.8)';this.style.background='rgba(201,168,76,0.1)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.3)';this.style.background='transparent'">
+            ▶ Ver GOL
+          </a>
+        </div>
+        <div class="award-card"><div class="award-label">Best CB</div><div class="award-winner">Jebedias</div></div>
+        <div class="award-card"><div class="award-label">Premio Goteras</div><div class="award-winner">Rvssian</div></div>
+        <div class="award-card" style="border-color:rgba(201,168,76,0.5);background:linear-gradient(135deg,rgba(20,18,8,0.98),rgba(10,8,2,0.99));grid-column:span 1;">
+          <div class="award-label">🏆 Balón de Oro</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1.2rem;">🥇</span><span class="award-winner" style="font-size:1.6rem;">17fxbri</span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1rem;">🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;color:rgba(201,168,76,0.7);letter-spacing:2px;">Jebedias</span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1rem;">🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;color:rgba(201,168,76,0.5);letter-spacing:2px;">Azion / Uriel / Carter</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Próximamente -->
+    <div style="text-align:center;padding:60px 20px;border-top:1px solid rgba(201,168,76,0.15);margin-top:20px;">
+      <p class="soon-text">Y PRÓXIMAMENTE...</p>
+      <div style="width:60px;height:2px;background:#c9a84c;margin:20px auto;"></div>
+      <p class="soon-date">✦ &nbsp; URIELNETA AWARDS 4 &nbsp; · &nbsp; 01/06 &nbsp; ✦</p>
+    </div>
+
   </div>
-</section>
+</div>
+
+<script>
+// Cargar trofeo desde la imagen subida o usar SVG de respaldo
+(function(){
+  var img = document.getElementById('trophy-img');
+  // SVG trofeo inline de respaldo con los colores del trofeo de la imagen
+  var svgTrophy = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" width="180" height="220"><defs><linearGradient id="tg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1a3a1a"/><stop offset="100%" style="stop-color:#0d200d"/></linearGradient><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#8b1a1a"/><stop offset="100%" style="stop-color:#5a0f0f"/></linearGradient></defs><path d="M60 20 Q55 80 30 100 Q50 105 60 100 L60 140 L50 140 L50 155 L150 155 L150 140 L140 140 L140 100 Q150 105 170 100 Q145 80 140 20 Z" fill="url(#tg)" stroke="#2d5a2d" stroke-width="2"/><circle cx="100" cy="60" r="30" fill="rgba(255,255,255,0.1)" stroke="#3a7a3a" stroke-width="1"/><text x="100" y="65" text-anchor="middle" font-size="22" fill="#c9a84c">🦁</text><rect x="60" y="155" width="80" height="45" rx="4" fill="url(#bg)" stroke="#8b1a1a" stroke-width="1"/><rect x="45" y="200" width="110" height="15" rx="3" fill="#5a0f0f"/></svg>';
+  img.src = 'data:image/png;base64,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';
+})();
+</script></section>
 
 <footer>
   <img src="https://i.imgur.com/placeholder.png" id="footer-logo" alt="CF Ineri">
@@ -440,7 +639,7 @@ const STATS = [
   {"jugador":"Azion","goles":152+1,"asistencias":50},
   {"jugador":"Rvssian","goles":96+20,"asistencias":85+8},
   {"jugador":"Jebedias","goles":76+8,"asistencias":82+4},
-  {"jugador":"Uriel","goles":67+1,"asistencias":40+4},
+  {"jugador":"Uriel","goles":71,"asistencias":52},
   {"jugador":"Leo","goles":56,"asistencias":8},
   {"jugador":"Goteras","goles":39+6,"asistencias":49+6},
   {"jugador":"Hiiro","goles":19,"asistencias":32+1},
@@ -457,7 +656,6 @@ const STATS = [
   {"jugador":"44aaron","goles":14,"asistencias":3},
   {"jugador":"Bluexihno","goles":10,"asistencias":14},
   {"jugador":"17jxvrix","goles":12,"asistencias":3},
-  {"jugador":"Xuriel","goles":3,"asistencias":8},
   {"jugador":"ynacho","goles":4,"asistencias":2},
   {"jugador":"Hydro","goles":3,"asistencias":1},
   {"jugador":"14skxz","goles":2,"asistencias":3},
@@ -846,7 +1044,7 @@ function updateLimitUI() {
 
 let chatHistory = [];
 // Init limit UI after DOM ready
-document.addEventListener('DOMContentLoaded', updateLimitUI);
+
 
 function addMessage(text, isUser) {
   const container = document.getElementById('chat-messages');
@@ -919,10 +1117,7 @@ function askSuggested(q) {
   sendMessage();
 }
 
-document.getElementById('chat-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') sendMessage();
-});
-updateLimitUI();
+
 
 // ── FADE IN ───────────────────────────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
