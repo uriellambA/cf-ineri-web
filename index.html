@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CF Ineri — Club Oficial</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@400;700;900&display=swap&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --verde: #1a5c2a;
@@ -270,8 +270,6 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 .empty-news{text-align:center;padding:60px 20px;color:var(--gris);}
 .empty-news-icon{font-size:3rem;margin-bottom:14px;}
 .empty-news-text{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;letter-spacing:2px;text-transform:uppercase;}
-
-/* Modal noticias */
 .modal-box.wide{max-width:600px;}
 .noticia-editor{width:100%;min-height:140px;background:#111;border:1px solid #2a3a2c;border-radius:7px;padding:10px 14px;color:var(--blanco);font-family:'Barlow',sans-serif;font-size:.9rem;outline:none;resize:vertical;transition:border-color .2s;}
 .noticia-editor:focus{border-color:var(--verde-brillante);}
@@ -285,8 +283,6 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 .ps{text-align:center;}
 .ps-val{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--verde-brillante);line-height:1;}
 .ps-lbl{font-size:.68rem;color:var(--gris);font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;}
-
-/* Admin panel */
 .admin-panel{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:20px;margin-top:20px;}
 .admin-title{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--dorado);margin-bottom:14px;}
 .admin-user-list{display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto;}
@@ -328,13 +324,11 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL AUTH ══ -->
 <div class="modal-overlay hidden" id="modal-auth">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeAuthModal()">✕</button>
+    <button class="modal-close" onclick="closeAuthModal()">&#10005;</button>
     <div class="form-tabs">
       <button class="form-tab-btn active" id="tab-login" onclick="switchAuthTab('login')">Iniciar sesión</button>
       <button class="form-tab-btn" id="tab-reg" onclick="switchAuthTab('register')">Registrarse</button>
     </div>
-
-    <!-- LOGIN -->
     <div id="auth-login">
       <div class="form-group">
         <label class="form-label">Usuario</label>
@@ -342,13 +336,11 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       </div>
       <div class="form-group">
         <label class="form-label">Contraseña</label>
-        <input class="form-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password">
+        <input class="form-input" id="login-pass" type="password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" autocomplete="current-password">
       </div>
       <div class="form-error" id="login-error"></div>
       <button class="form-btn" onclick="doLogin()">Entrar</button>
     </div>
-
-    <!-- REGISTER -->
     <div id="auth-register" style="display:none">
       <div class="form-group">
         <label class="form-label">Usuario</label>
@@ -375,7 +367,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL NOTICIA ══ -->
 <div class="modal-overlay hidden" id="modal-noticia">
   <div class="modal-box wide">
-    <button class="modal-close" onclick="closeNoticiaModal()">✕</button>
+    <button class="modal-close" onclick="closeNoticiaModal()">&#10005;</button>
     <h2 id="noticia-modal-title">Nueva Noticia</h2>
     <p class="modal-sub">Solo admins y editores pueden publicar</p>
     <div class="form-group">
@@ -405,9 +397,9 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
 <!-- ══ USER DROPDOWN ══ -->
 <div class="user-dropdown" id="user-dropdown">
-  <button class="dd-item" onclick="showPage('perfil');closeDropdown()">👤 Mi Perfil</button>
+  <button class="dd-item" onclick="showPage('perfil');closeDropdown()">&#128100; Mi Perfil</button>
   <div class="dd-sep"></div>
-  <button class="dd-item danger" onclick="doLogout()">🚪 Cerrar sesión</button>
+  <button class="dd-item danger" onclick="doLogout()">&#128682; Cerrar sesión</button>
 </div>
 
 <!-- ══ NAV ══ -->
@@ -416,7 +408,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
     <img id="nav-logo-img" src="" alt="CF Ineri">
     <span class="nav-brand">CF INERI</span>
   </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" id="hamburger">☰</button>
+  <button class="nav-hamburger" onclick="toggleMenu()" id="hamburger">&#9776;</button>
   <ul class="nav-center" id="nav-tabs">
     <li><button class="nav-tab active" data-page="historia"    onclick="showPage('historia')">Historia</button></li>
     <li><button class="nav-tab" data-page="palmares"   onclick="showPage('palmares')">Palmarés</button></li>
@@ -487,10 +479,26 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
         <div class="historia-badges"><span class="hbadge oro">🏆 Argentina — Campeón Mundial MOS (14-8 Estados Unidos)</span></div>
       </div>
       <div class="historia-entry">
+        <span class="historia-era">2023 — MPS: Las Copas Nacionales</span>
+        <h3 class="historia-titulo">Boca Juniors y la Racha de Copas en MPS</h3>
+        <p class="historia-texto">En paralelo a las grandes campañas internacionales, la Urielneta demostró su poderío doméstico en el Mobile Pro Soccer (MPS) comandando al Boca Juniors. El equipo conquistó cuatro Copas Nacionales consecutivas, consolidando a Boca como el club más ganador del torneo en esa etapa. Fue una racha que mostró la profundidad del plantel y la consistencia táctica del cuerpo técnico.</p>
+        <div class="historia-badges">
+          <span class="hbadge oro">🏆 Boca Juniors — Copa Nacional MPS (x4)</span>
+        </div>
+      </div>
+      <div class="historia-entry">
         <span class="historia-era">2023 — The New ERA</span>
         <h3 class="historia-titulo">El Renacer: CF Ineri en las Grandes Ligas</h3>
         <p class="historia-texto">Motivado por la iniciativa de Gabe, el club emprendió un nuevo camino bajo el lema "The New ERA". En paralelo, CF Ineri probó suerte en Touch Football y en MPS, donde consiguió un subcampeonato a instancias del talento de Coco, Milan y Khazir, además de varias copas no oficiales que dieron cuenta del potencial creciente del plantel.</p>
         <div class="historia-badges"><span class="hbadge plata">Touch/MPS — Subcampeón (Coco, Milan y Khazir)</span></div>
+      </div>
+      <div class="historia-entry">
+        <span class="historia-era">2024 — FTC: La Libertadores</span>
+        <h3 class="historia-titulo">Racing Campeón de la Libertadores FTC</h3>
+        <p class="historia-texto">En la liga FTC, la Urielneta tomó las riendas del Racing Club con un objetivo claro: la Libertadores. Después de una campaña memorable, el equipo se consagró campeón continental, añadiendo uno de los títulos más prestigiosos del circuito a la vitrina del club. Un logro que consolidó la reputación internacional de la institución y el talento del plantel en el fútbol sudamericano virtual.</p>
+        <div class="historia-badges">
+          <span class="hbadge oro">🏆 Racing Club — Campeón Libertadores FTC</span>
+        </div>
       </div>
       <div class="historia-entry">
         <span class="historia-era">2025 — El Salto a la Gloria</span>
@@ -529,6 +537,11 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
     <div class="trofeos-grid">
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">Mundial Juvenil CWL</div><div class="trofeo-comp">Copa Mundial Liga · Uruguay</div><div class="trofeo-año">2023</div><div class="trofeo-detalle">Final: 3-0 vs Corea del Sur</div></div>
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">Mundial MOS 2.0</div><div class="trofeo-comp">Copa Mundial MOS · Argentina</div><div class="trofeo-año">2023</div><div class="trofeo-detalle">Final: 14-8 vs Estados Unidos</div></div>
+      <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">Copa Nacional MPS</div><div class="trofeo-comp">Mobile Pro Soccer · Boca Juniors</div><div class="trofeo-año">2023</div><div class="trofeo-detalle">1ra edición · Título doméstico</div></div>
+      <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">Copa Nacional MPS</div><div class="trofeo-comp">Mobile Pro Soccer · Boca Juniors</div><div class="trofeo-año">2023</div><div class="trofeo-detalle">2da edición · Título doméstico</div></div>
+      <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">Copa Nacional MPS</div><div class="trofeo-comp">Mobile Pro Soccer · Boca Juniors</div><div class="trofeo-año">2023</div><div class="trofeo-detalle">3ra edición · Título doméstico</div></div>
+      <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">Copa Nacional MPS</div><div class="trofeo-comp">Mobile Pro Soccer · Boca Juniors</div><div class="trofeo-año">2023</div><div class="trofeo-detalle">4ta edición · Título doméstico</div></div>
+      <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">Libertadores FTC</div><div class="trofeo-comp">FTC · Racing Club</div><div class="trofeo-año">2024</div><div class="trofeo-detalle">Campeón continental · FTC</div></div>
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">LNH Season 1</div><div class="trofeo-comp">Liga Nacional Hispana · TPS</div><div class="trofeo-año">2025</div><div class="trofeo-detalle">Final: 8-7</div></div>
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">LNH Season 2</div><div class="trofeo-comp">Liga Nacional Hispana · TPS</div><div class="trofeo-año">2025</div><div class="trofeo-detalle">Final: 4-3 vs Chelsea · Puntaje perfecto</div></div>
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">UL Season 5</div><div class="trofeo-comp">Ultimate League · TPS</div><div class="trofeo-año">2025</div><div class="trofeo-detalle">Final: 7-0</div></div>
@@ -559,10 +572,10 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
   <div class="page-inner">
     <div class="section-header"><h2 class="section-title">Estadísticas</h2><div class="section-line"></div></div>
     <div class="stats-tabs" id="stat-filters">
-      <button class="filter-btn active" data-stat="goles">⚽ Goles</button>
-      <button class="filter-btn" data-stat="asistencias">🎯 Asistencias</button>
-      <button class="filter-btn" data-stat="total">📊 G+A</button>
-      <button class="filter-btn" data-stat="partidos">🎮 Partidos</button>
+      <button class="filter-btn active" data-stat="goles">&#9917; Goles</button>
+      <button class="filter-btn" data-stat="asistencias">&#127919; Asistencias</button>
+      <button class="filter-btn" data-stat="total">&#128202; G+A</button>
+      <button class="filter-btn" data-stat="partidos">&#127918; Partidos</button>
     </div>
     <div class="stats-grid" id="stats-grid"></div>
     <div style="margin-top:52px">
@@ -592,7 +605,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <button class="filter-btn" data-f="victoria">Victorias</button>
       <button class="filter-btn" data-f="derrota">Derrotas</button>
       <button class="filter-btn" data-f="empate">Empates</button>
-      <button class="filter-btn" data-f="copa">Copa 🏆</button>
+      <button class="filter-btn" data-f="copa">Copa &#127942;</button>
     </div>
     <div class="matches-filters" id="match-year-filters"></div>
     <div class="matches-list" id="matches-list"></div>
@@ -644,7 +657,6 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
         <p style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;letter-spacing:3px;color:rgba(255,255,255,.32);text-transform:uppercase;">Los premios oficiales del CF Ineri</p>
       </div>
 
-      <!-- Ed 1 -->
       <div style="margin-bottom:48px;">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;"><span class="edition-badge">Edición N°1</span><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.4),transparent);"></div></div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
@@ -664,7 +676,6 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
         </div>
       </div>
 
-      <!-- Ed 2 -->
       <div style="margin-bottom:48px;">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;"><span class="edition-badge">Edición N°2</span><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.4),transparent);"></div></div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
@@ -690,7 +701,6 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
         </div>
       </div>
 
-      <!-- Ed 3 -->
       <div style="margin-bottom:48px;">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;"><span class="edition-badge">Edición N°3</span><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.4),transparent);"></div></div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
@@ -705,7 +715,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
           <div class="award-card"><div class="award-label">Premio Mamita</div><div class="award-winner">Ryze</div></div>
           <div class="award-card">
             <div class="award-label">Premio Khazir</div><div class="award-winner">Uriel</div>
-            <a href="https://medal.tv/es/games/roblox/clips/ljhhrDPsqmwUyqpx5?invite=cr-MSxpOFosMTgzNTM2MDc3" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-size:.67rem;letter-spacing:2px;color:#c9a84c;text-decoration:none;border:1px solid rgba(201,168,76,.3);padding:3px 8px;border-radius:4px;">▶ Ver GOL</a>
+            <a href="https://medal.tv/es/games/roblox/clips/ljhhrDPsqmwUyqpx5?invite=cr-MSxpOFosMTgzNTM2MDc3" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-size:.67rem;letter-spacing:2px;color:#c9a84c;text-decoration:none;border:1px solid rgba(201,168,76,.3);padding:3px 8px;border-radius:4px;">&#9654; Ver GOL</a>
           </div>
           <div class="award-card"><div class="award-label">Best CB</div><div class="award-winner">Jebedias</div></div>
           <div class="award-card"><div class="award-label">Premio Goteras</div><div class="award-winner">Rvssian</div></div>
@@ -723,7 +733,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div style="text-align:center;padding:48px 20px;border-top:1px solid rgba(201,168,76,.12);">
         <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,7vw,4.5rem);letter-spacing:8px;background:linear-gradient(90deg,rgba(201,168,76,.3),rgba(201,168,76,.9),rgba(201,168,76,.3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Y PRÓXIMAMENTE...</p>
         <div style="width:46px;height:2px;background:#c9a84c;margin:16px auto;"></div>
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(.9rem,2.5vw,1.35rem);letter-spacing:6px;color:rgba(201,168,76,.6);">✦ &nbsp; URIELNETA AWARDS 4 &nbsp; · &nbsp; 01/06 &nbsp; ✦</p>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(.9rem,2.5vw,1.35rem);letter-spacing:6px;color:rgba(201,168,76,.6);">&#10022; &nbsp; URIELNETA AWARDS 4 &nbsp; · &nbsp; 01/06 &nbsp; &#10022;</p>
       </div>
     </div>
   </div>
@@ -742,7 +752,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
           <div class="section-line"></div>
         </div>
       </div>
-      <button class="btn-publish hidden" id="btn-publish" onclick="openNoticiaModal()">✚ Publicar noticia</button>
+      <button class="btn-publish hidden" id="btn-publish" onclick="openNoticiaModal()">+ Publicar noticia</button>
     </div>
     <div class="noticias-grid" id="noticias-grid">
       <div class="empty-news">
@@ -774,41 +784,47 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
 <script>
 // ═══════════════════════════════════════════════════════════
-// LOGO SVG
+// CONSTANTES GLOBALES — declaradas PRIMERO para evitar TDZ
 // ═══════════════════════════════════════════════════════════
-const LOGO_SRC='data:image/svg+xml;base64,'+btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#1a5c2a" stroke="#27a645" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="#0d3317" stroke="#27a645" stroke-width="1.5"/><text x="60" y="54" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="11" fill="#fff" font-weight="900" letter-spacing="1">CF</text><text x="60" y="70" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="11" fill="#f0f0f0" font-weight="900" letter-spacing="1">INERI</text><text x="60" y="84" text-anchor="middle" font-family="Arial,sans-serif" font-size="6" fill="#27a645" letter-spacing="1">URIELNETA</text></svg>');
-const AWARDS_SVG='data:image/svg+xml;base64,'+btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 290"><rect width="240" height="290" fill="#000"/><circle cx="120" cy="100" r="60" fill="none" stroke="#c9a84c" stroke-width="2.5"/><circle cx="120" cy="100" r="40" fill="#1a5c2a" stroke="#c9a84c" stroke-width="1.5"/><text x="120" y="96" text-anchor="middle" font-family="Arial Black" font-size="8" fill="#fff" font-weight="900">CF INERI</text><text x="120" y="109" text-anchor="middle" font-family="Arial" font-size="6" fill="#c9a84c">URIELNETA</text><line x1="120" y1="162" x2="120" y2="210" stroke="#c9a84c" stroke-width="2"/><text x="120" y="238" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#c9a84c" font-weight="bold" letter-spacing="2">URIELNETA</text><text x="120" y="252" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#c9a84c" letter-spacing="3">AWARDS</text><text x="120" y="272" text-anchor="middle" font-family="Arial" font-size="8" fill="#c9a84c" letter-spacing="2" opacity=".8">4ᵃ EDICION</text></svg>');
-['nav-logo-img','hero-logo'].forEach(id=>{const el=document.getElementById(id);if(el)el.src=LOGO_SRC;});
-document.getElementById('awards-logo-img').src=AWARDS_SVG;
+var ADMIN_PASSWORD = 'ineri2025';
+var RANKS = ['visitante','usuario','editor','admin'];
+var RANK_LABELS = {visitante:'Visitante',usuario:'Usuario',editor:'Editor',admin:'Admin'};
+
+// ═══════════════════════════════════════════════════════════
+// LOGO SVG — usando encodeURIComponent para evitar btoa con Unicode
+// ═══════════════════════════════════════════════════════════
+function svgToDataUrl(svgString) {
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
+}
+
+var LOGO_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#1a5c2a" stroke="#27a645" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="#0d3317" stroke="#27a645" stroke-width="1.5"/><text x="60" y="54" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="11" fill="#fff" font-weight="900" letter-spacing="1">CF</text><text x="60" y="70" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="11" fill="#f0f0f0" font-weight="900" letter-spacing="1">INERI</text><text x="60" y="84" text-anchor="middle" font-family="Arial,sans-serif" font-size="6" fill="#27a645" letter-spacing="1">URIELNETA</text></svg>';
+
+var AWARDS_SVG_STR = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 290"><rect width="240" height="290" fill="#000"/><circle cx="120" cy="100" r="60" fill="none" stroke="#c9a84c" stroke-width="2.5"/><circle cx="120" cy="100" r="40" fill="#1a5c2a" stroke="#c9a84c" stroke-width="1.5"/><text x="120" y="96" text-anchor="middle" font-family="Arial Black" font-size="8" fill="#fff" font-weight="900">CF INERI</text><text x="120" y="109" text-anchor="middle" font-family="Arial" font-size="6" fill="#c9a84c">URIELNETA</text><line x1="120" y1="162" x2="120" y2="210" stroke="#c9a84c" stroke-width="2"/><text x="120" y="238" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#c9a84c" font-weight="bold" letter-spacing="2">URIELNETA</text><text x="120" y="252" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#c9a84c" letter-spacing="3">AWARDS</text><text x="120" y="272" text-anchor="middle" font-family="Arial" font-size="8" fill="#c9a84c" letter-spacing="2" opacity=".8">4a EDICION</text></svg>';
+
+var LOGO_SRC = svgToDataUrl(LOGO_SVG);
+var AWARDS_SRC = svgToDataUrl(AWARDS_SVG_STR);
+
+document.getElementById('nav-logo-img').src = LOGO_SRC;
+document.getElementById('hero-logo').src = LOGO_SRC;
+document.getElementById('awards-logo-img').src = AWARDS_SRC;
 
 // ═══════════════════════════════════════════════════════════
 // AUTH SYSTEM
 // ═══════════════════════════════════════════════════════════
-const ADMIN_PASSWORD = 'ineri2025'; // Clave maestra para registrarse como admin
-const RANKS = ['visitante','usuario','editor','admin'];
-const RANK_LABELS = {visitante:'Visitante',usuario:'Usuario',editor:'Editor',admin:'Admin'};
-
 function getUsers(){try{return JSON.parse(localStorage.getItem('cfineri_users')||'[]');}catch{return[];}}
 function saveUsers(u){localStorage.setItem('cfineri_users',JSON.stringify(u));}
-function getCurrentUser(){try{const s=localStorage.getItem('cfineri_session');return s?JSON.parse(s):null;}catch{return null;}}
+function getCurrentUser(){try{var s=localStorage.getItem('cfineri_session');return s?JSON.parse(s):null;}catch{return null;}}
 function setCurrentUser(u){if(u)localStorage.setItem('cfineri_session',JSON.stringify(u));else localStorage.removeItem('cfineri_session');}
 
-function updateUserInSession(){
-  const cur=getCurrentUser();
-  if(!cur)return;
-  const users=getUsers();
-  const u=users.find(x=>x.username===cur.username);
-  if(u)setCurrentUser(u);
-}
+var currentUser = getCurrentUser();
 
-let currentUser=getCurrentUser();
-
-function showToast(msg,isError=false){
-  const t=document.getElementById('toast');
+function showToast(msg,isError){
+  isError = isError || false;
+  var t=document.getElementById('toast');
   t.textContent=msg;
   t.className='toast'+(isError?' error':'');
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
+  setTimeout(function(){t.classList.remove('show');},3000);
 }
 
 function openAuthModal(){
@@ -825,12 +841,13 @@ function switchAuthTab(tab){
 }
 
 function doLogin(){
-  const user=document.getElementById('login-user').value.trim();
-  const pass=document.getElementById('login-pass').value;
-  const err=document.getElementById('login-error');
+  var user=document.getElementById('login-user').value.trim();
+  var pass=document.getElementById('login-pass').value;
+  var err=document.getElementById('login-error');
   if(!user||!pass){err.textContent='Completá todos los campos.';err.style.display='block';return;}
-  const users=getUsers();
-  const found=users.find(u=>u.username.toLowerCase()===user.toLowerCase()&&u.password===pass);
+  var users=getUsers();
+  var found=null;
+  for(var i=0;i<users.length;i++){if(users[i].username.toLowerCase()===user.toLowerCase()&&users[i].password===pass){found=users[i];break;}}
   if(!found){err.textContent='Usuario o contraseña incorrectos.';err.style.display='block';return;}
   currentUser=found;
   setCurrentUser(found);
@@ -838,25 +855,27 @@ function doLogin(){
   renderNav();
   renderNoticias();
   renderPerfil();
-  showToast('¡Bienvenido, '+found.username+'! 🎉');
+  showToast('Bienvenido, '+found.username+'!');
 }
 
 function doRegister(){
-  const user=document.getElementById('reg-user').value.trim();
-  const pass=document.getElementById('reg-pass').value;
-  const pass2=document.getElementById('reg-pass2').value;
-  const adminKey=document.getElementById('reg-admin').value;
-  const err=document.getElementById('reg-error');
+  var user=document.getElementById('reg-user').value.trim();
+  var pass=document.getElementById('reg-pass').value;
+  var pass2=document.getElementById('reg-pass2').value;
+  var adminKey=document.getElementById('reg-admin').value;
+  var err=document.getElementById('reg-error');
   if(!user||!pass||!pass2){err.textContent='Completá todos los campos.';err.style.display='block';return;}
   if(user.length<3){err.textContent='El usuario debe tener al menos 3 caracteres.';err.style.display='block';return;}
   if(pass.length<6){err.textContent='La contraseña debe tener al menos 6 caracteres.';err.style.display='block';return;}
   if(pass!==pass2){err.textContent='Las contraseñas no coinciden.';err.style.display='block';return;}
-  const users=getUsers();
-  if(users.find(u=>u.username.toLowerCase()===user.toLowerCase())){err.textContent='Ese nombre de usuario ya existe.';err.style.display='block';return;}
-  let rank='usuario';
-  if(adminKey===ADMIN_PASSWORD) rank='admin';
-  else if(adminKey&&adminKey!=='') {err.textContent='Clave de admin incorrecta.';err.style.display='block';return;}
-  const newUser={username:user,password:pass,rank,joined:new Date().toISOString(),comments:0};
+  var users=getUsers();
+  var exists=false;
+  for(var i=0;i<users.length;i++){if(users[i].username.toLowerCase()===user.toLowerCase()){exists=true;break;}}
+  if(exists){err.textContent='Ese nombre de usuario ya existe.';err.style.display='block';return;}
+  var rank='usuario';
+  if(adminKey===ADMIN_PASSWORD){rank='admin';}
+  else if(adminKey&&adminKey!==''){err.textContent='Clave de admin incorrecta.';err.style.display='block';return;}
+  var newUser={username:user,password:pass,rank:rank,joined:new Date().toISOString(),comments:0};
   users.push(newUser);
   saveUsers(users);
   currentUser=newUser;
@@ -865,7 +884,7 @@ function doRegister(){
   renderNav();
   renderNoticias();
   renderPerfil();
-  showToast('¡Cuenta creada! Bienvenido, '+user+' 🎉');
+  showToast('Cuenta creada! Bienvenido, '+user);
 }
 
 function doLogout(){
@@ -887,30 +906,20 @@ function isLoggedIn(){return !!currentUser;}
 // NAV RENDER
 // ═══════════════════════════════════════════════════════════
 function renderNav(){
-  const right=document.getElementById('nav-right');
+  var right=document.getElementById('nav-right');
   if(currentUser){
-    const initials=currentUser.username.slice(0,2).toUpperCase();
-    right.innerHTML=`
-      <div class="nav-user-info" onclick="toggleDropdown()">
-        <div class="nav-avatar">${initials}</div>
-        <span class="nav-username">${currentUser.username}</span>
-        <span class="rank-badge rank-${currentUser.rank}">${RANK_LABELS[currentUser.rank]}</span>
-      </div>`;
+    var initials=currentUser.username.slice(0,2).toUpperCase();
+    right.innerHTML='<div class="nav-user-info" onclick="toggleDropdown()"><div class="nav-avatar">'+initials+'</div><span class="nav-username">'+currentUser.username+'</span><span class="rank-badge rank-'+currentUser.rank+'">'+RANK_LABELS[currentUser.rank]+'</span></div>';
   } else {
-    right.innerHTML=`<button class="nav-user-btn" onclick="openAuthModal()">Iniciar sesión</button>`;
+    right.innerHTML='<button class="nav-user-btn" onclick="openAuthModal()">Iniciar sesión</button>';
   }
-  // Botón publicar noticias
-  const btnPub=document.getElementById('btn-publish');
+  var btnPub=document.getElementById('btn-publish');
   if(btnPub) btnPub.classList.toggle('hidden',!canPublish());
 }
 
-function toggleDropdown(){
-  document.getElementById('user-dropdown').classList.toggle('open');
-}
-function closeDropdown(){
-  document.getElementById('user-dropdown').classList.remove('open');
-}
-document.addEventListener('click',e=>{
+function toggleDropdown(){document.getElementById('user-dropdown').classList.toggle('open');}
+function closeDropdown(){document.getElementById('user-dropdown').classList.remove('open');}
+document.addEventListener('click',function(e){
   if(!e.target.closest('.nav-user-info')&&!e.target.closest('#user-dropdown')) closeDropdown();
 });
 
@@ -920,15 +929,17 @@ document.addEventListener('click',e=>{
 function getNoticias(){try{return JSON.parse(localStorage.getItem('cfineri_noticias')||'[]');}catch{return[];}}
 function saveNoticias(n){localStorage.setItem('cfineri_noticias',JSON.stringify(n));}
 
-let editingNoticiaId=null;
+var editingNoticiaId=null;
 
-function openNoticiaModal(id=null){
+function openNoticiaModal(id){
+  id = id || null;
   if(!canPublish()){showToast('No tenés permisos para publicar.',true);return;}
   editingNoticiaId=id;
-  const modal=document.getElementById('modal-noticia');
-  const titleEl=document.getElementById('noticia-modal-title');
+  var titleEl=document.getElementById('noticia-modal-title');
   if(id!==null){
-    const n=getNoticias().find(x=>x.id===id);
+    var noticias=getNoticias();
+    var n=null;
+    for(var i=0;i<noticias.length;i++){if(noticias[i].id===id){n=noticias[i];break;}}
     if(!n)return;
     document.getElementById('n-titulo').value=n.titulo;
     document.getElementById('n-tag').value=n.tag;
@@ -941,26 +952,29 @@ function openNoticiaModal(id=null){
     titleEl.textContent='Nueva Noticia';
   }
   document.getElementById('noticia-error').style.display='none';
-  modal.classList.remove('hidden');
+  document.getElementById('modal-noticia').classList.remove('hidden');
 }
 function closeNoticiaModal(){document.getElementById('modal-noticia').classList.add('hidden');}
 
 function saveNoticia(){
-  const titulo=document.getElementById('n-titulo').value.trim();
-  const tag=document.getElementById('n-tag').value;
-  const texto=document.getElementById('n-texto').value.trim();
-  const err=document.getElementById('noticia-error');
+  var titulo=document.getElementById('n-titulo').value.trim();
+  var tag=document.getElementById('n-tag').value;
+  var texto=document.getElementById('n-texto').value.trim();
+  var err=document.getElementById('noticia-error');
   if(!titulo||!texto){err.textContent='Completá el título y el contenido.';err.style.display='block';return;}
   if(!canPublish()){err.textContent='Sin permisos.';err.style.display='block';return;}
-  const noticias=getNoticias();
+  var noticias=getNoticias();
   if(editingNoticiaId!==null){
-    const idx=noticias.findIndex(x=>x.id===editingNoticiaId);
-    if(idx>=0){noticias[idx].titulo=titulo;noticias[idx].tag=tag;noticias[idx].texto=texto;noticias[idx].editado=new Date().toISOString();}
-    showToast('Noticia actualizada ✓');
+    for(var i=0;i<noticias.length;i++){
+      if(noticias[i].id===editingNoticiaId){
+        noticias[i].titulo=titulo;noticias[i].tag=tag;noticias[i].texto=texto;noticias[i].editado=new Date().toISOString();break;
+      }
+    }
+    showToast('Noticia actualizada');
   } else {
-    const id=Date.now();
-    noticias.unshift({id,titulo,tag,texto,autor:currentUser.username,fecha:new Date().toISOString(),comentarios:[]});
-    showToast('Noticia publicada ✓');
+    var id=Date.now();
+    noticias.unshift({id:id,titulo:titulo,tag:tag,texto:texto,autor:currentUser.username,fecha:new Date().toISOString(),comentarios:[]});
+    showToast('Noticia publicada');
   }
   saveNoticias(noticias);
   closeNoticiaModal();
@@ -969,8 +983,8 @@ function saveNoticia(){
 
 function deleteNoticia(id){
   if(!isAdmin()){showToast('Solo los admins pueden eliminar.',true);return;}
-  if(!confirm('¿Eliminar esta noticia?'))return;
-  const n=getNoticias().filter(x=>x.id!==id);
+  if(!confirm('Eliminar esta noticia?'))return;
+  var n=getNoticias().filter(function(x){return x.id!==id;});
   saveNoticias(n);
   renderNoticias();
   showToast('Noticia eliminada.');
@@ -978,175 +992,133 @@ function deleteNoticia(id){
 
 function addComentario(noticiaId){
   if(!isLoggedIn()){showToast('Iniciá sesión para comentar.',true);return;}
-  const input=document.getElementById('comment-input-'+noticiaId);
-  const texto=input.value.trim();
+  var input=document.getElementById('comment-input-'+noticiaId);
+  var texto=input.value.trim();
   if(!texto)return;
-  const noticias=getNoticias();
-  const n=noticias.find(x=>x.id===noticiaId);
+  var noticias=getNoticias();
+  var n=null;
+  for(var i=0;i<noticias.length;i++){if(noticias[i].id===noticiaId){n=noticias[i];break;}}
   if(!n)return;
-  n.comentarios.push({id:Date.now(),usuario:currentUser.username,texto,fecha:new Date().toISOString()});
-  // count comentarios del usuario
-  const users=getUsers();
-  const ui=users.findIndex(u=>u.username===currentUser.username);
-  if(ui>=0){users[ui].comments=(users[ui].comments||0)+1;saveUsers(users);currentUser=users[ui];setCurrentUser(users[ui]);}
+  n.comentarios.push({id:Date.now(),usuario:currentUser.username,texto:texto,fecha:new Date().toISOString()});
+  var users=getUsers();
+  for(var j=0;j<users.length;j++){
+    if(users[j].username===currentUser.username){users[j].comments=(users[j].comments||0)+1;saveUsers(users);currentUser=users[j];setCurrentUser(users[j]);break;}
+  }
   saveNoticias(noticias);
   input.value='';
   renderNoticias();
 }
 
 function deleteComentario(noticiaId,comentId){
-  const noticias=getNoticias();
-  const n=noticias.find(x=>x.id===noticiaId);
+  var noticias=getNoticias();
+  var n=null;
+  for(var i=0;i<noticias.length;i++){if(noticias[i].id===noticiaId){n=noticias[i];break;}}
   if(!n)return;
-  const c=n.comentarios.find(x=>x.id===comentId);
+  var c=null;
+  for(var j=0;j<n.comentarios.length;j++){if(n.comentarios[j].id===comentId){c=n.comentarios[j];break;}}
   if(!c)return;
-  if(!isAdmin()&&c.usuario!==currentUser?.username){showToast('Sin permisos.',true);return;}
-  n.comentarios=n.comentarios.filter(x=>x.id!==comentId);
+  if(!isAdmin()&&c.usuario!==currentUser.username){showToast('Sin permisos.',true);return;}
+  n.comentarios=n.comentarios.filter(function(x){return x.id!==comentId;});
   saveNoticias(noticias);
   renderNoticias();
 }
 
 function toggleComentarios(id){
-  const sec=document.getElementById('comments-sec-'+id);
+  var sec=document.getElementById('comments-sec-'+id);
   if(sec)sec.classList.toggle('hidden');
 }
 
 function fmtDate(iso){
-  try{const d=new Date(iso);return d.toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+d.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}
-  catch{return '';}
+  try{var d=new Date(iso);return d.toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+d.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}
+  catch(e){return '';}
+}
+
+function escHtml(s){
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/\n/g,'<br>');
 }
 
 function renderNoticias(){
-  const grid=document.getElementById('noticias-grid');
+  var grid=document.getElementById('noticias-grid');
   if(!grid)return;
-  const btnPub=document.getElementById('btn-publish');
+  var btnPub=document.getElementById('btn-publish');
   if(btnPub)btnPub.classList.toggle('hidden',!canPublish());
-  const noticias=getNoticias();
+  var noticias=getNoticias();
   if(!noticias.length){
-    grid.innerHTML=`<div class="empty-news"><div class="empty-news-icon">📰</div><div class="empty-news-text">${canPublish()?'No hay noticias. ¡Publicá la primera!':'No hay noticias publicadas aún'}</div></div>`;
+    grid.innerHTML='<div class="empty-news"><div class="empty-news-icon">📰</div><div class="empty-news-text">'+(canPublish()?'No hay noticias. Publicá la primera!':'No hay noticias publicadas aún')+'</div></div>';
     return;
   }
-  grid.innerHTML=noticias.map(n=>{
-    const editado=n.editado?` <span style="font-size:.65rem;color:#555">(editado)</span>`:'';
-    const adminBtns=canPublish()?`
-      <button class="noticia-btn" onclick="openNoticiaModal(${n.id})">✏️ Editar</button>
-      ${isAdmin()?`<button class="noticia-btn danger" onclick="deleteNoticia(${n.id})">🗑️ Eliminar</button>`:''}
-    `:'';
-    const comentariosHTML=n.comentarios.map(c=>`
-      <div class="comentario">
-        <div class="comentario-header">
-          <span class="comentario-user">${escHtml(c.usuario)}</span>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span class="comentario-date">${fmtDate(c.fecha)}</span>
-            ${(isAdmin()||c.usuario===currentUser?.username)?`<button class="comentario-delete" onclick="deleteComentario(${n.id},${c.id})">✕</button>`:''}
-          </div>
-        </div>
-        <div class="comentario-texto">${escHtml(c.texto)}</div>
-      </div>`).join('');
-    const commentForm=isLoggedIn()?`
-      <div class="comentario-form">
-        <textarea class="comentario-input" id="comment-input-${n.id}" placeholder="Escribí un comentario..." rows="2"
-          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();addComentario(${n.id});}"></textarea>
-        <button class="comentario-send" onclick="addComentario(${n.id})">Enviar</button>
-      </div>`:`<p style="font-size:.8rem;color:var(--gris);margin-top:10px"><a onclick="openAuthModal()" style="color:var(--verde-brillante);cursor:pointer">Iniciá sesión</a> para comentar.</p>`;
-    return `
-      <div class="noticia-card">
-        <div class="noticia-body">
-          <div class="noticia-meta">
-            <span class="noticia-tag">${escHtml(n.tag)}</span>
-            <span class="noticia-date">${fmtDate(n.fecha)}${editado}</span>
-            <span class="noticia-autor">por ${escHtml(n.autor)}</span>
-          </div>
-          <div class="noticia-titulo">${escHtml(n.titulo)}</div>
-          <div class="noticia-texto">${escHtml(n.texto)}</div>
-          <div class="noticia-footer">
-            <div class="noticia-actions">
-              <button class="noticia-btn comment-btn" onclick="toggleComentarios(${n.id})">💬 ${n.comentarios.length} comentario${n.comentarios.length!==1?'s':''}</button>
-              ${adminBtns}
-            </div>
-          </div>
-        </div>
-        <div class="comentarios-section hidden" id="comments-sec-${n.id}">
-          <div class="comentarios-title">Comentarios</div>
-          ${comentariosHTML||'<p style="font-size:.8rem;color:var(--gris)">Sé el primero en comentar.</p>'}
-          ${commentForm}
-        </div>
-      </div>`;
-  }).join('');
+  var html='';
+  for(var i=0;i<noticias.length;i++){
+    var n=noticias[i];
+    var editado=n.editado?'<span style="font-size:.65rem;color:#555"> (editado)</span>':'';
+    var adminBtns=canPublish()?'<button class="noticia-btn" onclick="openNoticiaModal('+n.id+')">Editar</button>'+(isAdmin()?'<button class="noticia-btn danger" onclick="deleteNoticia('+n.id+')">Eliminar</button>':''):'';
+    var comentariosHTML='';
+    for(var j=0;j<n.comentarios.length;j++){
+      var c=n.comentarios[j];
+      var canDel=(isAdmin()||c.usuario===(currentUser&&currentUser.username));
+      comentariosHTML+='<div class="comentario"><div class="comentario-header"><span class="comentario-user">'+escHtml(c.usuario)+'</span><div style="display:flex;align-items:center;gap:8px;"><span class="comentario-date">'+fmtDate(c.fecha)+'</span>'+(canDel?'<button class="comentario-delete" onclick="deleteComentario('+n.id+','+c.id+')">x</button>':'')+'</div></div><div class="comentario-texto">'+escHtml(c.texto)+'</div></div>';
+    }
+    var commentForm=isLoggedIn()?'<div class="comentario-form"><textarea class="comentario-input" id="comment-input-'+n.id+'" placeholder="Escribí un comentario..." rows="2"></textarea><button class="comentario-send" onclick="addComentario('+n.id+')">Enviar</button></div>':'<p style="font-size:.8rem;color:var(--gris);margin-top:10px"><a onclick="openAuthModal()" style="color:var(--verde-brillante);cursor:pointer">Iniciá sesión</a> para comentar.</p>';
+    html+='<div class="noticia-card"><div class="noticia-body"><div class="noticia-meta"><span class="noticia-tag">'+escHtml(n.tag)+'</span><span class="noticia-date">'+fmtDate(n.fecha)+editado+'</span><span class="noticia-autor">por '+escHtml(n.autor)+'</span></div><div class="noticia-titulo">'+escHtml(n.titulo)+'</div><div class="noticia-texto">'+escHtml(n.texto)+'</div><div class="noticia-footer"><div class="noticia-actions"><button class="noticia-btn comment-btn" onclick="toggleComentarios('+n.id+')">Comentarios ('+n.comentarios.length+')</button>'+adminBtns+'</div></div></div><div class="comentarios-section hidden" id="comments-sec-'+n.id+'"><div class="comentarios-title">Comentarios</div>'+(comentariosHTML||'<p style="font-size:.8rem;color:var(--gris)">Sé el primero en comentar.</p>')+commentForm+'</div></div>';
+  }
+  grid.innerHTML=html;
 }
-
-function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>');}
 
 // ═══════════════════════════════════════════════════════════
 // PERFIL RENDER
 // ═══════════════════════════════════════════════════════════
 function renderPerfil(){
-  const content=document.getElementById('perfil-content');
+  var content=document.getElementById('perfil-content');
   if(!content)return;
   if(!currentUser){
-    content.innerHTML=`<div class="locked-section"><div class="locked-icon">🔒</div><div class="locked-title">Iniciá sesión para ver tu perfil</div><p class="locked-text">Creá una cuenta o iniciá sesión.</p><button class="locked-btn" onclick="openAuthModal()">Iniciar sesión</button></div>`;
+    content.innerHTML='<div class="locked-section"><div class="locked-icon">🔒</div><div class="locked-title">Iniciá sesión para ver tu perfil</div><p class="locked-text">Creá una cuenta o iniciá sesión.</p><button class="locked-btn" onclick="openAuthModal()">Iniciar sesión</button></div>';
     return;
   }
-  const initials=currentUser.username.slice(0,2).toUpperCase();
-  const joined=new Date(currentUser.joined||Date.now()).toLocaleDateString('es-AR',{month:'long',year:'numeric'});
-  const noticias=getNoticias().filter(n=>n.autor===currentUser.username).length;
-
-  const adminHTML=isAdmin()?renderAdminPanel():'';
-  const editorNote=currentUser.rank==='editor'?`<div style="margin-top:14px;padding:12px 16px;background:rgba(100,150,255,.07);border:1px solid rgba(100,150,255,.2);border-radius:8px;font-size:.82rem;color:#7aadff;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;">Sos editor: podés publicar y editar noticias.</div>`:'';
-
-  content.innerHTML=`
-    <div class="perfil-card">
-      <div class="perfil-avatar">${initials}</div>
-      <div class="perfil-nombre">${escHtml(currentUser.username)}</div>
-      <span class="rank-badge rank-${currentUser.rank}" style="font-size:.75rem;padding:4px 12px;">${RANK_LABELS[currentUser.rank]}</span>
-      <div class="perfil-stats">
-        <div class="ps"><div class="ps-val">${noticias}</div><div class="ps-lbl">Noticias</div></div>
-        <div class="ps"><div class="ps-val">${currentUser.comments||0}</div><div class="ps-lbl">Comentarios</div></div>
-        <div class="ps"><div class="ps-val">${joined}</div><div class="ps-lbl">Miembro desde</div></div>
-      </div>
-      ${editorNote}
-    </div>
-    ${adminHTML}`;
+  var initials=currentUser.username.slice(0,2).toUpperCase();
+  var joined=new Date(currentUser.joined||Date.now()).toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+  var noticias=getNoticias().filter(function(n){return n.autor===currentUser.username;}).length;
+  var editorNote=currentUser.rank==='editor'?'<div style="margin-top:14px;padding:12px 16px;background:rgba(100,150,255,.07);border:1px solid rgba(100,150,255,.2);border-radius:8px;font-size:.82rem;color:#7aadff;font-family:Barlow Condensed,sans-serif;letter-spacing:1px;">Sos editor: podés publicar y editar noticias.</div>':'';
+  var adminHTML=isAdmin()?renderAdminPanel():'';
+  content.innerHTML='<div class="perfil-card"><div class="perfil-avatar">'+initials+'</div><div class="perfil-nombre">'+escHtml(currentUser.username)+'</div><span class="rank-badge rank-'+currentUser.rank+'" style="font-size:.75rem;padding:4px 12px;">'+RANK_LABELS[currentUser.rank]+'</span><div class="perfil-stats"><div class="ps"><div class="ps-val">'+noticias+'</div><div class="ps-lbl">Noticias</div></div><div class="ps"><div class="ps-val">'+(currentUser.comments||0)+'</div><div class="ps-lbl">Comentarios</div></div><div class="ps"><div class="ps-val">'+joined+'</div><div class="ps-lbl">Miembro desde</div></div></div>'+editorNote+'</div>'+adminHTML;
 }
 
 function renderAdminPanel(){
-  const users=getUsers();
-  const rows=users.map(u=>`
-    <div class="admin-user-row">
-      <div class="nav-avatar" style="width:26px;height:26px;font-size:.75rem;">${u.username.slice(0,2).toUpperCase()}</div>
-      <div class="admin-user-name">${escHtml(u.username)}</div>
-      <span class="rank-badge rank-${u.rank}">${RANK_LABELS[u.rank]}</span>
-      <select class="admin-rank-select" onchange="changeRank('${escHtml(u.username)}',this.value)">
-        ${RANKS.map(r=>`<option value="${r}"${r===u.rank?' selected':''}>${RANK_LABELS[r]}</option>`).join('')}
-      </select>
-    </div>`).join('');
-  return `
-    <div class="admin-panel">
-      <div class="admin-title">⚙️ Panel de Administración — Usuarios (${users.length})</div>
-      <div class="admin-user-list">${rows||'<p style="font-size:.82rem;color:var(--gris)">No hay usuarios registrados.</p>'}</div>
-    </div>`;
+  var users=getUsers();
+  var rows='';
+  for(var i=0;i<users.length;i++){
+    var u=users[i];
+    var opts='';
+    for(var j=0;j<RANKS.length;j++){opts+='<option value="'+RANKS[j]+'"'+(RANKS[j]===u.rank?' selected':'')+'>'+RANK_LABELS[RANKS[j]]+'</option>';}
+    rows+='<div class="admin-user-row"><div class="nav-avatar" style="width:26px;height:26px;font-size:.75rem;">'+u.username.slice(0,2).toUpperCase()+'</div><div class="admin-user-name">'+escHtml(u.username)+'</div><span class="rank-badge rank-'+u.rank+'">'+RANK_LABELS[u.rank]+'</span><select class="admin-rank-select" onchange="changeRank(\''+escHtml(u.username)+'\',this.value)">'+opts+'</select></div>';
+  }
+  return '<div class="admin-panel"><div class="admin-title">Panel de Administración — Usuarios ('+users.length+')</div><div class="admin-user-list">'+(rows||'<p style="font-size:.82rem;color:var(--gris)">No hay usuarios.</p>')+'</div></div>';
 }
 
 function changeRank(username,newRank){
-  const users=getUsers();
-  const idx=users.findIndex(u=>u.username===username);
-  if(idx<0)return;
-  users[idx].rank=newRank;
+  var users=getUsers();
+  for(var i=0;i<users.length;i++){
+    if(users[i].username===username){users[i].rank=newRank;break;}
+  }
   saveUsers(users);
   if(currentUser&&currentUser.username===username){currentUser.rank=newRank;setCurrentUser(currentUser);}
   renderNav();
   renderPerfil();
-  showToast(`${username} → ${RANK_LABELS[newRank]}`);
+  showToast(username+' -> '+RANK_LABELS[newRank]);
 }
 
 // ═══════════════════════════════════════════════════════════
 // PAGE NAV
 // ═══════════════════════════════════════════════════════════
 function showPage(name){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
   document.getElementById('page-'+name).classList.add('active');
-  const tab=document.querySelector(`[data-page="${name}"]`);
+  var tab=document.querySelector('[data-page="'+name+'"]');
   if(tab)tab.classList.add('active');
   document.getElementById('nav-tabs').classList.remove('open');
   closeDropdown();
@@ -1159,7 +1131,7 @@ function toggleMenu(){document.getElementById('nav-tabs').classList.toggle('open
 // ═══════════════════════════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════════════════════════
-const STATS=[
+var STATS=[
   {jugador:"Azion",goles:153,asistencias:50,partidos:80},
   {jugador:"Rvssian",goles:116,asistencias:93,partidos:95},
   {jugador:"Jebedias",goles:84,asistencias:86,partidos:90},
@@ -1200,111 +1172,93 @@ const STATS=[
   {jugador:"UsuarioDesconocido",goles:2,asistencias:1,partidos:4}
 ];
 
-const HOF=[
-  {nombre:"Azion",rol:"Delantero · Leyenda",goles:153,asistencias:50,logros:["Máximo Goleador All-Time","Balón de Playa Ed.3","The New ERA"]},
-  {nombre:"Rvssian",rol:"Mediocampista · Capitán",goles:116,asistencias:93,logros:["LNH S1 Campeón","LNH S2 Campeón","Banca D'Or Ed.3","Más Activo Ed.3"]},
-  {nombre:"Jebedias",rol:"Defensa · Co-Fundador",goles:84,asistencias:86,logros:["CWL Campeón","MOS 2.0 Campeón","Old Star Ed.3","Best CB Ed.3"]},
-  {nombre:"Uriel",rol:"DT · Fundador",goles:71,asistencias:52,logros:["CWL Campeón","MOS 2.0 Campeón","Old Star Ed.2","Mejor Staff CPA 2021"]},
-  {nombre:"Gabe",rol:"Extremo · The Remontada",goles:10,asistencias:8,logros:["Future Star Ed.1","Future Star Ed.2","Ballon D'Or Ed.2","Gol 90+1 vs Atlético"]},
-  {nombre:"Goteras",rol:"Extremo · Asistidor",goles:45,asistencias:55,logros:["SLM S2 Campeón","LNH S1 Campeón","Balón de Playa Ed.2"]},
+var HOF=[
+  {nombre:"Azion",rol:"Delantero - Leyenda",goles:153,asistencias:50,logros:["Maximo Goleador All-Time","Balon de Playa Ed.3","The New ERA"]},
+  {nombre:"Rvssian",rol:"Mediocampista - Capitan",goles:116,asistencias:93,logros:["LNH S1 Campeon","LNH S2 Campeon","Banca D'Or Ed.3","Mas Activo Ed.3"]},
+  {nombre:"Jebedias",rol:"Defensa - Co-Fundador",goles:84,asistencias:86,logros:["CWL Campeon","MOS 2.0 Campeon","Old Star Ed.3","Best CB Ed.3"]},
+  {nombre:"Uriel",rol:"DT - Fundador",goles:71,asistencias:52,logros:["CWL Campeon","MOS 2.0 Campeon","Old Star Ed.2","Mejor Staff CPA 2021"]},
+  {nombre:"Gabe",rol:"Extremo - The Remontada",goles:10,asistencias:8,logros:["Future Star Ed.1","Future Star Ed.2","Ballon D'Or Ed.2","Gol 90+1 vs Atletico"]},
+  {nombre:"Goteras",rol:"Extremo - Asistidor",goles:45,asistencias:55,logros:["SLM S2 Campeon","LNH S1 Campeon","Balon de Playa Ed.2"]}
 ];
 
-const MATCHES=[{id:1,rival:"River Plate",resultado_ineri:2,resultado_rival:20,juego:"TPS",tipo:"derrota",año:"2023",liga:"TSL",copa:"NO"},{id:2,rival:"America",resultado_ineri:4,resultado_rival:18,juego:"TPS",tipo:"derrota",año:"2023",liga:"TSL",copa:"NO"},{id:3,rival:"Atletico de Madrid",resultado_ineri:3,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2023",liga:"TSL",copa:"NO"},{id:4,rival:"Ajax",resultado_ineri:2,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2023",liga:"TSL",copa:"NO"},{id:5,rival:"Marruecos",resultado_ineri:18,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2023",liga:"CWL",copa:"NO"},{id:6,rival:"Argentina",resultado_ineri:11,resultado_rival:9,juego:"TPS",tipo:"victoria",año:"2023",liga:"CWL",copa:"NO"},{id:7,rival:"Corea del Sur",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2023",liga:"CWL",copa:"SI"},{id:8,rival:"España",resultado_ineri:4,resultado_rival:12,juego:"TPS",tipo:"derrota",año:"2023",liga:"CWL",copa:"NO"},{id:9,rival:"Parma",resultado_ineri:3,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2023",liga:"TSL",copa:"NO"},{id:10,rival:"Town FC",resultado_ineri:2,resultado_rival:3,juego:"TPS",tipo:"derrota",año:"2023",liga:"TSL",copa:"NO"},{id:11,rival:"Paraguay",resultado_ineri:0,resultado_rival:3,juego:"TPS",tipo:"derrota",año:"2021",liga:"MOS",copa:"NO"},{id:12,rival:"Otaku FC",resultado_ineri:0,resultado_rival:1,juego:"TPS",tipo:"derrota",año:"2021",liga:"MOS",copa:"NO"},{id:13,rival:"Otaku FC",resultado_ineri:2,resultado_rival:3,juego:"TPS",tipo:"derrota",año:"2021",liga:"MOS",copa:"NO"},{id:14,rival:"Estados Unidos",resultado_ineri:14,resultado_rival:8,juego:"TPS",tipo:"victoria",año:"2023",liga:"MOS",copa:"NO"},{id:15,rival:"G2",resultado_ineri:3,resultado_rival:3,juego:"Touch",tipo:"empate",año:"2024",liga:"ATF",copa:"NO"},{id:16,rival:"Team Random",resultado_ineri:4,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:17,rival:"Moron Celtics",resultado_ineri:5,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:18,rival:"Atletico Berlin",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:19,rival:"Novorizontino",resultado_ineri:1,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:20,rival:"Bloxyneta",resultado_ineri:7,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2025",liga:"ATF",copa:"NO"},{id:21,rival:"Fantasy FC",resultado_ineri:4,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:22,rival:"Da Pushis",resultado_ineri:4,resultado_rival:7,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:23,rival:"Nacional",resultado_ineri:4,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2025",liga:"ATF",copa:"NO"},{id:24,rival:"Racing Club",resultado_ineri:0,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:25,rival:"Atletico Nacional",resultado_ineri:0,resultado_rival:2,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:26,rival:"Nacional",resultado_ineri:6,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2025",liga:"ATF",copa:"NO"},{id:27,rival:"Racing Club",resultado_ineri:3,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2025",liga:"ATF",copa:"NO"},{id:28,rival:"Atletico Nacional",resultado_ineri:2,resultado_rival:10,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:29,rival:"Atletico Nacional",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:30,rival:"Bucaramanga",resultado_ineri:8,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:31,rival:"Sugar FC",resultado_ineri:2,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:32,rival:"Faustoneta",resultado_ineri:2,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:33,rival:"The Sylars",resultado_ineri:4,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:34,rival:"DSC",resultado_ineri:1,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:35,rival:"U De CALI",resultado_ineri:0,resultado_rival:0,juego:"Touch",tipo:"empate",año:"2024",liga:"ATF",copa:"NO"},{id:36,rival:"Sao Cayetano",resultado_ineri:0,resultado_rival:1,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:37,rival:"Skanvia",resultado_ineri:3,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:38,rival:"Fantasy FC",resultado_ineri:2,resultado_rival:9,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:39,rival:"Atletico Berlin",resultado_ineri:1,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:40,rival:"Skanvia",resultado_ineri:3,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:41,rival:"Racing Club",resultado_ineri:3,resultado_rival:3,juego:"Touch",tipo:"empate",año:"2024",liga:"ATF",copa:"NO"},{id:42,rival:"Rosario Central",resultado_ineri:2,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:43,rival:"Estudiantes de la Plata",resultado_ineri:3,resultado_rival:14,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:44,rival:"River Plate",resultado_ineri:11,resultado_rival:7,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:45,rival:"Da Pushis",resultado_ineri:6,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:46,rival:"Sugar FC",resultado_ineri:4,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:47,rival:"Galindos FC",resultado_ineri:3,resultado_rival:7,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:48,rival:"Jamaica",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:49,rival:"Marruecos",resultado_ineri:0,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:50,rival:"Canada",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:51,rival:"Brasil",resultado_ineri:1,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:52,rival:"Francia",resultado_ineri:6,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:53,rival:"Venezuela",resultado_ineri:6,resultado_rival:14,juego:"TPS",tipo:"derrota",año:"2025",liga:"TSL",copa:"NO"},{id:54,rival:"Suiza",resultado_ineri:6,resultado_rival:14,juego:"TPS",tipo:"derrota",año:"2025",liga:"TSL",copa:"NO"},{id:55,rival:"Team Random",resultado_ineri:0,resultado_rival:0,juego:"TPS",tipo:"empate",año:"2025",liga:"UL",copa:"NO"},{id:56,rival:"Sol FC",resultado_ineri:3,resultado_rival:3,juego:"TPS",tipo:"empate",año:"2025",liga:"UL",copa:"NO"},{id:57,rival:"Otaku FC",resultado_ineri:14,resultado_rival:11,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:58,rival:"Independiente",resultado_ineri:3,resultado_rival:3,juego:"TPS",tipo:"empate",año:"2025",liga:"UL",copa:"NO"},{id:59,rival:"Paraguay",resultado_ineri:10,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:60,rival:"Brasil",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:61,rival:"Estados Unidos",resultado_ineri:3,resultado_rival:12,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:62,rival:"Barcelona FC",resultado_ineri:0,resultado_rival:1,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:63,rival:"Team Random",resultado_ineri:6,resultado_rival:6,juego:"TPS",tipo:"empate",año:"2025",liga:"Amistoso",copa:"NO"},{id:64,rival:"Team Random",resultado_ineri:3,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:65,rival:"Otaku FC",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:66,rival:"Ecuador",resultado_ineri:2,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:67,rival:"Brasil",resultado_ineri:9,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:68,rival:"Team Random",resultado_ineri:1,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:69,rival:"Team Random",resultado_ineri:1,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:70,rival:"Milan FC",resultado_ineri:2,resultado_rival:10,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:71,rival:"Liga de Quito",resultado_ineri:6,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:72,rival:"Retolam FC",resultado_ineri:2,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:73,rival:"Universitario",resultado_ineri:16,resultado_rival:16,juego:"TPS",tipo:"empate",año:"2025",liga:"FTC",copa:"NO"},{id:74,rival:"Saiyans FC",resultado_ineri:11,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:75,rival:"PXG",resultado_ineri:5,resultado_rival:13,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:76,rival:"Uruguay",resultado_ineri:6,resultado_rival:13,juego:"TPS",tipo:"derrota",año:"2025",liga:"LMS",copa:"NO"},{id:77,rival:"Ecuador",resultado_ineri:1,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"LMS",copa:"NO"},{id:78,rival:"Mushuc",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:79,rival:"Santos",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:80,rival:"Japon",resultado_ineri:3,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"LMS",copa:"NO"},{id:81,rival:"Team Random",resultado_ineri:9,resultado_rival:9,juego:"TPS",tipo:"empate",año:"2025",liga:"Amistoso",copa:"NO"},{id:82,rival:"America",resultado_ineri:9,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:83,rival:"Corinthians",resultado_ineri:9,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:84,rival:"Eintracht",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:85,rival:"Kickers",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:86,rival:"Otaku FC",resultado_ineri:8,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:87,rival:"Atletico Nacional",resultado_ineri:3,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:88,rival:"Team Random",resultado_ineri:5,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:89,rival:"Estudiantes de la Plata",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:90,rival:"Kickers",resultado_ineri:9,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:91,rival:"Alianza Lima",resultado_ineri:7,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:92,rival:"Corinthians",resultado_ineri:3,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:93,rival:"Eintracht",resultado_ineri:3,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:94,rival:"Estudiantes de la Plata",resultado_ineri:5,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:95,rival:"Kickers",resultado_ineri:11,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:96,rival:"Michi Team",resultado_ineri:4,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:97,rival:"Team Random",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:98,rival:"Atletico Nacional",resultado_ineri:2,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:99,rival:"Corinthians",resultado_ineri:9,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:100,rival:"Kazbra FC",resultado_ineri:3,resultado_rival:12,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:101,rival:"Mushuc",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:102,rival:"Kickers",resultado_ineri:7,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:103,rival:"Saiyans FC",resultado_ineri:6,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:104,rival:"Team Random",resultado_ineri:3,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"LNH",copa:"NO"},{id:105,rival:"Atletico Nacional",resultado_ineri:5,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:106,rival:"Corinthians",resultado_ineri:12,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:107,rival:"Santos",resultado_ineri:5,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:108,rival:"Universitario",resultado_ineri:9,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:109,rival:"Palmeiras",resultado_ineri:8,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:110,rival:"Kickers",resultado_ineri:6,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:111,rival:"Kickers",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:112,rival:"Alianza Lima",resultado_ineri:11,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:113,rival:"Universitario",resultado_ineri:3,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:114,rival:"Saiyans FC",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"SI"},{id:115,rival:"Guadalajara",resultado_ineri:8,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:116,rival:"Team Random",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"LNH",copa:"NO"},{id:117,rival:"Kickers",resultado_ineri:4,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:118,rival:"Otaku FC",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:119,rival:"Michi Team",resultado_ineri:8,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:120,rival:"Athletico Paranaense",resultado_ineri:8,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:121,rival:"Santos",resultado_ineri:8,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:122,rival:"Saiyans FC",resultado_ineri:9,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:123,rival:"Guadalajara",resultado_ineri:4,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:124,rival:"Kazbra FC",resultado_ineri:5,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:125,rival:"Athletico Paranaense",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:126,rival:"Corinthians",resultado_ineri:8,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:127,rival:"Estudiantes de la Plata",resultado_ineri:7,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:128,rival:"Alianza Lima",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:129,rival:"Universitario",resultado_ineri:8,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:130,rival:"Athletico Paranaense",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"SI"},{id:131,rival:"Kazbra FC",resultado_ineri:3,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:132,rival:"Guadalajara",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:133,rival:"Universitario",resultado_ineri:9,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:134,rival:"Corinthians",resultado_ineri:4,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:135,rival:"Palmeiras",resultado_ineri:4,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:136,rival:"Alianza Lima",resultado_ineri:7,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:137,rival:"Team Random",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:138,rival:"Kickers",resultado_ineri:9,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"SI"},{id:139,rival:"Team Random",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:140,rival:"Athletico Paranaense",resultado_ineri:5,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:141,rival:"Saiyans FC",resultado_ineri:9,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"SI"},{id:142,rival:"Atletico Nacional",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:143,rival:"Universitario",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:144,rival:"Athletico Paranaense",resultado_ineri:3,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:145,rival:"Alianza Lima",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:146,rival:"Guadalajara",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:147,rival:"Corinthians",resultado_ineri:4,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:148,rival:"Santos",resultado_ineri:5,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:149,rival:"Corinthians",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:150,rival:"PXG",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:151,rival:"Universitario",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:152,rival:"Santos",resultado_ineri:8,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:153,rival:"Guadalajara",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:154,rival:"Athletico Paranaense",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:155,rival:"Otaku FC",resultado_ineri:8,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:156,rival:"Team Random",resultado_ineri:8,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:157,rival:"Atlante FC",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:158,rival:"Otaku FC",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"LNH",copa:"NO"},{id:159,rival:"Ecuador",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"Banana League",copa:"NO"},{id:160,rival:"Guadalajara",resultado_ineri:12,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:161,rival:"Palmeiras",resultado_ineri:8,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:162,rival:"Chelsea",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:163,rival:"Belgica",resultado_ineri:0,resultado_rival:0,juego:"TPS",tipo:"empate",año:"2025",liga:"Banana League",copa:"NO"},{id:164,rival:"Peñarol",resultado_ineri:12,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:165,rival:"Alianza Lima",resultado_ineri:9,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:166,rival:"SportsBoys",resultado_ineri:5,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"LMS",copa:"NO"},{id:167,rival:"Team Random",resultado_ineri:6,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:168,rival:"Colo Colo",resultado_ineri:6,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:169,rival:"Inglaterra",resultado_ineri:5,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"Banana League",copa:"NO"},{id:170,rival:"Kazbra FC",resultado_ineri:8,resultado_rival:14,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:171,rival:"Holanda",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"Banana League",copa:"NO"},{id:172,rival:"Colo Colo",resultado_ineri:4,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:173,rival:"Boca Juniors",resultado_ineri:13,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:174,rival:"Peru",resultado_ineri:7,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"Banana League",copa:"NO"},{id:175,rival:"Boca Juniors",resultado_ineri:14,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:176,rival:"Palmeiras",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:177,rival:"Team Random",resultado_ineri:8,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:178,rival:"Michi Team",resultado_ineri:6,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:179,rival:"Team Random",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:180,rival:"Francia",resultado_ineri:8,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"Banana League",copa:"NO"},{id:181,rival:"Independiente",resultado_ineri:8,resultado_rival:7,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"SI"},{id:182,rival:"Pachuca",resultado_ineri:9,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:183,rival:"Team Random",resultado_ineri:2,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:184,rival:"Sporting",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:185,rival:"Brentford",resultado_ineri:6,resultado_rival:16,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:186,rival:"Roma FC",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:187,rival:"Team Random",resultado_ineri:8,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:188,rival:"Team Random",resultado_ineri:7,resultado_rival:7,juego:"TPS",tipo:"empate",año:"2025",liga:"UL",copa:"NO"},{id:189,rival:"Auckland City",resultado_ineri:12,resultado_rival:9,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:190,rival:"Auckland City",resultado_ineri:12,resultado_rival:9,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:191,rival:"Auckland City",resultado_ineri:7,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:192,rival:"Team Random",resultado_ineri:1,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:193,rival:"Estados Unidos",resultado_ineri:14,resultado_rival:8,juego:"TPS",tipo:"victoria",año:"2023",liga:"MOS",copa:"SI"},{id:194,rival:"Atletico Nacional",resultado_ineri:1,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:195,rival:"Atletico Nacional",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:196,rival:"Team Random",resultado_ineri:0,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:197,rival:"Team Random",resultado_ineri:2,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:198,rival:"Team Random",resultado_ineri:1,resultado_rival:2,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:199,rival:"Team Random",resultado_ineri:0,resultado_rival:0,juego:"Touch",tipo:"empate",año:"2026",liga:"ATF",copa:"NO"},{id:200,rival:"Team Random",resultado_ineri:1,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:201,rival:"Team Random",resultado_ineri:4,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:202,rival:"Team Random",resultado_ineri:4,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:203,rival:"Team Random",resultado_ineri:4,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:204,rival:"Team Random",resultado_ineri:3,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:205,rival:"Team Random",resultado_ineri:3,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:206,rival:"Team Random",resultado_ineri:0,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:207,rival:"Team Random",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:208,rival:"Team Random",resultado_ineri:2,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:209,rival:"Team Random",resultado_ineri:4,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:210,rival:"Team Random",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:211,rival:"Team Random",resultado_ineri:10,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:212,rival:"Team Random",resultado_ineri:1,resultado_rival:2,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:213,rival:"Team Random",resultado_ineri:1,resultado_rival:2,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:214,rival:"Team Random",resultado_ineri:4,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:215,rival:"Concepcion",resultado_ineri:1,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:216,rival:"Red Bull",resultado_ineri:1,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:217,rival:"Team Random",resultado_ineri:1,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:218,rival:"Brazukinho",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:219,rival:"Red Bull",resultado_ineri:4,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:220,rival:"Team Random",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:221,rival:"Team Random",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:222,rival:"Team Random",resultado_ineri:2,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:223,rival:"Team Random",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:224,rival:"Team Random",resultado_ineri:5,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:225,rival:"Team Random",resultado_ineri:2,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:226,rival:"Red Bull",resultado_ineri:7,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:227,rival:"Team Random",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:228,rival:"Red Waffles",resultado_ineri:3,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:229,rival:"Team Random",resultado_ineri:3,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:230,rival:"Black Mans FC",resultado_ineri:2,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:231,rival:"Black Mans FC",resultado_ineri:5,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:232,rival:"Galindos FC",resultado_ineri:1,resultado_rival:1,juego:"Touch",tipo:"empate",año:"2026",liga:"ATF",copa:"NO"},{id:233,rival:"Galindos FC",resultado_ineri:0,resultado_rival:0,juego:"Touch",tipo:"empate",año:"2026",liga:"ATF",copa:"NO"},{id:234,rival:"CJA",resultado_ineri:1,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:235,rival:"CJA",resultado_ineri:2,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:236,rival:"Santos",resultado_ineri:8,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:237,rival:"Manchester Piggy",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2026",liga:"ULS",copa:"NO"},{id:238,rival:"Bayern Munich",resultado_ineri:3,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:239,rival:"Neo United",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:240,rival:"Real Esteli",resultado_ineri:10,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:241,rival:"Golemneta",resultado_ineri:2,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:242,rival:"Independiente",resultado_ineri:4,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:243,rival:"Independiente",resultado_ineri:9,resultado_rival:7,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:244,rival:"San Lorenzo",resultado_ineri:8,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2026",liga:"ULS",copa:"NO"},{id:245,rival:"FxckAll",resultado_ineri:10,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:246,rival:"Cambridge",resultado_ineri:3,resultado_rival:11,juego:"TPS",tipo:"derrota",año:"2026",liga:"ULS",copa:"NO"},{id:247,rival:"Real Madrid",resultado_ineri:9,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:248,rival:"Arsenal",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2026",liga:"ULS",copa:"NO"},{id:249,rival:"Team Random",resultado_ineri:5,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:250,rival:"Team Random",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:251,rival:"Team Random",resultado_ineri:7,resultado_rival:7,juego:"TPS",tipo:"empate",año:"2026",liga:"ULS",copa:"NO"}];
+var MATCHES=[{id:1,rival:"River Plate",resultado_ineri:2,resultado_rival:20,juego:"TPS",tipo:"derrota",año:"2023",liga:"TSL",copa:"NO"},{id:2,rival:"America",resultado_ineri:4,resultado_rival:18,juego:"TPS",tipo:"derrota",año:"2023",liga:"TSL",copa:"NO"},{id:3,rival:"Atletico de Madrid",resultado_ineri:3,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2023",liga:"TSL",copa:"NO"},{id:4,rival:"Ajax",resultado_ineri:2,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2023",liga:"TSL",copa:"NO"},{id:5,rival:"Marruecos",resultado_ineri:18,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2023",liga:"CWL",copa:"NO"},{id:6,rival:"Argentina",resultado_ineri:11,resultado_rival:9,juego:"TPS",tipo:"victoria",año:"2023",liga:"CWL",copa:"NO"},{id:7,rival:"Corea del Sur",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2023",liga:"CWL",copa:"SI"},{id:8,rival:"España",resultado_ineri:4,resultado_rival:12,juego:"TPS",tipo:"derrota",año:"2023",liga:"CWL",copa:"NO"},{id:9,rival:"Parma",resultado_ineri:3,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2023",liga:"TSL",copa:"NO"},{id:10,rival:"Town FC",resultado_ineri:2,resultado_rival:3,juego:"TPS",tipo:"derrota",año:"2023",liga:"TSL",copa:"NO"},{id:11,rival:"Paraguay",resultado_ineri:0,resultado_rival:3,juego:"TPS",tipo:"derrota",año:"2021",liga:"MOS",copa:"NO"},{id:12,rival:"Otaku FC",resultado_ineri:0,resultado_rival:1,juego:"TPS",tipo:"derrota",año:"2021",liga:"MOS",copa:"NO"},{id:13,rival:"Otaku FC",resultado_ineri:2,resultado_rival:3,juego:"TPS",tipo:"derrota",año:"2021",liga:"MOS",copa:"NO"},{id:14,rival:"Estados Unidos",resultado_ineri:14,resultado_rival:8,juego:"TPS",tipo:"victoria",año:"2023",liga:"MOS",copa:"NO"},{id:15,rival:"G2",resultado_ineri:3,resultado_rival:3,juego:"Touch",tipo:"empate",año:"2024",liga:"ATF",copa:"NO"},{id:16,rival:"Team Random",resultado_ineri:4,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:17,rival:"Moron Celtics",resultado_ineri:5,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:18,rival:"Atletico Berlin",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:19,rival:"Novorizontino",resultado_ineri:1,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:20,rival:"Bloxyneta",resultado_ineri:7,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2025",liga:"ATF",copa:"NO"},{id:21,rival:"Fantasy FC",resultado_ineri:4,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:22,rival:"Da Pushis",resultado_ineri:4,resultado_rival:7,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:23,rival:"Nacional",resultado_ineri:4,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2025",liga:"ATF",copa:"NO"},{id:24,rival:"Racing Club",resultado_ineri:0,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:25,rival:"Atletico Nacional",resultado_ineri:0,resultado_rival:2,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:26,rival:"Nacional",resultado_ineri:6,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2025",liga:"ATF",copa:"NO"},{id:27,rival:"Racing Club",resultado_ineri:3,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2025",liga:"ATF",copa:"NO"},{id:28,rival:"Atletico Nacional",resultado_ineri:2,resultado_rival:10,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:29,rival:"Atletico Nacional",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:30,rival:"Bucaramanga",resultado_ineri:8,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:31,rival:"Sugar FC",resultado_ineri:2,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:32,rival:"Faustoneta",resultado_ineri:2,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:33,rival:"The Sylars",resultado_ineri:4,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:34,rival:"DSC",resultado_ineri:1,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:35,rival:"U De CALI",resultado_ineri:0,resultado_rival:0,juego:"Touch",tipo:"empate",año:"2024",liga:"ATF",copa:"NO"},{id:36,rival:"Sao Cayetano",resultado_ineri:0,resultado_rival:1,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:37,rival:"Skanvia",resultado_ineri:3,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:38,rival:"Fantasy FC",resultado_ineri:2,resultado_rival:9,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:39,rival:"Atletico Berlin",resultado_ineri:1,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:40,rival:"Skanvia",resultado_ineri:3,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:41,rival:"Racing Club",resultado_ineri:3,resultado_rival:3,juego:"Touch",tipo:"empate",año:"2024",liga:"ATF",copa:"NO"},{id:42,rival:"Rosario Central",resultado_ineri:2,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:43,rival:"Estudiantes de la Plata",resultado_ineri:3,resultado_rival:14,juego:"Touch",tipo:"derrota",año:"2024",liga:"ATF",copa:"NO"},{id:44,rival:"River Plate",resultado_ineri:11,resultado_rival:7,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:45,rival:"Da Pushis",resultado_ineri:6,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:46,rival:"Sugar FC",resultado_ineri:4,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2024",liga:"ATF",copa:"NO"},{id:47,rival:"Galindos FC",resultado_ineri:3,resultado_rival:7,juego:"Touch",tipo:"derrota",año:"2025",liga:"ATF",copa:"NO"},{id:48,rival:"Jamaica",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:49,rival:"Marruecos",resultado_ineri:0,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:50,rival:"Canada",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:51,rival:"Brasil",resultado_ineri:1,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:52,rival:"Francia",resultado_ineri:6,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:53,rival:"Venezuela",resultado_ineri:6,resultado_rival:14,juego:"TPS",tipo:"derrota",año:"2025",liga:"TSL",copa:"NO"},{id:54,rival:"Suiza",resultado_ineri:6,resultado_rival:14,juego:"TPS",tipo:"derrota",año:"2025",liga:"TSL",copa:"NO"},{id:55,rival:"Team Random",resultado_ineri:0,resultado_rival:0,juego:"TPS",tipo:"empate",año:"2025",liga:"UL",copa:"NO"},{id:56,rival:"Sol FC",resultado_ineri:3,resultado_rival:3,juego:"TPS",tipo:"empate",año:"2025",liga:"UL",copa:"NO"},{id:57,rival:"Otaku FC",resultado_ineri:14,resultado_rival:11,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:58,rival:"Independiente",resultado_ineri:3,resultado_rival:3,juego:"TPS",tipo:"empate",año:"2025",liga:"UL",copa:"NO"},{id:59,rival:"Paraguay",resultado_ineri:10,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:60,rival:"Brasil",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:61,rival:"Estados Unidos",resultado_ineri:3,resultado_rival:12,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:62,rival:"Barcelona FC",resultado_ineri:0,resultado_rival:1,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:63,rival:"Team Random",resultado_ineri:6,resultado_rival:6,juego:"TPS",tipo:"empate",año:"2025",liga:"Amistoso",copa:"NO"},{id:64,rival:"Team Random",resultado_ineri:3,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:65,rival:"Otaku FC",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:66,rival:"Ecuador",resultado_ineri:2,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:67,rival:"Brasil",resultado_ineri:9,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:68,rival:"Team Random",resultado_ineri:1,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:69,rival:"Team Random",resultado_ineri:1,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:70,rival:"Milan FC",resultado_ineri:2,resultado_rival:10,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:71,rival:"Liga de Quito",resultado_ineri:6,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:72,rival:"Retolam FC",resultado_ineri:2,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:73,rival:"Universitario",resultado_ineri:16,resultado_rival:16,juego:"TPS",tipo:"empate",año:"2025",liga:"FTC",copa:"NO"},{id:74,rival:"Saiyans FC",resultado_ineri:11,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:75,rival:"PXG",resultado_ineri:5,resultado_rival:13,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:76,rival:"Uruguay",resultado_ineri:6,resultado_rival:13,juego:"TPS",tipo:"derrota",año:"2025",liga:"LMS",copa:"NO"},{id:77,rival:"Ecuador",resultado_ineri:1,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"LMS",copa:"NO"},{id:78,rival:"Mushuc",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:79,rival:"Santos",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:80,rival:"Japon",resultado_ineri:3,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"LMS",copa:"NO"},{id:81,rival:"Team Random",resultado_ineri:9,resultado_rival:9,juego:"TPS",tipo:"empate",año:"2025",liga:"Amistoso",copa:"NO"},{id:82,rival:"America",resultado_ineri:9,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:83,rival:"Corinthians",resultado_ineri:9,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:84,rival:"Eintracht",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:85,rival:"Kickers",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:86,rival:"Otaku FC",resultado_ineri:8,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:87,rival:"Atletico Nacional",resultado_ineri:3,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:88,rival:"Team Random",resultado_ineri:5,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:89,rival:"Estudiantes de la Plata",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:90,rival:"Kickers",resultado_ineri:9,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:91,rival:"Alianza Lima",resultado_ineri:7,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:92,rival:"Corinthians",resultado_ineri:3,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:93,rival:"Eintracht",resultado_ineri:3,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:94,rival:"Estudiantes de la Plata",resultado_ineri:5,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:95,rival:"Kickers",resultado_ineri:11,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:96,rival:"Michi Team",resultado_ineri:4,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:97,rival:"Team Random",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:98,rival:"Atletico Nacional",resultado_ineri:2,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:99,rival:"Corinthians",resultado_ineri:9,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:100,rival:"Kazbra FC",resultado_ineri:3,resultado_rival:12,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:101,rival:"Mushuc",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:102,rival:"Kickers",resultado_ineri:7,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:103,rival:"Saiyans FC",resultado_ineri:6,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:104,rival:"Team Random",resultado_ineri:3,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"LNH",copa:"NO"},{id:105,rival:"Atletico Nacional",resultado_ineri:5,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:106,rival:"Corinthians",resultado_ineri:12,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:107,rival:"Santos",resultado_ineri:5,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:108,rival:"Universitario",resultado_ineri:9,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:109,rival:"Palmeiras",resultado_ineri:8,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:110,rival:"Kickers",resultado_ineri:6,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:111,rival:"Kickers",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:112,rival:"Alianza Lima",resultado_ineri:11,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:113,rival:"Universitario",resultado_ineri:3,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:114,rival:"Saiyans FC",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"SI"},{id:115,rival:"Guadalajara",resultado_ineri:8,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:116,rival:"Team Random",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"LNH",copa:"NO"},{id:117,rival:"Kickers",resultado_ineri:4,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:118,rival:"Otaku FC",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:119,rival:"Michi Team",resultado_ineri:8,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:120,rival:"Athletico Paranaense",resultado_ineri:8,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:121,rival:"Santos",resultado_ineri:8,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:122,rival:"Saiyans FC",resultado_ineri:9,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"NO"},{id:123,rival:"Guadalajara",resultado_ineri:4,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:124,rival:"Kazbra FC",resultado_ineri:5,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:125,rival:"Athletico Paranaense",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:126,rival:"Corinthians",resultado_ineri:8,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:127,rival:"Estudiantes de la Plata",resultado_ineri:7,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:128,rival:"Alianza Lima",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:129,rival:"Universitario",resultado_ineri:8,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:130,rival:"Athletico Paranaense",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"SI"},{id:131,rival:"Kazbra FC",resultado_ineri:3,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:132,rival:"Guadalajara",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:133,rival:"Universitario",resultado_ineri:9,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:134,rival:"Corinthians",resultado_ineri:4,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:135,rival:"Palmeiras",resultado_ineri:4,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:136,rival:"Alianza Lima",resultado_ineri:7,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:137,rival:"Team Random",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:138,rival:"Kickers",resultado_ineri:9,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"SI"},{id:139,rival:"Team Random",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:140,rival:"Athletico Paranaense",resultado_ineri:5,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:141,rival:"Saiyans FC",resultado_ineri:9,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"UL",copa:"SI"},{id:142,rival:"Atletico Nacional",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:143,rival:"Universitario",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:144,rival:"Athletico Paranaense",resultado_ineri:3,resultado_rival:5,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:145,rival:"Alianza Lima",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:146,rival:"Guadalajara",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:147,rival:"Corinthians",resultado_ineri:4,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:148,rival:"Santos",resultado_ineri:5,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:149,rival:"Corinthians",resultado_ineri:6,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:150,rival:"PXG",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:151,rival:"Universitario",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:152,rival:"Santos",resultado_ineri:8,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:153,rival:"Guadalajara",resultado_ineri:5,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:154,rival:"Athletico Paranaense",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:155,rival:"Otaku FC",resultado_ineri:8,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:156,rival:"Team Random",resultado_ineri:8,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:157,rival:"Atlante FC",resultado_ineri:5,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:158,rival:"Otaku FC",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"LNH",copa:"NO"},{id:159,rival:"Ecuador",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"Banana League",copa:"NO"},{id:160,rival:"Guadalajara",resultado_ineri:12,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:161,rival:"Palmeiras",resultado_ineri:8,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:162,rival:"Chelsea",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:163,rival:"Belgica",resultado_ineri:0,resultado_rival:0,juego:"TPS",tipo:"empate",año:"2025",liga:"Banana League",copa:"NO"},{id:164,rival:"Peñarol",resultado_ineri:12,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:165,rival:"Alianza Lima",resultado_ineri:9,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:166,rival:"SportsBoys",resultado_ineri:5,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"LMS",copa:"NO"},{id:167,rival:"Team Random",resultado_ineri:6,resultado_rival:8,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:168,rival:"Colo Colo",resultado_ineri:6,resultado_rival:7,juego:"TPS",tipo:"derrota",año:"2025",liga:"FTC",copa:"NO"},{id:169,rival:"Inglaterra",resultado_ineri:5,resultado_rival:6,juego:"TPS",tipo:"derrota",año:"2025",liga:"Banana League",copa:"NO"},{id:170,rival:"Kazbra FC",resultado_ineri:8,resultado_rival:14,juego:"TPS",tipo:"derrota",año:"2025",liga:"SLM",copa:"NO"},{id:171,rival:"Holanda",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"Banana League",copa:"NO"},{id:172,rival:"Colo Colo",resultado_ineri:4,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:173,rival:"Boca Juniors",resultado_ineri:13,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:174,rival:"Peru",resultado_ineri:7,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"Banana League",copa:"NO"},{id:175,rival:"Boca Juniors",resultado_ineri:14,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"NO"},{id:176,rival:"Palmeiras",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:177,rival:"Team Random",resultado_ineri:8,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:178,rival:"Michi Team",resultado_ineri:6,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:179,rival:"Team Random",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"LNH",copa:"NO"},{id:180,rival:"Francia",resultado_ineri:8,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"Banana League",copa:"NO"},{id:181,rival:"Independiente",resultado_ineri:8,resultado_rival:7,juego:"TPS",tipo:"victoria",año:"2025",liga:"FTC",copa:"SI"},{id:182,rival:"Pachuca",resultado_ineri:9,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:183,rival:"Team Random",resultado_ineri:2,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2025",liga:"Amistoso",copa:"NO"},{id:184,rival:"Sporting",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:185,rival:"Brentford",resultado_ineri:6,resultado_rival:16,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:186,rival:"Roma FC",resultado_ineri:4,resultado_rival:3,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:187,rival:"Team Random",resultado_ineri:8,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"Amistoso",copa:"NO"},{id:188,rival:"Team Random",resultado_ineri:7,resultado_rival:7,juego:"TPS",tipo:"empate",año:"2025",liga:"UL",copa:"NO"},{id:189,rival:"Auckland City",resultado_ineri:12,resultado_rival:9,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:190,rival:"Auckland City",resultado_ineri:12,resultado_rival:9,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"NO"},{id:191,rival:"Auckland City",resultado_ineri:7,resultado_rival:6,juego:"TPS",tipo:"victoria",año:"2025",liga:"SLM",copa:"SI"},{id:192,rival:"Team Random",resultado_ineri:1,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2025",liga:"UL",copa:"NO"},{id:193,rival:"Estados Unidos",resultado_ineri:14,resultado_rival:8,juego:"TPS",tipo:"victoria",año:"2023",liga:"MOS",copa:"SI"},{id:194,rival:"Atletico Nacional",resultado_ineri:1,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:195,rival:"Atletico Nacional",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:196,rival:"Team Random",resultado_ineri:0,resultado_rival:6,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:197,rival:"Team Random",resultado_ineri:2,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:198,rival:"Team Random",resultado_ineri:1,resultado_rival:2,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:199,rival:"Team Random",resultado_ineri:0,resultado_rival:0,juego:"Touch",tipo:"empate",año:"2026",liga:"ATF",copa:"NO"},{id:200,rival:"Team Random",resultado_ineri:1,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:201,rival:"Team Random",resultado_ineri:4,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:202,rival:"Team Random",resultado_ineri:4,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:203,rival:"Team Random",resultado_ineri:4,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:204,rival:"Team Random",resultado_ineri:3,resultado_rival:2,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:205,rival:"Team Random",resultado_ineri:3,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:206,rival:"Team Random",resultado_ineri:0,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:207,rival:"Team Random",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:208,rival:"Team Random",resultado_ineri:2,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:209,rival:"Team Random",resultado_ineri:4,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:210,rival:"Team Random",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:211,rival:"Team Random",resultado_ineri:10,resultado_rival:3,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:212,rival:"Team Random",resultado_ineri:1,resultado_rival:2,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:213,rival:"Team Random",resultado_ineri:1,resultado_rival:2,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:214,rival:"Team Random",resultado_ineri:4,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:215,rival:"Concepcion",resultado_ineri:1,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:216,rival:"Red Bull",resultado_ineri:1,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:217,rival:"Team Random",resultado_ineri:1,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:218,rival:"Brazukinho",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:219,rival:"Red Bull",resultado_ineri:4,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:220,rival:"Team Random",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:221,rival:"Team Random",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:222,rival:"Team Random",resultado_ineri:2,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:223,rival:"Team Random",resultado_ineri:5,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:224,rival:"Team Random",resultado_ineri:5,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:225,rival:"Team Random",resultado_ineri:2,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:226,rival:"Red Bull",resultado_ineri:7,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:227,rival:"Team Random",resultado_ineri:0,resultado_rival:3,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:228,rival:"Red Waffles",resultado_ineri:3,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:229,rival:"Team Random",resultado_ineri:3,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:230,rival:"Black Mans FC",resultado_ineri:2,resultado_rival:1,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:231,rival:"Black Mans FC",resultado_ineri:5,resultado_rival:0,juego:"Touch",tipo:"victoria",año:"2026",liga:"ATF",copa:"NO"},{id:232,rival:"Galindos FC",resultado_ineri:1,resultado_rival:1,juego:"Touch",tipo:"empate",año:"2026",liga:"ATF",copa:"NO"},{id:233,rival:"Galindos FC",resultado_ineri:0,resultado_rival:0,juego:"Touch",tipo:"empate",año:"2026",liga:"ATF",copa:"NO"},{id:234,rival:"CJA",resultado_ineri:1,resultado_rival:4,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:235,rival:"CJA",resultado_ineri:2,resultado_rival:5,juego:"Touch",tipo:"derrota",año:"2026",liga:"ATF",copa:"NO"},{id:236,rival:"Santos",resultado_ineri:8,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:237,rival:"Manchester Piggy",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2026",liga:"ULS",copa:"NO"},{id:238,rival:"Bayern Munich",resultado_ineri:3,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:239,rival:"Neo United",resultado_ineri:3,resultado_rival:0,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:240,rival:"Real Esteli",resultado_ineri:10,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:241,rival:"Golemneta",resultado_ineri:2,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:242,rival:"Independiente",resultado_ineri:4,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:243,rival:"Independiente",resultado_ineri:9,resultado_rival:7,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:244,rival:"San Lorenzo",resultado_ineri:8,resultado_rival:9,juego:"TPS",tipo:"derrota",año:"2026",liga:"ULS",copa:"NO"},{id:245,rival:"FxckAll",resultado_ineri:10,resultado_rival:2,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:246,rival:"Cambridge",resultado_ineri:3,resultado_rival:11,juego:"TPS",tipo:"derrota",año:"2026",liga:"ULS",copa:"NO"},{id:247,rival:"Real Madrid",resultado_ineri:9,resultado_rival:1,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:248,rival:"Arsenal",resultado_ineri:3,resultado_rival:4,juego:"TPS",tipo:"derrota",año:"2026",liga:"ULS",copa:"NO"},{id:249,rival:"Team Random",resultado_ineri:5,resultado_rival:4,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:250,rival:"Team Random",resultado_ineri:6,resultado_rival:5,juego:"TPS",tipo:"victoria",año:"2026",liga:"ULS",copa:"NO"},{id:251,rival:"Team Random",resultado_ineri:7,resultado_rival:7,juego:"TPS",tipo:"empate",año:"2026",liga:"ULS",copa:"NO"}];
 
 // ═══════════════════════════════════════════════════════════
 // COMPUTED STATS
 // ═══════════════════════════════════════════════════════════
-const totalPartidos=MATCHES.length;
-const victorias=MATCHES.filter(m=>m.tipo==='victoria').length;
-const derrotas=MATCHES.filter(m=>m.tipo==='derrota').length;
-const empates=MATCHES.filter(m=>m.tipo==='empate').length;
-const golesFavor=MATCHES.reduce((a,m)=>a+m.resultado_ineri,0);
-const golesContra=MATCHES.reduce((a,m)=>a+m.resultado_rival,0);
-const winRate=Math.round(victorias/totalPartidos*100);
-const maxGol=MATCHES.reduce((a,m)=>m.resultado_ineri>a.resultado_ineri?m:a,MATCHES[0]);
-const maxDerrota=MATCHES.reduce((a,m)=>m.resultado_rival>a.resultado_rival?m:a,MATCHES[0]);
-const years=[...new Set(MATCHES.map(m=>m.año))].sort();
+var totalPartidos=MATCHES.length;
+var victorias=MATCHES.filter(function(m){return m.tipo==='victoria';}).length;
+var derrotas=MATCHES.filter(function(m){return m.tipo==='derrota';}).length;
+var empates=MATCHES.filter(function(m){return m.tipo==='empate';}).length;
+var golesFavor=MATCHES.reduce(function(a,m){return a+m.resultado_ineri;},0);
+var golesContra=MATCHES.reduce(function(a,m){return a+m.resultado_rival;},0);
+var winRate=Math.round(victorias/totalPartidos*100);
+var maxGol=MATCHES.reduce(function(a,m){return m.resultado_ineri>a.resultado_ineri?m:a;},MATCHES[0]);
+var maxDerrota=MATCHES.reduce(function(a,m){return m.resultado_rival>a.resultado_rival?m:a;},MATCHES[0]);
+var years=[...new Set(MATCHES.map(function(m){return m.año;}))].sort();
 
-// Historia quick stats
+// Historia quick stats — 12 titles total (7 + 4 Copa Nacional MPS + 1 Libertadores FTC)
 document.getElementById('historia-quick-stats').innerHTML=[
   {num:totalPartidos,lbl:'Partidos'},
   {num:victorias,lbl:'Victorias'},
-  {num:7,lbl:'Títulos'},
-  {num:STATS.reduce((a,s)=>a+s.goles,0),lbl:'Goles totales'},
-].map(s=>`<div class="hqs"><div class="hqs-num">${s.num}</div><div class="hqs-label">${s.lbl}</div></div>`).join('');
+  {num:12,lbl:'Títulos'},
+  {num:STATS.reduce(function(a,s){return a+s.goles;},0),lbl:'Goles totales'}
+].map(function(s){return '<div class="hqs"><div class="hqs-num">'+s.num+'</div><div class="hqs-label">'+s.lbl+'</div></div>';}).join('');
 
 // ═══════════════════════════════════════════════════════════
 // ESTADÍSTICAS RENDER
 // ═══════════════════════════════════════════════════════════
-let currentStat='goles';
+var currentStat='goles';
 function renderStats(){
-  const sorted=[...STATS].sort((a,b)=>{
+  var sorted=[].concat(STATS).sort(function(a,b){
     if(currentStat==='total') return (b.goles+b.asistencias)-(a.goles+a.asistencias);
     return b[currentStat]-a[currentStat];
   });
-  const maxVal=currentStat==='total'?Math.max(...sorted.map(s=>s.goles+s.asistencias)):Math.max(...sorted.map(s=>s[currentStat]));
-  const rankCls=i=>i===0?'gold':i===1?'silver':i===2?'bronze':'';
-  const grid=document.getElementById('stats-grid');
+  var maxVal=currentStat==='total'?Math.max.apply(null,sorted.map(function(s){return s.goles+s.asistencias;})):Math.max.apply(null,sorted.map(function(s){return s[currentStat];}));
+  var grid=document.getElementById('stats-grid');
   if(!grid)return;
-  grid.innerHTML=sorted.map((p,i)=>{
-    const val=currentStat==='total'?p.goles+p.asistencias:p[currentStat];
-    const pct=maxVal>0?Math.round(val/maxVal*100):0;
-    return `<div class="player-card">
-      <div class="player-rank ${rankCls(i)}">${i+1}</div>
-      <div style="flex:1">
-        <div class="player-name">${p.jugador}</div>
-        <div class="player-stats-row">
-          <div class="stat-chip">⚽ <span>${p.goles}</span></div>
-          <div class="stat-chip">🎯 <span>${p.asistencias}</span></div>
-          <div class="stat-chip">📊 <span>${p.goles+p.asistencias}</span></div>
-        </div>
-      </div>
-      <div class="stat-bar-wrap">
-        <div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">${val}</div>
-        <div class="stat-bar"><div class="stat-bar-fill" style="width:${pct}%"></div></div>
-      </div>
-    </div>`;
-  }).join('');
+  var html='';
+  for(var i=0;i<sorted.length;i++){
+    var p=sorted[i];
+    var val=currentStat==='total'?p.goles+p.asistencias:p[currentStat];
+    var pct=maxVal>0?Math.round(val/maxVal*100):0;
+    var rankCls=i===0?'gold':i===1?'silver':i===2?'bronze':'';
+    html+='<div class="player-card"><div class="player-rank '+rankCls+'">'+(i+1)+'</div><div style="flex:1"><div class="player-name">'+p.jugador+'</div><div class="player-stats-row"><div class="stat-chip">G <span>'+p.goles+'</span></div><div class="stat-chip">A <span>'+p.asistencias+'</span></div><div class="stat-chip">G+A <span>'+(p.goles+p.asistencias)+'</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">'+val+'</div><div class="stat-bar"><div class="stat-bar-fill" style="width:'+pct+'%"></div></div></div></div>';
+  }
+  grid.innerHTML=html;
 }
 
-// HOF render
 function renderHOF(){
-  const grid=document.getElementById('hof-grid');
+  var grid=document.getElementById('hof-grid');
   if(!grid)return;
-  grid.innerHTML=HOF.map(h=>`
-    <div class="hof-card">
-      <div class="hof-nombre">${h.nombre}</div>
-      <div class="hof-rol">${h.rol}</div>
-      <div class="hof-stats">
-        <div><div class="hof-stat-val">${h.goles}</div><div class="hof-stat-lbl">Goles</div></div>
-        <div><div class="hof-stat-val">${h.asistencias}</div><div class="hof-stat-lbl">Asist.</div></div>
-        <div><div class="hof-stat-val">${h.goles+h.asistencias}</div><div class="hof-stat-lbl">G+A</div></div>
-      </div>
-      <div class="hof-logros">${h.logros.map(l=>`<span class="hof-badge">${l}</span>`).join('')}</div>
-    </div>`).join('');
+  var html='';
+  for(var i=0;i<HOF.length;i++){
+    var h=HOF[i];
+    html+='<div class="hof-card"><div class="hof-nombre">'+h.nombre+'</div><div class="hof-rol">'+h.rol+'</div><div class="hof-stats"><div><div class="hof-stat-val">'+h.goles+'</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">'+h.asistencias+'</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">'+(h.goles+h.asistencias)+'</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros">'+h.logros.map(function(l){return '<span class="hof-badge">'+l+'</span>';}).join('')+'</div></div>';
+  }
+  grid.innerHTML=html;
 }
 
-// Forma reciente render
 function renderForma(){
-  const el=document.getElementById('forma-reciente');
+  var el=document.getElementById('forma-reciente');
   if(!el)return;
-  const last10=[...MATCHES].reverse().slice(0,10);
-  el.innerHTML=`
-    <div style="margin-bottom:10px;font-family:'Barlow Condensed',sans-serif;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris)">Últimos 10 partidos</div>
-    <div class="forma-dots">${last10.map(m=>`
-      <div class="forma-dot ${m.tipo==='victoria'?'v':m.tipo==='derrota'?'d':'e'}" title="${m.rival} ${m.resultado_ineri}-${m.resultado_rival}">
-        ${m.tipo==='victoria'?'V':m.tipo==='derrota'?'D':'E'}
-      </div>`).join('')}
-    </div>
-    <div style="margin-top:11px;font-size:.78rem;color:var(--gris)">
-      ${last10.filter(m=>m.tipo==='victoria').length}V · ${last10.filter(m=>m.tipo==='empate').length}E · ${last10.filter(m=>m.tipo==='derrota').length}D en los últimos 10
-    </div>`;
+  var last10=[].concat(MATCHES).reverse().slice(0,10);
+  var dots='';
+  for(var i=0;i<last10.length;i++){
+    var m=last10[i];
+    var cls=m.tipo==='victoria'?'v':m.tipo==='derrota'?'d':'e';
+    var lbl=m.tipo==='victoria'?'V':m.tipo==='derrota'?'D':'E';
+    dots+='<div class="forma-dot '+cls+'" title="'+m.rival+' '+m.resultado_ineri+'-'+m.resultado_rival+'">'+lbl+'</div>';
+  }
+  var v10=last10.filter(function(m){return m.tipo==='victoria';}).length;
+  var e10=last10.filter(function(m){return m.tipo==='empate';}).length;
+  var d10=last10.filter(function(m){return m.tipo==='derrota';}).length;
+  el.innerHTML='<div style="margin-bottom:10px;font-family:Barlow Condensed,sans-serif;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris)">Ultimos 10 partidos</div><div class="forma-dots">'+dots+'</div><div style="margin-top:11px;font-size:.78rem;color:var(--gris)">'+v10+'V · '+e10+'E · '+d10+'D en los ultimos 10</div>';
 }
 
-// Filtros stats
-document.getElementById('stat-filters').querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('#stat-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+document.getElementById('stat-filters').querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('#stat-filters .filter-btn').forEach(function(b){b.classList.remove('active');});
     btn.classList.add('active');
     currentStat=btn.dataset.stat;
     renderStats();
@@ -1314,55 +1268,54 @@ document.getElementById('stat-filters').querySelectorAll('.filter-btn').forEach(
 // ═══════════════════════════════════════════════════════════
 // PARTIDOS RENDER
 // ═══════════════════════════════════════════════════════════
-let matchFilter='all',yearFilter='all',currentPage=1;
-const PER_PAGE=15;
+var matchFilter='all', yearFilter='all', currentPage=1;
+var PER_PAGE=15;
 
-// Year filters
 document.getElementById('match-year-filters').innerHTML=
-  `<button class="filter-btn active" data-y="all">Todos</button>`+
-  years.map(y=>`<button class="filter-btn" data-y="${y}">${y}</button>`).join('');
+  '<button class="filter-btn active" data-y="all">Todos</button>'+
+  years.map(function(y){return '<button class="filter-btn" data-y="'+y+'">'+y+'</button>';}).join('');
 
 function getFiltered(){
-  return MATCHES.filter(m=>{
-    const t=matchFilter==='all'||(matchFilter==='copa'?m.copa==='SI':m.tipo===matchFilter);
-    const y=yearFilter==='all'||m.año===yearFilter;
+  return MATCHES.filter(function(m){
+    var t=matchFilter==='all'||(matchFilter==='copa'?m.copa==='SI':m.tipo===matchFilter);
+    var y=yearFilter==='all'||m.año===yearFilter;
     return t&&y;
   }).reverse();
 }
 
 function renderMatches(){
-  const filtered=getFiltered();
-  const totalPages=Math.ceil(filtered.length/PER_PAGE);
-  const page=filtered.slice((currentPage-1)*PER_PAGE,currentPage*PER_PAGE);
-  const list=document.getElementById('matches-list');
-  const pag=document.getElementById('pagination');
+  var filtered=getFiltered();
+  var totalPages=Math.ceil(filtered.length/PER_PAGE);
+  var page=filtered.slice((currentPage-1)*PER_PAGE,currentPage*PER_PAGE);
+  var list=document.getElementById('matches-list');
+  var pag=document.getElementById('pagination');
   if(!list||!pag)return;
-  list.innerHTML=page.map(m=>`
-    <div class="match-row ${m.tipo}">
-      <div class="match-tipo ${m.tipo}">${m.tipo[0].toUpperCase()}</div>
-      <div class="match-rival">${m.rival}${m.copa==='SI'?' <span class="match-copa">🏆</span>':''}</div>
-      <div class="match-score" style="color:${m.tipo==='victoria'?'var(--verde-brillante)':m.tipo==='derrota'?'var(--rojo)':'#888'}">${m.resultado_ineri} – ${m.resultado_rival}</div>
-      <div class="match-meta">${m.liga}<br>${m.año} · ${m.juego}</div>
-    </div>`).join('');
+  var html='';
+  for(var i=0;i<page.length;i++){
+    var m=page[i];
+    var scoreColor=m.tipo==='victoria'?'var(--verde-brillante)':m.tipo==='derrota'?'var(--rojo)':'#888';
+    html+='<div class="match-row '+m.tipo+'"><div class="match-tipo '+m.tipo+'">'+m.tipo[0].toUpperCase()+'</div><div class="match-rival">'+m.rival+(m.copa==='SI'?' <span class="match-copa">C</span>':'')+'</div><div class="match-score" style="color:'+scoreColor+'">'+m.resultado_ineri+' - '+m.resultado_rival+'</div><div class="match-meta">'+m.liga+'<br>'+m.año+' · '+m.juego+'</div></div>';
+  }
+  list.innerHTML=html;
   pag.innerHTML='';
-  for(let i=1;i<=totalPages;i++){
-    const b=document.createElement('button');
-    b.className='page-btn'+(i===currentPage?' active':'');
-    b.textContent=i;
-    b.onclick=()=>{currentPage=i;renderMatches();};
+  for(var p=1;p<=totalPages;p++){
+    var b=document.createElement('button');
+    b.className='page-btn'+(p===currentPage?' active':'');
+    b.textContent=p;
+    (function(pg){b.onclick=function(){currentPage=pg;renderMatches();};})(p);
     pag.appendChild(b);
   }
 }
 
-document.getElementById('match-filters').querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('#match-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+document.getElementById('match-filters').querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('#match-filters .filter-btn').forEach(function(b){b.classList.remove('active');});
     btn.classList.add('active');matchFilter=btn.dataset.f;currentPage=1;renderMatches();
   });
 });
-document.getElementById('match-year-filters').querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('#match-year-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+document.getElementById('match-year-filters').querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('#match-year-filters .filter-btn').forEach(function(b){b.classList.remove('active');});
     btn.classList.add('active');yearFilter=btn.dataset.y;currentPage=1;renderMatches();
   });
 });
@@ -1371,99 +1324,56 @@ document.getElementById('match-year-filters').querySelectorAll('.filter-btn').fo
 // GENERAL / OVERVIEW RENDER
 // ═══════════════════════════════════════════════════════════
 function renderOverview(){
-  const grid=document.getElementById('overview-grid');
+  var grid=document.getElementById('overview-grid');
   if(!grid)return;
-  const ligaCounts={};
-  MATCHES.forEach(m=>{ligaCounts[m.liga]=(ligaCounts[m.liga]||0)+1;});
-  const topLigas=Object.entries(ligaCounts).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  const maxLiga=topLigas[0][1];
-  const cx=70,cy=70,r=50,sw=16,circ=2*Math.PI*r;
-  const segs=[{v:victorias,c:'var(--verde-brillante)'},{v:derrotas,c:'var(--rojo)'},{v:empates,c:'#555'}];
-  let off=0;
-  const paths=segs.map(s=>{
-    const pct=s.v/totalPartidos,dash=pct*circ,gap=circ-dash;
-    const p=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.c}" stroke-width="${sw}" stroke-dasharray="${dash} ${gap}" stroke-dashoffset="${-off*circ}" transform="rotate(-90 ${cx} ${cy})"/>`;
+  var ligaCounts={};
+  MATCHES.forEach(function(m){ligaCounts[m.liga]=(ligaCounts[m.liga]||0)+1;});
+  var topLigas=Object.entries(ligaCounts).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+  var maxLiga=topLigas[0][1];
+  var cx=70,cy=70,r=50,sw=16,circ=2*Math.PI*r;
+  var segs=[{v:victorias,c:'var(--verde-brillante)'},{v:derrotas,c:'var(--rojo)'},{v:empates,c:'#555'}];
+  var off=0;
+  var paths=segs.map(function(s){
+    var pct=s.v/totalPartidos,dash=pct*circ,gap=circ-dash;
+    var p='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+s.c+'" stroke-width="'+sw+'" stroke-dasharray="'+dash+' '+gap+'" stroke-dashoffset="'+(-off*circ)+'" transform="rotate(-90 '+cx+' '+cy+')"/>';
     off+=pct;return p;
   }).join('');
-  const svgDonut=`<svg viewBox="0 0 140 140" width="125" height="125">${paths}<text x="${cx}" y="${cy-5}" text-anchor="middle" fill="#fff" font-family="Bebas Neue,sans-serif" font-size="20">${winRate}%</text><text x="${cx}" y="${cy+13}" text-anchor="middle" fill="#666" font-family="Barlow Condensed,sans-serif" font-size="9" letter-spacing="1">WIN RATE</text></svg>`;
-  grid.innerHTML=`
-    <div class="chart-card">
-      <div class="chart-title">Resultados</div>
-      <div class="donut-wrap">${svgDonut}
-        <div class="donut-labels">
-          <div class="donut-label"><div class="dot" style="background:var(--verde-brillante)"></div>Victorias: <strong>${victorias}</strong></div>
-          <div class="donut-label"><div class="dot" style="background:var(--rojo)"></div>Derrotas: <strong>${derrotas}</strong></div>
-          <div class="donut-label"><div class="dot" style="background:#555"></div>Empates: <strong>${empates}</strong></div>
-          <div class="donut-label"><div class="dot" style="background:#333"></div>Total: <strong>${totalPartidos}</strong></div>
-        </div>
-      </div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">Goles</div>
-      <div class="bar-chart">
-        <div class="bar-row"><div class="bar-label">A favor</div><div class="bar-outer"><div class="bar-inner" style="width:${Math.round(golesFavor/Math.max(golesFavor,golesContra)*100)}%"></div></div><div class="bar-val">${golesFavor}</div></div>
-        <div class="bar-row"><div class="bar-label">En contra</div><div class="bar-outer"><div class="bar-inner" style="width:${Math.round(golesContra/Math.max(golesFavor,golesContra)*100)}%;background:var(--rojo)"></div></div><div class="bar-val">${golesContra}</div></div>
-        <div style="margin-top:12px" class="chart-title">Partidos por liga</div>
-        ${topLigas.map(([l,c])=>`<div class="bar-row"><div class="bar-label">${l}</div><div class="bar-outer"><div class="bar-inner" style="width:${Math.round(c/maxLiga*100)}%"></div></div><div class="bar-val">${c}</div></div>`).join('')}
-      </div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">Récords</div>
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Mayor victoria</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--verde-brillante)">${maxGol.resultado_ineri}–${maxGol.resultado_rival} vs ${maxGol.rival}</div><div style="font-size:.72rem;color:var(--gris)">${maxGol.liga} · ${maxGol.año}</div></div>
-        <div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Mayor derrota</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--rojo)">${maxDerrota.resultado_ineri}–${maxDerrota.resultado_rival} vs ${maxDerrota.rival}</div><div style="font-size:.72rem;color:var(--gris)">${maxDerrota.liga} · ${maxDerrota.año}</div></div>
-        <div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Máx. goleador</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#f4c430">Azion · 153 goles</div></div>
-        <div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Diferencia de goles</div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--verde-brillante)">${golesFavor>golesContra?'+':''}${golesFavor-golesContra} goles</div></div>
-      </div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">Por juego</div>
-      <div class="bar-chart">
-        ${['TPS','Touch'].map(j=>{const c=MATCHES.filter(m=>m.juego===j).length;const v=MATCHES.filter(m=>m.juego===j&&m.tipo==='victoria').length;return `<div class="bar-row"><div class="bar-label">${j}</div><div class="bar-outer"><div class="bar-inner" style="width:${Math.round(c/totalPartidos*100)}%"></div></div><div class="bar-val">${c}</div></div><div style="font-size:.7rem;color:var(--gris);margin:-5px 0 5px 76px">${v}V (${Math.round(v/c*100)}%)</div>`;}).join('')}
-        <div style="margin-top:8px" class="chart-title">Por año</div>
-        ${years.map(y=>{const c=MATCHES.filter(m=>m.año===y).length;const mx=Math.max(...years.map(yr=>MATCHES.filter(m=>m.año===yr).length));return `<div class="bar-row"><div class="bar-label">${y}</div><div class="bar-outer"><div class="bar-inner" style="width:${Math.round(c/mx*100)}%"></div></div><div class="bar-val">${c}</div></div>`;}).join('')}
-      </div>
-    </div>`;
+  var svgDonut='<svg viewBox="0 0 140 140" width="125" height="125">'+paths+'<text x="'+cx+'" y="'+(cy-5)+'" text-anchor="middle" fill="#fff" font-family="Bebas Neue,sans-serif" font-size="20">'+winRate+'%</text><text x="'+cx+'" y="'+(cy+13)+'" text-anchor="middle" fill="#666" font-family="Barlow Condensed,sans-serif" font-size="9" letter-spacing="1">WIN RATE</text></svg>';
+  grid.innerHTML='<div class="chart-card"><div class="chart-title">Resultados</div><div class="donut-wrap">'+svgDonut+'<div class="donut-labels"><div class="donut-label"><div class="dot" style="background:var(--verde-brillante)"></div>Victorias: <strong>'+victorias+'</strong></div><div class="donut-label"><div class="dot" style="background:var(--rojo)"></div>Derrotas: <strong>'+derrotas+'</strong></div><div class="donut-label"><div class="dot" style="background:#555"></div>Empates: <strong>'+empates+'</strong></div><div class="donut-label"><div class="dot" style="background:#333"></div>Total: <strong>'+totalPartidos+'</strong></div></div></div></div>'
+  +'<div class="chart-card"><div class="chart-title">Goles</div><div class="bar-chart"><div class="bar-row"><div class="bar-label">A favor</div><div class="bar-outer"><div class="bar-inner" style="width:'+Math.round(golesFavor/Math.max(golesFavor,golesContra)*100)+'%"></div></div><div class="bar-val">'+golesFavor+'</div></div><div class="bar-row"><div class="bar-label">En contra</div><div class="bar-outer"><div class="bar-inner" style="width:'+Math.round(golesContra/Math.max(golesFavor,golesContra)*100)+'%;background:var(--rojo)"></div></div><div class="bar-val">'+golesContra+'</div></div><div style="margin-top:12px" class="chart-title">Partidos por liga</div>'+topLigas.map(function(entry){return '<div class="bar-row"><div class="bar-label">'+entry[0]+'</div><div class="bar-outer"><div class="bar-inner" style="width:'+Math.round(entry[1]/maxLiga*100)+'%"></div></div><div class="bar-val">'+entry[1]+'</div></div>';}).join('')+'</div></div>'
+  +'<div class="chart-card"><div class="chart-title">Records</div><div style="display:flex;flex-direction:column;gap:14px"><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Mayor victoria</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--verde-brillante)">'+maxGol.resultado_ineri+'-'+maxGol.resultado_rival+' vs '+maxGol.rival+'</div><div style="font-size:.72rem;color:var(--gris)">'+maxGol.liga+' · '+maxGol.año+'</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Mayor derrota</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--rojo)">'+maxDerrota.resultado_ineri+'-'+maxDerrota.resultado_rival+' vs '+maxDerrota.rival+'</div><div style="font-size:.72rem;color:var(--gris)">'+maxDerrota.liga+' · '+maxDerrota.año+'</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Max. goleador</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:#f4c430">Azion · 153 goles</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Diferencia de goles</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--verde-brillante)">'+(golesFavor>golesContra?'+':'')+(golesFavor-golesContra)+' goles</div></div></div></div>'
+  +'<div class="chart-card"><div class="chart-title">Por juego</div><div class="bar-chart">'+['TPS','Touch'].map(function(j){var c=MATCHES.filter(function(m){return m.juego===j;}).length;var v=MATCHES.filter(function(m){return m.juego===j&&m.tipo==='victoria';}).length;return '<div class="bar-row"><div class="bar-label">'+j+'</div><div class="bar-outer"><div class="bar-inner" style="width:'+Math.round(c/totalPartidos*100)+'%"></div></div><div class="bar-val">'+c+'</div></div><div style="font-size:.7rem;color:var(--gris);margin:-5px 0 5px 76px">'+v+'V ('+Math.round(v/c*100)+'%)</div>';}).join('')+'<div style="margin-top:8px" class="chart-title">Por año</div>'+years.map(function(y){var c=MATCHES.filter(function(m){return m.año===y;}).length;var mx=Math.max.apply(null,years.map(function(yr){return MATCHES.filter(function(m){return m.año===yr;}).length;}));return '<div class="bar-row"><div class="bar-label">'+y+'</div><div class="bar-outer"><div class="bar-inner" style="width:'+Math.round(c/mx*100)+'%"></div></div><div class="bar-val">'+c+'</div></div>';}).join('')+'</div></div>';
 }
 
 function renderRivalidades(){
-  const grid=document.getElementById('rivalidades-grid');
+  var grid=document.getElementById('rivalidades-grid');
   if(!grid)return;
-  const rivalMap={};
-  MATCHES.forEach(m=>{
+  var rivalMap={};
+  MATCHES.forEach(function(m){
     if(!rivalMap[m.rival])rivalMap[m.rival]={v:0,d:0,e:0,gf:0,gc:0};
-    rivalMap[m.rival][m.tipo[0]]++;
+    if(m.tipo==='victoria')rivalMap[m.rival].v++;
+    else if(m.tipo==='derrota')rivalMap[m.rival].d++;
+    else rivalMap[m.rival].e++;
     rivalMap[m.rival].gf+=m.resultado_ineri;
     rivalMap[m.rival].gc+=m.resultado_rival;
   });
-  const topRivales=Object.entries(rivalMap)
-    .map(([n,s])=>({n,...s,total:s.v+s.d+s.e}))
-    .filter(r=>r.total>=3)
-    .sort((a,b)=>b.total-a.total)
+  var topRivales=Object.entries(rivalMap)
+    .map(function(entry){return {n:entry[0],v:entry[1].v,d:entry[1].d,e:entry[1].e,gf:entry[1].gf,gc:entry[1].gc,total:entry[1].v+entry[1].d+entry[1].e};})
+    .filter(function(r){return r.total>=3;})
+    .sort(function(a,b){return b.total-a.total;})
     .slice(0,12);
-  grid.innerHTML=topRivales.map(r=>{
-    const vPct=Math.round(r.v/r.total*100),ePct=Math.round(r.e/r.total*100),dPct=100-vPct-ePct;
-    const col=r.v>r.d?'var(--verde-brillante)':r.d>r.v?'var(--rojo)':'#888';
-    return `<div class="rival-card">
-      <div class="rival-nombre" style="color:${col}">${r.n}</div>
-      <div class="rival-record">
-        <div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">${r.v}</div><div class="rr-lbl">V</div></div>
-        <div class="rr"><div class="rr-num" style="color:#888">${r.e}</div><div class="rr-lbl">E</div></div>
-        <div class="rr"><div class="rr-num" style="color:var(--rojo)">${r.d}</div><div class="rr-lbl">D</div></div>
-        <div class="rr"><div class="rr-num" style="color:var(--gris)">${r.total}</div><div class="rr-lbl">PJ</div></div>
-      </div>
-      <div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">${r.gf} GF · ${r.gc} GC</div>
-      <div class="rival-bar">
-        <div class="rb-v" style="flex:${vPct}"></div>
-        <div class="rb-e" style="flex:${ePct}"></div>
-        <div class="rb-d" style="flex:${dPct}"></div>
-      </div>
-    </div>`;
-  }).join('');
+  var html='';
+  for(var i=0;i<topRivales.length;i++){
+    var r=topRivales[i];
+    var vPct=Math.round(r.v/r.total*100),ePct=Math.round(r.e/r.total*100),dPct=100-vPct-ePct;
+    var col=r.v>r.d?'var(--verde-brillante)':r.d>r.v?'var(--rojo)':'#888';
+    html+='<div class="rival-card"><div class="rival-nombre" style="color:'+col+'">'+r.n+'</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">'+r.v+'</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">'+r.e+'</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">'+r.d+'</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">'+r.total+'</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">'+r.gf+' GF · '+r.gc+' GC</div><div class="rival-bar"><div class="rb-v" style="flex:'+vPct+'"></div><div class="rb-e" style="flex:'+ePct+'"></div><div class="rb-d" style="flex:'+dPct+'"></div></div></div>';
+  }
+  grid.innerHTML=html;
 }
 
 // ═══════════════════════════════════════════════════════════
-// INIT — render everything on load
+// INIT
 // ═══════════════════════════════════════════════════════════
 renderNav();
 renderStats();
@@ -1474,9 +1384,8 @@ renderOverview();
 renderRivalidades();
 renderNoticias();
 
-// Keyboard Enter support for modals
-document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-document.getElementById('reg-pass2').addEventListener('keydown',e=>{if(e.key==='Enter')doRegister();});
+document.getElementById('login-pass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+document.getElementById('reg-pass2').addEventListener('keydown',function(e){if(e.key==='Enter')doRegister();});
 </script>
 </body>
 </html>
