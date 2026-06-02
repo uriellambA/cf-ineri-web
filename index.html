@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<!-- saved from url=(0099)file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/index.html -->
-<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="es">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CF Ineri — Club Oficial</title>
-<link href="./CF Ineri — Club Oficial_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
 <!-- Firebase SDKs - pegar antes del script principal -->
-<script src="./CF Ineri — Club Oficial_files/firebase-app-compat.js.descarga"></script>
-<script src="./CF Ineri — Club Oficial_files/firebase-auth-compat.js.descarga"></script>
-<script src="./CF Ineri — Club Oficial_files/firebase-database-compat.js.descarga"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script>
   // Pega aca tu firebaseConfig real de Firebase Console.
   const firebaseConfig = {
-  apiKey: "AIzaSyCjGOz1HyMf5oubWUelCfkmo5Dw_uTaC5c",
-  authDomain: "cf-ineri.firebaseapp.com",
-  databaseURL: "https://cf-ineri-default-rtdb.firebaseio.com",
-  projectId: "cf-ineri",
-  storageBucket: "cf-ineri.firebasestorage.app",
-  messagingSenderId: "1038890222432",
-  appId: "1:1038890222432:web:92387869dc2752ba859405",
-  measurementId: "G-JW2K6YJXNF"
-};
+    apiKey: "AIzaSyCjGOz1HyMf5oubWUelCfkmo5Dw_uTaC5c",
+    authDomain: "cf-ineri.firebaseapp.com",
+    databaseURL: "https://cf-ineri-default-rtdb.firebaseio.com",
+    projectId: "cf-ineri",
+    storageBucket: "cf-ineri.firebasestorage.app",
+    messagingSenderId: "1038890222432",
+    appId: "1:1038890222432:web:92387869dc2752ba859405",
+    measurementId: "G-JW2K6YJXNF"
+  };
 
   const firebaseConfigured = firebaseConfig.apiKey !== "TU_API_KEY" && firebaseConfig.projectId !== "TU_PROYECTO";
   if (firebaseConfigured) {
@@ -1105,10 +1105,10 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL AUTH ══ -->
 <div class="modal-overlay hidden" id="modal-auth">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeAuthModal()">✕</button>
+    <button class="modal-close" onclick="closeAuthModal()">&#10005;</button>
     <div class="form-tabs">
-      <button class="form-tab-btn active" id="tab-login" onclick="switchAuthTab(&#39;login&#39;)">Iniciar sesión</button>
-      <button class="form-tab-btn" id="tab-reg" onclick="switchAuthTab(&#39;register&#39;)">Registrarse</button>
+      <button class="form-tab-btn active" id="tab-login" onclick="switchAuthTab('login')">Iniciar sesión</button>
+      <button class="form-tab-btn" id="tab-reg" onclick="switchAuthTab('register')">Registrarse</button>
     </div>
     <div id="auth-login">
       <div class="form-group"><label class="form-label">Usuario</label><input class="form-input" id="login-user" type="text" placeholder="Tu nombre de usuario" autocomplete="username"></div>
@@ -1130,7 +1130,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL NOTICIA ══ -->
 <div class="modal-overlay hidden" id="modal-noticia">
   <div class="modal-box wide">
-    <button class="modal-close" onclick="closeNoticiaModal()">✕</button>
+    <button class="modal-close" onclick="closeNoticiaModal()">&#10005;</button>
     <h2 id="noticia-modal-title">Nueva Noticia</h2>
     <p class="modal-sub">Solo admins y editores pueden publicar</p>
     <div class="form-group"><label class="form-label">Título</label><input class="form-input" id="n-titulo" type="text" placeholder="Título de la noticia"></div>
@@ -1145,7 +1145,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL FIGURITA CREATOR ══ -->
 <div class="modal-overlay hidden" id="modal-figurita">
   <div class="modal-box wide" style="max-width:520px;">
-    <button class="modal-close" onclick="document.getElementById(&#39;modal-figurita&#39;).classList.add(&#39;hidden&#39;)">✕</button>
+    <button class="modal-close" onclick="document.getElementById('modal-figurita').classList.add('hidden')">&#10005;</button>
     <h2>Crear Figurita</h2>
     <p class="modal-sub">Solo admins pueden crear figuritas</p>
     <div class="fig-creator-grid">
@@ -1166,13 +1166,13 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
           <label class="form-label">Foto del jugador (opcional)</label>
           <label class="img-upload-label" id="fig-img-label" for="fig-img-input">📷 Subir imagen</label>
           <input class="img-upload-input" type="file" id="fig-img-input" accept="image/*" onchange="handleFigImg(this)">
-          <img id="fig-img-preview" class="img-preview" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/index.html" alt="">
+          <img id="fig-img-preview" class="img-preview" src="" alt="">
         </div>
       </div>
       <div class="fig-preview-wrap">
-        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:8px;">Vista previa</div>
-        <div class="fig-preview-card figurita-slot pegada com" id="fig-live-preview"><div class="figurita-card fig-bg-com" style="position:relative; width:100%; height:100%; display:flex; flex-direction:column; border-radius:8px; overflow:hidden;"><div class="fig-watermark">JU</div><div class="fig-top-bar" style="position:relative; z-index:2;"><div><div class="fig-rating">75</div><div class="fig-pos" style="font-size:.45rem;letter-spacing:1px;color:rgba(255,255,255,.5);">CF Ineri</div></div><span class="fig-rareza-badge fig-rareza-com">Común</span></div><div class="fig-img-area" style="position:relative; z-index:1;"><div class="fig-player-initials">JU</div></div><div class="fig-footer" style="position:relative; z-index:2;"><div class="fig-name">Jugador</div><div class="fig-country-team"><span class="fig-flag">🌍</span><div style="display:flex;align-items:center;gap:3px;"><img src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/__LOGO_B64__" class="fig-team-logo" alt="CF Ineri"><span class="fig-team-name">CF Ineri</span></div></div></div></div></div>
-        <div style="font-size:.68rem;color:#444;margin-top:8px;text-align:center;font-family:&#39;Barlow Condensed&#39;,sans-serif;">CF Ineri · Urielneta</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:8px;">Vista previa</div>
+        <div class="fig-preview-card" id="fig-live-preview"></div>
+        <div style="font-size:.68rem;color:#444;margin-top:8px;text-align:center;font-family:'Barlow Condensed',sans-serif;">CF Ineri · Urielneta</div>
       </div>
     </div>
     <div class="form-error" id="fig-error"></div>
@@ -1183,13 +1183,13 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL AVATAR/BANNER ══ -->
 <div class="modal-overlay hidden" id="modal-personalizar">
   <div class="modal-box" style="max-width:440px;">
-    <button class="modal-close" onclick="document.getElementById(&#39;modal-personalizar&#39;).classList.add(&#39;hidden&#39;)">✕</button>
+    <button class="modal-close" onclick="document.getElementById('modal-personalizar').classList.add('hidden')">&#10005;</button>
     <h2 id="personalizar-title">Cambiar Avatar</h2>
     <p class="modal-sub">Personalizá tu perfil</p>
     <div class="form-group">
       <label class="img-upload-label" id="pers-label" for="pers-input">📷 Seleccionar imagen</label>
       <input class="img-upload-input" type="file" id="pers-input" accept="image/*" onchange="handlePersImg(this)">
-      <img id="pers-preview" class="img-preview" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/index.html" alt="">
+      <img id="pers-preview" class="img-preview" src="" alt="">
     </div>
     <div class="form-error" id="pers-error"></div>
     <button class="form-btn" onclick="savePersImg()">Guardar</button>
@@ -1199,39 +1199,41 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
 <!-- ══ USER DROPDOWN ══ -->
 <div class="user-dropdown" id="user-dropdown">
-  <button class="dd-item" onclick="showPage(&#39;perfil&#39;);closeDropdown()">👤 Mi Perfil</button>
-  <button class="dd-item" onclick="showPage(&#39;album&#39;);closeDropdown()">🃏 Mi Álbum</button>
+  <button class="dd-item" onclick="showPage('perfil');closeDropdown()">👤 Mi Perfil</button>
+  <button class="dd-item" onclick="showPage('album');closeDropdown()">🃏 Mi Álbum</button>
   <div class="dd-sep"></div>
   <button class="dd-item danger" onclick="doLogout()">🚪 Cerrar sesión</button>
 </div>
 
 <!-- ══ NAV ══ -->
 <nav id="main-nav">
-  <div class="nav-logo" onclick="showPage(&#39;historia&#39;)">
-    <img id="nav-logo-img" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/__LOGO_B64__" alt="CF Ineri">
+  <div class="nav-logo" onclick="showPage('historia')">
+    <img id="nav-logo-img" src="" alt="CF Ineri">
     <span class="nav-brand">CF INERI</span>
   </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" id="hamburger">☰</button>
+  <button class="nav-hamburger" onclick="toggleMenu()" id="hamburger">&#9776;</button>
   <ul class="nav-center" id="nav-tabs">
-    <li><button class="nav-tab active" data-page="historia" onclick="showPage(&#39;historia&#39;);closeMenu()">Historia</button></li>
-    <li><button class="nav-tab" data-page="palmares" onclick="showPage(&#39;palmares&#39;);closeMenu()">Palmarés</button></li>
-    <li><button class="nav-tab" data-page="estadisticas" onclick="showPage(&#39;estadisticas&#39;);closeMenu()">Estadísticas</button></li>
-    <li><button class="nav-tab" data-page="partidos" onclick="showPage(&#39;partidos&#39;);closeMenu()">Partidos</button></li>
-    <li><button class="nav-tab" data-page="general" onclick="showPage(&#39;general&#39;);closeMenu()">General</button></li>
-    <li><button class="nav-tab" data-page="awards" onclick="showPage(&#39;awards&#39;);closeMenu()">Awards</button></li>
-    <li><button class="nav-tab" data-page="noticias" onclick="showPage(&#39;noticias&#39;);closeMenu()">Noticias</button></li>
-    <li><button class="nav-tab" data-page="album" onclick="showPage(&#39;album&#39;);closeMenu()">🃏 Álbum</button></li>
+    <li><button class="nav-tab active" data-page="historia" onclick="showPage('historia');closeMenu()">Historia</button></li>
+    <li><button class="nav-tab" data-page="palmares" onclick="showPage('palmares');closeMenu()">Palmarés</button></li>
+    <li><button class="nav-tab" data-page="estadisticas" onclick="showPage('estadisticas');closeMenu()">Estadísticas</button></li>
+    <li><button class="nav-tab" data-page="partidos" onclick="showPage('partidos');closeMenu()">Partidos</button></li>
+    <li><button class="nav-tab" data-page="general" onclick="showPage('general');closeMenu()">General</button></li>
+    <li><button class="nav-tab" data-page="awards" onclick="showPage('awards');closeMenu()">Awards</button></li>
+    <li><button class="nav-tab" data-page="noticias" onclick="showPage('noticias');closeMenu()">Noticias</button></li>
+    <li><button class="nav-tab" data-page="album" onclick="showPage('album');closeMenu()">🃏 Álbum</button></li>
   </ul>
-  <div class="nav-right" id="nav-right"><button class="nav-user-btn" onclick="openAuthModal()">Iniciar sesión</button></div>
+  <div class="nav-right" id="nav-right">
+    <button class="nav-user-btn" onclick="openAuthModal()">Iniciar sesión</button>
+  </div>
 </nav>
 
 <!-- ══════════ HISTORIA ══════════ -->
 <div id="page-historia" class="page active">
   <div class="historia-hero">
-    <img id="hero-logo" class="historia-hero-logo" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/__LOGO_B64__" alt="CF Ineri">
+    <img id="hero-logo" class="historia-hero-logo" src="" alt="CF Ineri">
     <h1>CF INERI</h1>
     <p class="historia-hero-sub">Urielneta · Fundado 2021 · TPS · Touch Football · ATF</p>
-    <div class="historia-quick-stats" id="historia-quick-stats"><div class="hqs"><div class="hqs-num">251</div><div class="hqs-label">Partidos</div></div><div class="hqs"><div class="hqs-num">144</div><div class="hqs-label">Victorias</div></div><div class="hqs"><div class="hqs-num">12</div><div class="hqs-label">Títulos</div></div><div class="hqs"><div class="hqs-num">718</div><div class="hqs-label">Goles totales</div></div></div>
+    <div class="historia-quick-stats" id="historia-quick-stats"></div>
   </div>
   <div class="page-inner">
     <div class="section-header"><h2 class="section-title">Historia</h2><div class="section-line"></div></div>
@@ -1265,7 +1267,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">SLM Season 2</div><div class="trofeo-comp">SLM · TPS</div><div class="trofeo-año">2025</div><div class="trofeo-detalle">Final: 12-3</div></div>
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">SLM Season 3</div><div class="trofeo-comp">SLM · Boca Juniors</div><div class="trofeo-año">2025</div><div class="trofeo-detalle">Final: 19-15 · Mundial de Clubes</div></div>
     </div>
-    <div style="margin-top:44px"><h3 style="font-family:&#39;Bebas Neue&#39;,sans-serif;font-size:1.7rem;letter-spacing:3px;color:#c0c0c0;margin-bottom:18px;">Subcampeonatos</h3>
+    <div style="margin-top:44px"><h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;color:#c0c0c0;margin-bottom:18px;">Subcampeonatos</h3>
     <div class="subcamps-grid">
       <div class="subcamp-card"><span style="font-size:1.3rem">🥈</span><div class="subcamp-info"><div class="subcamp-titulo">LaLiga MOS S2</div><div class="subcamp-det">Cádiz · 2022</div></div></div>
       <div class="subcamp-card"><span style="font-size:1.3rem">🥈</span><div class="subcamp-info"><div class="subcamp-titulo">Copa del Rey MOS S2</div><div class="subcamp-det">Cádiz · 2022</div></div></div>
@@ -1289,11 +1291,11 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <button class="filter-btn" data-stat="total">📊 G+A</button>
       <button class="filter-btn" data-stat="partidos">🎮 Partidos</button>
     </div>
-    <div class="stats-grid" id="stats-grid"><div class="player-card"><div class="player-rank gold">1</div><div style="flex:1"><div class="player-name">Azion</div><div class="player-stats-row"><div class="stat-chip">G <span>153</span></div><div class="stat-chip">A <span>50</span></div><div class="stat-chip">G+A <span>203</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">153</div><div class="stat-bar"><div class="stat-bar-fill" style="width:100%"></div></div></div></div><div class="player-card"><div class="player-rank silver">2</div><div style="flex:1"><div class="player-name">Rvssian</div><div class="player-stats-row"><div class="stat-chip">G <span>116</span></div><div class="stat-chip">A <span>93</span></div><div class="stat-chip">G+A <span>209</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">116</div><div class="stat-bar"><div class="stat-bar-fill" style="width:76%"></div></div></div></div><div class="player-card"><div class="player-rank bronze">3</div><div style="flex:1"><div class="player-name">Jebedias</div><div class="player-stats-row"><div class="stat-chip">G <span>84</span></div><div class="stat-chip">A <span>86</span></div><div class="stat-chip">G+A <span>170</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">84</div><div class="stat-bar"><div class="stat-bar-fill" style="width:55%"></div></div></div></div><div class="player-card"><div class="player-rank ">4</div><div style="flex:1"><div class="player-name">Uriel</div><div class="player-stats-row"><div class="stat-chip">G <span>71</span></div><div class="stat-chip">A <span>52</span></div><div class="stat-chip">G+A <span>123</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">71</div><div class="stat-bar"><div class="stat-bar-fill" style="width:46%"></div></div></div></div><div class="player-card"><div class="player-rank ">5</div><div style="flex:1"><div class="player-name">Leo</div><div class="player-stats-row"><div class="stat-chip">G <span>56</span></div><div class="stat-chip">A <span>8</span></div><div class="stat-chip">G+A <span>64</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">56</div><div class="stat-bar"><div class="stat-bar-fill" style="width:37%"></div></div></div></div><div class="player-card"><div class="player-rank ">6</div><div style="flex:1"><div class="player-name">Goteras</div><div class="player-stats-row"><div class="stat-chip">G <span>45</span></div><div class="stat-chip">A <span>55</span></div><div class="stat-chip">G+A <span>100</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">45</div><div class="stat-bar"><div class="stat-bar-fill" style="width:29%"></div></div></div></div><div class="player-card"><div class="player-rank ">7</div><div style="flex:1"><div class="player-name">Coco</div><div class="player-stats-row"><div class="stat-chip">G <span>20</span></div><div class="stat-chip">A <span>8</span></div><div class="stat-chip">G+A <span>28</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">20</div><div class="stat-bar"><div class="stat-bar-fill" style="width:13%"></div></div></div></div><div class="player-card"><div class="player-rank ">8</div><div style="flex:1"><div class="player-name">Hiiro</div><div class="player-stats-row"><div class="stat-chip">G <span>19</span></div><div class="stat-chip">A <span>33</span></div><div class="stat-chip">G+A <span>52</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">19</div><div class="stat-bar"><div class="stat-bar-fill" style="width:12%"></div></div></div></div><div class="player-card"><div class="player-rank ">9</div><div style="flex:1"><div class="player-name">Gigi</div><div class="player-stats-row"><div class="stat-chip">G <span>18</span></div><div class="stat-chip">A <span>7</span></div><div class="stat-chip">G+A <span>25</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">18</div><div class="stat-bar"><div class="stat-bar-fill" style="width:12%"></div></div></div></div><div class="player-card"><div class="player-rank ">10</div><div style="flex:1"><div class="player-name">44aaron</div><div class="player-stats-row"><div class="stat-chip">G <span>14</span></div><div class="stat-chip">A <span>3</span></div><div class="stat-chip">G+A <span>17</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">14</div><div class="stat-bar"><div class="stat-bar-fill" style="width:9%"></div></div></div></div><div class="player-card"><div class="player-rank ">11</div><div style="flex:1"><div class="player-name">Adri</div><div class="player-stats-row"><div class="stat-chip">G <span>13</span></div><div class="stat-chip">A <span>8</span></div><div class="stat-chip">G+A <span>21</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">13</div><div class="stat-bar"><div class="stat-bar-fill" style="width:8%"></div></div></div></div><div class="player-card"><div class="player-rank ">12</div><div style="flex:1"><div class="player-name">Wicho</div><div class="player-stats-row"><div class="stat-chip">G <span>13</span></div><div class="stat-chip">A <span>4</span></div><div class="stat-chip">G+A <span>17</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">13</div><div class="stat-bar"><div class="stat-bar-fill" style="width:8%"></div></div></div></div><div class="player-card"><div class="player-rank ">13</div><div style="flex:1"><div class="player-name">17jxvrix</div><div class="player-stats-row"><div class="stat-chip">G <span>12</span></div><div class="stat-chip">A <span>3</span></div><div class="stat-chip">G+A <span>15</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">12</div><div class="stat-bar"><div class="stat-bar-fill" style="width:8%"></div></div></div></div><div class="player-card"><div class="player-rank ">14</div><div style="flex:1"><div class="player-name">Gabe</div><div class="player-stats-row"><div class="stat-chip">G <span>10</span></div><div class="stat-chip">A <span>8</span></div><div class="stat-chip">G+A <span>18</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">10</div><div class="stat-bar"><div class="stat-bar-fill" style="width:7%"></div></div></div></div><div class="player-card"><div class="player-rank ">15</div><div style="flex:1"><div class="player-name">Bluexihno</div><div class="player-stats-row"><div class="stat-chip">G <span>10</span></div><div class="stat-chip">A <span>14</span></div><div class="stat-chip">G+A <span>24</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">10</div><div class="stat-bar"><div class="stat-bar-fill" style="width:7%"></div></div></div></div><div class="player-card"><div class="player-rank ">16</div><div style="flex:1"><div class="player-name">Somating</div><div class="player-stats-row"><div class="stat-chip">G <span>9</span></div><div class="stat-chip">A <span>16</span></div><div class="stat-chip">G+A <span>25</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">9</div><div class="stat-bar"><div class="stat-bar-fill" style="width:6%"></div></div></div></div><div class="player-card"><div class="player-rank ">17</div><div style="flex:1"><div class="player-name">Camilo</div><div class="player-stats-row"><div class="stat-chip">G <span>8</span></div><div class="stat-chip">A <span>16</span></div><div class="stat-chip">G+A <span>24</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">8</div><div class="stat-bar"><div class="stat-bar-fill" style="width:5%"></div></div></div></div><div class="player-card"><div class="player-rank ">18</div><div style="flex:1"><div class="player-name">Nhelv</div><div class="player-stats-row"><div class="stat-chip">G <span>8</span></div><div class="stat-chip">A <span>1</span></div><div class="stat-chip">G+A <span>9</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">8</div><div class="stat-bar"><div class="stat-bar-fill" style="width:5%"></div></div></div></div><div class="player-card"><div class="player-rank ">19</div><div style="flex:1"><div class="player-name">Frizao</div><div class="player-stats-row"><div class="stat-chip">G <span>8</span></div><div class="stat-chip">A <span>6</span></div><div class="stat-chip">G+A <span>14</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">8</div><div class="stat-bar"><div class="stat-bar-fill" style="width:5%"></div></div></div></div><div class="player-card"><div class="player-rank ">20</div><div style="flex:1"><div class="player-name">Golem</div><div class="player-stats-row"><div class="stat-chip">G <span>6</span></div><div class="stat-chip">A <span>7</span></div><div class="stat-chip">G+A <span>13</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">6</div><div class="stat-bar"><div class="stat-bar-fill" style="width:4%"></div></div></div></div><div class="player-card"><div class="player-rank ">21</div><div style="flex:1"><div class="player-name">Bizaa</div><div class="player-stats-row"><div class="stat-chip">G <span>6</span></div><div class="stat-chip">A <span>2</span></div><div class="stat-chip">G+A <span>8</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">6</div><div class="stat-bar"><div class="stat-bar-fill" style="width:4%"></div></div></div></div><div class="player-card"><div class="player-rank ">22</div><div style="flex:1"><div class="player-name">ynacho</div><div class="player-stats-row"><div class="stat-chip">G <span>4</span></div><div class="stat-chip">A <span>2</span></div><div class="stat-chip">G+A <span>6</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">4</div><div class="stat-bar"><div class="stat-bar-fill" style="width:3%"></div></div></div></div><div class="player-card"><div class="player-rank ">23</div><div style="flex:1"><div class="player-name">Pemegamer6</div><div class="player-stats-row"><div class="stat-chip">G <span>4</span></div><div class="stat-chip">A <span>1</span></div><div class="stat-chip">G+A <span>5</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">4</div><div class="stat-bar"><div class="stat-bar-fill" style="width:3%"></div></div></div></div><div class="player-card"><div class="player-rank ">24</div><div style="flex:1"><div class="player-name">Hydro</div><div class="player-stats-row"><div class="stat-chip">G <span>3</span></div><div class="stat-chip">A <span>1</span></div><div class="stat-chip">G+A <span>4</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">3</div><div class="stat-bar"><div class="stat-bar-fill" style="width:2%"></div></div></div></div><div class="player-card"><div class="player-rank ">25</div><div style="flex:1"><div class="player-name">ElBiza</div><div class="player-stats-row"><div class="stat-chip">G <span>3</span></div><div class="stat-chip">A <span>1</span></div><div class="stat-chip">G+A <span>4</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">3</div><div class="stat-bar"><div class="stat-bar-fill" style="width:2%"></div></div></div></div><div class="player-card"><div class="player-rank ">26</div><div style="flex:1"><div class="player-name">14skxz</div><div class="player-stats-row"><div class="stat-chip">G <span>2</span></div><div class="stat-chip">A <span>3</span></div><div class="stat-chip">G+A <span>5</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">2</div><div class="stat-bar"><div class="stat-bar-fill" style="width:1%"></div></div></div></div><div class="player-card"><div class="player-rank ">27</div><div style="flex:1"><div class="player-name">rxf</div><div class="player-stats-row"><div class="stat-chip">G <span>2</span></div><div class="stat-chip">A <span>0</span></div><div class="stat-chip">G+A <span>2</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">2</div><div class="stat-bar"><div class="stat-bar-fill" style="width:1%"></div></div></div></div><div class="player-card"><div class="player-rank ">28</div><div style="flex:1"><div class="player-name">Chees</div><div class="player-stats-row"><div class="stat-chip">G <span>1</span></div><div class="stat-chip">A <span>3</span></div><div class="stat-chip">G+A <span>4</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">1</div><div class="stat-bar"><div class="stat-bar-fill" style="width:1%"></div></div></div></div><div class="player-card"><div class="player-rank ">29</div><div style="flex:1"><div class="player-name">Samuswp</div><div class="player-stats-row"><div class="stat-chip">G <span>0</span></div><div class="stat-chip">A <span>2</span></div><div class="stat-chip">G+A <span>2</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">0</div><div class="stat-bar"><div class="stat-bar-fill" style="width:0%"></div></div></div></div><div class="player-card"><div class="player-rank ">30</div><div style="flex:1"><div class="player-name">Iker</div><div class="player-stats-row"><div class="stat-chip">G <span>0</span></div><div class="stat-chip">A <span>4</span></div><div class="stat-chip">G+A <span>4</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">0</div><div class="stat-bar"><div class="stat-bar-fill" style="width:0%"></div></div></div></div></div>
-    <div style="margin-top:52px"><div class="section-header"><h2 class="section-title">Hall of Fame</h2><div class="section-line"></div></div><div class="hof-grid" id="hof-grid"><div class="hof-card"><div class="hof-nombre">Azion</div><div class="hof-rol">Delantero - Leyenda</div><div class="hof-stats"><div><div class="hof-stat-val">153</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">50</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">203</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">Maximo Goleador All-Time</span><span class="hof-badge">Balon de Playa Ed.3</span><span class="hof-badge">The New ERA</span></div></div><div class="hof-card"><div class="hof-nombre">Rvssian</div><div class="hof-rol">Mediocampista - Capitan</div><div class="hof-stats"><div><div class="hof-stat-val">116</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">93</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">209</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">LNH S1 Campeon</span><span class="hof-badge">LNH S2 Campeon</span><span class="hof-badge">Banca D'Or Ed.3</span><span class="hof-badge">Mas Activo Ed.3</span></div></div><div class="hof-card"><div class="hof-nombre">Jebedias</div><div class="hof-rol">Defensa - Co-Fundador</div><div class="hof-stats"><div><div class="hof-stat-val">84</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">86</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">170</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">CWL Campeon</span><span class="hof-badge">MOS 2.0 Campeon</span><span class="hof-badge">Old Star Ed.3</span><span class="hof-badge">Best CB Ed.3</span></div></div><div class="hof-card"><div class="hof-nombre">Uriel</div><div class="hof-rol">DT - Fundador</div><div class="hof-stats"><div><div class="hof-stat-val">71</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">52</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">123</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">CWL Campeon</span><span class="hof-badge">MOS 2.0 Campeon</span><span class="hof-badge">Old Star Ed.2</span><span class="hof-badge">Mejor Staff CPA 2021</span></div></div><div class="hof-card"><div class="hof-nombre">Gabe</div><div class="hof-rol">Extremo - The Remontada</div><div class="hof-stats"><div><div class="hof-stat-val">10</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">8</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">18</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">Future Star Ed.2</span><span class="hof-badge">Ballon D'Or Ed.2</span></div></div><div class="hof-card"><div class="hof-nombre">Goteras</div><div class="hof-rol">Extremo - Asistidor</div><div class="hof-stats"><div><div class="hof-stat-val">45</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">55</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">100</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">SLM S2 Campeon</span><span class="hof-badge">LNH S1 Campeon</span><span class="hof-badge">Balon de Playa Ed.2</span></div></div></div></div>
+    <div class="stats-grid" id="stats-grid"></div>
+    <div style="margin-top:52px"><div class="section-header"><h2 class="section-title">Hall of Fame</h2><div class="section-line"></div></div><div class="hof-grid" id="hof-grid"></div></div>
     <div style="margin-top:52px">
       <div class="section-header"><h2 class="section-title">Forma Reciente</h2><div class="section-line"></div><p style="font-size:.8rem;color:var(--gris);margin-top:7px">Últimos 10 partidos del club</p></div>
-      <div class="forma-card" id="forma-reciente"><div style="margin-bottom:10px;font-family:Barlow Condensed,sans-serif;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris)">Últimos 10 partidos</div><div class="forma-dots"><div class="forma-dot e" title="Team Random 7-7">E</div><div class="forma-dot v" title="Team Random 6-5">V</div><div class="forma-dot v" title="Team Random 5-4">V</div><div class="forma-dot d" title="Arsenal 3-4">D</div><div class="forma-dot v" title="Real Madrid 9-1">V</div><div class="forma-dot d" title="Cambridge 3-11">D</div><div class="forma-dot v" title="FxckAll 10-2">V</div><div class="forma-dot d" title="San Lorenzo 8-9">D</div><div class="forma-dot v" title="Independiente 9-7">V</div><div class="forma-dot v" title="Independiente 4-1">V</div></div><div style="margin-top:11px;font-size:.78rem;color:var(--gris)">6V · 1E · 3D</div></div>
+      <div class="forma-card" id="forma-reciente"></div>
     </div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
@@ -1310,7 +1312,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       </select>
       <select class="match-filters-select" id="mob-year" onchange="yearFilter=this.value;currentPage=1;renderMatches()">
         <option value="all">Todos los años</option>
-      <option value="2021">2021</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option></select>
+      </select>
     </div>
     <!-- Desktop filters -->
     <div class="matches-filters" id="match-filters">
@@ -1320,9 +1322,9 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <button class="filter-btn" data-f="empate">Empates</button>
       <button class="filter-btn" data-f="copa">Copa 🏆</button>
     </div>
-    <div class="matches-filters match-year-filters-wrap" id="match-year-filters"><button class="filter-btn active" data-y="all">Todos</button><button class="filter-btn" data-y="2021">2021</button><button class="filter-btn" data-y="2023">2023</button><button class="filter-btn" data-y="2024">2024</button><button class="filter-btn" data-y="2025">2025</button><button class="filter-btn" data-y="2026">2026</button></div>
-    <div class="matches-list" id="matches-list"><div class="match-row empate"><div class="match-tipo empate">E</div><div class="match-rival">Team Random</div><div class="match-score" style="color:#888">7 - 7</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Team Random</div><div class="match-score" style="color:var(--verde-brillante)">6 - 5</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Team Random</div><div class="match-score" style="color:var(--verde-brillante)">5 - 4</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row derrota"><div class="match-tipo derrota">D</div><div class="match-rival">Arsenal</div><div class="match-score" style="color:var(--rojo)">3 - 4</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Real Madrid</div><div class="match-score" style="color:var(--verde-brillante)">9 - 1</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row derrota"><div class="match-tipo derrota">D</div><div class="match-rival">Cambridge</div><div class="match-score" style="color:var(--rojo)">3 - 11</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">FxckAll</div><div class="match-score" style="color:var(--verde-brillante)">10 - 2</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row derrota"><div class="match-tipo derrota">D</div><div class="match-rival">San Lorenzo</div><div class="match-score" style="color:var(--rojo)">8 - 9</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Independiente</div><div class="match-score" style="color:var(--verde-brillante)">9 - 7</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Independiente</div><div class="match-score" style="color:var(--verde-brillante)">4 - 1</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Golemneta</div><div class="match-score" style="color:var(--verde-brillante)">2 - 1</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Real Esteli</div><div class="match-score" style="color:var(--verde-brillante)">10 - 2</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Neo United</div><div class="match-score" style="color:var(--verde-brillante)">3 - 0</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Bayern Munich</div><div class="match-score" style="color:var(--verde-brillante)">3 - 2</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row derrota"><div class="match-tipo derrota">D</div><div class="match-rival">Manchester Piggy</div><div class="match-score" style="color:var(--rojo)">3 - 4</div><div class="match-meta">ULS<br>2026 · TPS</div></div></div>
-    <div class="pagination" id="pagination"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">5</button><button class="page-btn">6</button><button class="page-btn">7</button><button class="page-btn">8</button><button class="page-btn">9</button><button class="page-btn">10</button><button class="page-btn">11</button><button class="page-btn">12</button><button class="page-btn">13</button><button class="page-btn">14</button><button class="page-btn">15</button><button class="page-btn">16</button><button class="page-btn">17</button></div>
+    <div class="matches-filters match-year-filters-wrap" id="match-year-filters"></div>
+    <div class="matches-list" id="matches-list"></div>
+    <div class="pagination" id="pagination"></div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
 </div>
@@ -1331,10 +1333,10 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <div id="page-general" class="page">
   <div class="page-inner">
     <div class="section-header"><h2 class="section-title">Resumen General</h2><div class="section-line"></div></div>
-    <div class="overview-grid" id="overview-grid"><div class="chart-card"><div class="chart-title">Resultados</div><div class="donut-wrap"><svg viewBox="0 0 140 140" width="125" height="125"><circle cx="70" cy="70" r="50" fill="none" stroke="var(--verde-brillante)" stroke-width="16" stroke-dasharray="180.23479765614752 133.9244677028318" stroke-dashoffset="0" transform="rotate(-90 70 70)"></circle><circle cx="70" cy="70" r="50" fill="none" stroke="var(--rojo)" stroke-width="16" stroke-dasharray="115.1500096136498 199.00925574532954" stroke-dashoffset="-180.23479765614752" transform="rotate(-90 70 70)"></circle><circle cx="70" cy="70" r="50" fill="none" stroke="#555" stroke-width="16" stroke-dasharray="18.774458089182033 295.3848072697973" stroke-dashoffset="-295.3848072697973" transform="rotate(-90 70 70)"></circle><text x="70" y="65" text-anchor="middle" fill="#fff" font-family="Bebas Neue,sans-serif" font-size="20">57%</text><text x="70" y="83" text-anchor="middle" fill="#666" font-family="Barlow Condensed,sans-serif" font-size="9" letter-spacing="1">WIN RATE</text></svg><div class="donut-labels"><div class="donut-label"><div class="dot" style="background:var(--verde-brillante)"></div>Victorias: <strong>144</strong></div><div class="donut-label"><div class="dot" style="background:var(--rojo)"></div>Derrotas: <strong>92</strong></div><div class="donut-label"><div class="dot" style="background:#555"></div>Empates: <strong>15</strong></div><div class="donut-label"><div class="dot" style="background:#333"></div>Total: <strong>251</strong></div></div></div></div><div class="chart-card"><div class="chart-title">Goles</div><div class="bar-chart"><div class="bar-row"><div class="bar-label">A favor</div><div class="bar-outer"><div class="bar-inner" style="width:100%"></div></div><div class="bar-val">1229</div></div><div class="bar-row"><div class="bar-label">En contra</div><div class="bar-outer"><div class="bar-inner" style="width:86%;background:var(--rojo)"></div></div><div class="bar-val">1061</div></div><div style="margin-top:12px" class="chart-title">Partidos por liga</div><div class="bar-row"><div class="bar-label">ATF</div><div class="bar-outer"><div class="bar-inner" style="width:100%"></div></div><div class="bar-val">75</div></div><div class="bar-row"><div class="bar-label">SLM</div><div class="bar-outer"><div class="bar-inner" style="width:53%"></div></div><div class="bar-val">40</div></div><div class="bar-row"><div class="bar-label">FTC</div><div class="bar-outer"><div class="bar-inner" style="width:40%"></div></div><div class="bar-val">30</div></div><div class="bar-row"><div class="bar-label">UL</div><div class="bar-outer"><div class="bar-inner" style="width:33%"></div></div><div class="bar-val">25</div></div><div class="bar-row"><div class="bar-label">LNH</div><div class="bar-outer"><div class="bar-inner" style="width:29%"></div></div><div class="bar-val">22</div></div><div class="bar-row"><div class="bar-label">Amistoso</div><div class="bar-outer"><div class="bar-inner" style="width:21%"></div></div><div class="bar-val">16</div></div></div></div><div class="chart-card"><div class="chart-title">Records</div><div style="display:flex;flex-direction:column;gap:14px"><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Mayor victoria</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--verde-brillante)">18-2 vs Marruecos</div><div style="font-size:.72rem;color:var(--gris)">CWL · 2023</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Mayor derrota</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--rojo)">2-20 vs River Plate</div><div style="font-size:.72rem;color:var(--gris)">TSL · 2023</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Max. goleador</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:#f4c430">Azion · 153 goles</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Diferencia de goles</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--verde-brillante)">+168 goles</div></div></div></div><div class="chart-card"><div class="chart-title">Por juego</div><div class="bar-chart"><div class="bar-row"><div class="bar-label">TPS</div><div class="bar-outer"><div class="bar-inner" style="width:70%"></div></div><div class="bar-val">176</div></div><div style="font-size:.7rem;color:var(--gris);margin:-5px 0 5px 76px">108V (61%)</div><div class="bar-row"><div class="bar-label">Touch</div><div class="bar-outer"><div class="bar-inner" style="width:30%"></div></div><div class="bar-val">75</div></div><div style="font-size:.7rem;color:var(--gris);margin:-5px 0 5px 76px">36V (48%)</div><div style="margin-top:8px" class="chart-title">Por año</div><div class="bar-row"><div class="bar-label">2021</div><div class="bar-outer"><div class="bar-inner" style="width:2%"></div></div><div class="bar-val">3</div></div><div class="bar-row"><div class="bar-label">2023</div><div class="bar-outer"><div class="bar-inner" style="width:8%"></div></div><div class="bar-val">12</div></div><div class="bar-row"><div class="bar-label">2024</div><div class="bar-outer"><div class="bar-inner" style="width:14%"></div></div><div class="bar-val">22</div></div><div class="bar-row"><div class="bar-label">2025</div><div class="bar-outer"><div class="bar-inner" style="width:100%"></div></div><div class="bar-val">154</div></div><div class="bar-row"><div class="bar-label">2026</div><div class="bar-outer"><div class="bar-inner" style="width:39%"></div></div><div class="bar-val">60</div></div></div></div></div>
+    <div class="overview-grid" id="overview-grid"></div>
     <div style="margin-top:52px">
       <div class="section-header"><h2 class="section-title">Rivalidades</h2><div class="section-line"></div><p style="font-size:.8rem;color:var(--gris);margin-top:7px">Rivales con 3 o más enfrentamientos</p></div>
-      <div class="rivalidades-grid" id="rivalidades-grid"><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Team Random</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">27</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">6</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">19</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">52</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">191 GF · 174 GC</div><div class="rival-bar"><div class="rb-v" style="flex:52"></div><div class="rb-e" style="flex:12"></div><div class="rb-d" style="flex:36"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--rojo)">Atletico Nacional</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">1</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">8</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">9</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">19 GF · 53 GC</div><div class="rival-bar"><div class="rb-v" style="flex:11"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:89"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:#888">Otaku FC</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">4</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">4</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">8</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">43 GF · 31 GC</div><div class="rival-bar"><div class="rb-v" style="flex:50"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:50"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Corinthians</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">5</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">3</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">8</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">55 GF · 39 GC</div><div class="rival-bar"><div class="rb-v" style="flex:63"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:37"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Kickers</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">8</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">8</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">55 GF · 18 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Universitario</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">5</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">1</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">1</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">7</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">56 GF · 41 GC</div><div class="rival-bar"><div class="rb-v" style="flex:71"></div><div class="rb-e" style="flex:14"></div><div class="rb-d" style="flex:15"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Santos</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">6</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">6</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">40 GF · 20 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Alianza Lima</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">6</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">6</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">45 GF · 23 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Guadalajara</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">6</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">6</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">41 GF · 21 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Athletico Paranaense</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">4</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">2</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">6</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">31 GF · 28 GC</div><div class="rival-bar"><div class="rb-v" style="flex:67"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:33"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Saiyans FC</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">5</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">5</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">39 GF · 20 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:#888">Estudiantes de la Plata</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">2</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">2</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">4</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">21 GF · 28 GC</div><div class="rival-bar"><div class="rb-v" style="flex:50"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:50"></div></div></div></div>
+      <div class="rivalidades-grid" id="rivalidades-grid"></div>
     </div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
@@ -1353,12 +1355,12 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div style="text-align:center;margin-bottom:48px;">
         <div style="display:flex;justify-content:center;margin-bottom:24px;">
           <div style="animation:awardsFloat 4s ease-in-out infinite,awardsGlow 3s ease-in-out infinite;">
-            <img id="awards-logo-img" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/__AWARDS_B64__" style="width:180px;height:auto;" alt="Urielneta Awards">
+            <img id="awards-logo-img" src="" style="width:180px;height:auto;" alt="Urielneta Awards">
           </div>
         </div>
-        <h2 style="font-family:&#39;Bebas Neue&#39;,sans-serif;font-size:clamp(1.8rem,5vw,3.2rem);letter-spacing:6px;margin:0 0 5px;">URIELNETA <span style="background:linear-gradient(90deg,#c9a84c,#f5e6a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AWARDS</span></h2>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,3.2rem);letter-spacing:6px;margin:0 0 5px;">URIELNETA <span style="background:linear-gradient(90deg,#c9a84c,#f5e6a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AWARDS</span></h2>
         <div style="width:56px;height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin:12px auto 18px;"></div>
-        <p style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.88rem;letter-spacing:3px;color:rgba(255,255,255,.32);text-transform:uppercase;">Los premios oficiales del CF Ineri</p>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;letter-spacing:3px;color:rgba(255,255,255,.32);text-transform:uppercase;">Los premios oficiales del CF Ineri</p>
       </div>
       <!-- Ed 1 -->
       <div style="margin-bottom:48px;">
@@ -1373,8 +1375,8 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
             <div class="award-label">🏆 Ballon D'Or</div>
             <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
               <div style="display:flex;align-items:center;gap:6px;"><span>🥇</span><span class="award-winner" style="font-size:1.4rem;">Coco</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Khazir</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Gabe</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Khazir</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Gabe</span></div>
             </div>
           </div>
         </div>
@@ -1398,8 +1400,8 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
             <div class="award-label">🏆 Balón de Oro</div>
             <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
               <div style="display:flex;align-items:center;gap:6px;"><span>🥇</span><span class="award-winner" style="font-size:1.4rem;">Gabe</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Jebedias</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Goteras</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Jebedias</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Goteras</span></div>
             </div>
           </div>
         </div>
@@ -1417,20 +1419,20 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
           <div class="award-card"><div class="award-label">Old Star</div><div class="award-winner">Jebedias</div></div>
           <div class="award-card"><div class="award-label">Future Star</div><div class="award-winner">17fxbri</div></div>
           <div class="award-card"><div class="award-label">Premio Mamita</div><div class="award-winner">Ryze</div></div>
-          <div class="award-card"><div class="award-label">Premio Khazir</div><div class="award-winner">Uriel</div><a href="https://medal.tv/es/games/roblox/clips/ljhhrDPsqmwUyqpx5?invite=cr-MSxpOFosMTgzNTM2MDc3" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.67rem;letter-spacing:2px;color:#c9a84c;text-decoration:none;border:1px solid rgba(201,168,76,.3);padding:3px 8px;border-radius:4px;">▶ Ver GOL</a></div>
+          <div class="award-card"><div class="award-label">Premio Khazir</div><div class="award-winner">Uriel</div><a href="https://medal.tv/es/games/roblox/clips/ljhhrDPsqmwUyqpx5?invite=cr-MSxpOFosMTgzNTM2MDc3" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-size:.67rem;letter-spacing:2px;color:#c9a84c;text-decoration:none;border:1px solid rgba(201,168,76,.3);padding:3px 8px;border-radius:4px;">▶ Ver GOL</a></div>
           <div class="award-card"><div class="award-label">Best CB</div><div class="award-winner">Jebedias</div></div>
           <div class="award-card"><div class="award-label">Premio Goteras</div><div class="award-winner">Rvssian</div></div>
           <div class="award-card" style="border-color:rgba(201,168,76,.5);background:linear-gradient(135deg,rgba(20,18,8,.98),rgba(10,8,2,.99));">
             <div class="award-label">🏆 Balón de Oro</div>
             <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
               <div style="display:flex;align-items:center;gap:6px;"><span>🥇</span><span class="award-winner" style="font-size:1.4rem;">17fxbri</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Jebedias</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Azion / Uriel / Carter</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Jebedias</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Azion / Uriel / Carter</span></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="awards-voting" id="awards-voting"><div class="vote-panel"><div class="vote-header"><div><div class="vote-title">URIELNETA AWARDS 4</div><div class="vote-sub">Elegi top 3 por premio. En Ballon D'OR elegi top 10.</div></div><div class="vote-status">Necesitas cuenta</div></div><div class="vote-login"><a class="vote-link" onclick="openAuthModal()">Inicia sesion</a> o crea una cuenta para votar.</div></div></div>
+      <div class="awards-voting" id="awards-voting"></div>
     </div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
@@ -1443,7 +1445,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div><div class="section-header" style="margin-bottom:0"><h2 class="section-title">Noticias</h2><div class="section-line"></div></div></div>
       <button class="btn-publish hidden" id="btn-publish" onclick="openNoticiaModal()">+ Publicar noticia</button>
     </div>
-    <div class="noticias-grid" id="noticias-grid"><div class="empty-news"><div class="empty-news-icon">📰</div><div class="empty-news-text">No hay noticias publicadas aún</div></div></div>
+    <div class="noticias-grid" id="noticias-grid"></div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
 </div>
@@ -1458,10 +1460,10 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
     <!-- Menú Principal del Álbum -->
     <div class="album-subnav">
-      <button class="album-subtab active" id="subtab-dashboard" onclick="changeAlbumTab(&#39;dashboard&#39;)">📊 Dashboard</button>
-      <button class="album-subtab" id="subtab-album_pages" onclick="changeAlbumTab(&#39;album_pages&#39;)">📖 Álbum por páginas</button>
-      <button class="album-subtab" id="subtab-sobres" onclick="changeAlbumTab(&#39;sobres&#39;)">📦 Sobres (<span id="stock-count-nav">0</span>)</button>
-      <button class="album-subtab" id="subtab-coleccion" onclick="changeAlbumTab(&#39;coleccion&#39;)">🗃️ Mi Colección</button>
+      <button class="album-subtab active" id="subtab-dashboard" onclick="changeAlbumTab('dashboard')">📊 Dashboard</button>
+      <button class="album-subtab" id="subtab-album_pages" onclick="changeAlbumTab('album_pages')">📖 Álbum por páginas</button>
+      <button class="album-subtab" id="subtab-sobres" onclick="changeAlbumTab('sobres')">📦 Sobres (<span id="stock-count-nav">0</span>)</button>
+      <button class="album-subtab" id="subtab-coleccion" onclick="changeAlbumTab('coleccion')">🗃️ Mi Colección</button>
     </div>
 
     <!-- 1. VISTA: DASHBOARD -->
@@ -1472,7 +1474,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
           <div class="db-lbl">Obtenidas (Únicas)</div>
         </div>
         <div class="db-card">
-          <div class="db-val" id="db-val-faltantes">8</div>
+          <div class="db-val" id="db-val-faltantes">0</div>
           <div class="db-lbl">Faltantes</div>
         </div>
         <div class="db-card">
@@ -1487,13 +1489,15 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
       <div class="db-section">
         <div class="db-title">Estadísticas por Rareza</div>
-        <div id="db-rarity-stats"><div class="db-row"><div class="db-row-lbl">Común</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#888"></div></div><div class="db-row-val">0 / 2 (0%)</div></div><div class="db-row"><div class="db-row-lbl">Poco común</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#27a645"></div></div><div class="db-row-val">0 / 1 (0%)</div></div><div class="db-row"><div class="db-row-lbl">Raro</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#0055ff"></div></div><div class="db-row-val">0 / 2 (0%)</div></div><div class="db-row"><div class="db-row-lbl">Épico</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#8b00ff"></div></div><div class="db-row-val">0 / 1 (0%)</div></div><div class="db-row"><div class="db-row-lbl">Legendario</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#ffcc00"></div></div><div class="db-row-val">0 / 2 (0%)</div></div></div>
+        <div id="db-rarity-stats">
+          <!-- Rarity rows dynamically loaded -->
+        </div>
       </div>
     </div>
 
     <!-- 2. VISTA: ÁLBUM POR PÁGINAS -->
     <div id="album-view-album_pages" class="album-view" style="display:none">
-      <div id="album-login-msg" class="hidden" style="margin-bottom:16px;padding:12px 16px;background:rgba(39,166,69,.07);border:1px solid rgba(39,166,69,.2);border-radius:8px;font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.82rem;color:var(--gris);letter-spacing:1px;">
+      <div id="album-login-msg" class="hidden" style="margin-bottom:16px;padding:12px 16px;background:rgba(39,166,69,.07);border:1px solid rgba(39,166,69,.2);border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;color:var(--gris);letter-spacing:1px;">
         <a onclick="openAuthModal()" style="color:var(--verde-brillante);cursor:pointer;">Iniciá sesión</a> para guardar tu progreso y pegar figuritas.
       </div>
       
@@ -1525,7 +1529,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
         <!-- Navigation of pages -->
         <div class="album-book-nav">
           <button class="album-nav-btn" id="btn-page-prev" onclick="prevAlbumPage()">◀ Anterior</button>
-          <span style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-weight:700; letter-spacing:1px;" id="album-page-indicator">Páginas 1 - 2</span>
+          <span style="font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:1px;" id="album-page-indicator">Páginas 1 - 2</span>
           <button class="album-nav-btn" id="btn-page-next" onclick="nextAlbumPage()">Siguiente ▶</button>
         </div>
       </div>
@@ -1536,7 +1540,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div class="sobres-tab-container">
         <div class="timer-container">
           <div class="timer-text" id="pack-timer">00:00</div>
-          <div class="timer-sub" id="pack-timer-label">Iniciá sesión para reclamar</div>
+          <div class="timer-sub" id="pack-timer-label">Siguiente sobre gratuito</div>
         </div>
 
         <div class="sobre-virtual" id="virtual-pack-element" onclick="triggerPackOpening()">
@@ -1556,17 +1560,17 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div class="col-header">
         <input class="col-search" id="col-search-input" type="text" placeholder="🔍 Buscar jugador..." oninput="renderColeccion()">
         <div class="col-filters" id="col-rarity-filters">
-          <button class="filter-btn active" data-colrar="all" onclick="filterColeccion(&#39;all&#39;,this)">Todas</button>
-          <button class="filter-btn" data-colrar="com" onclick="filterColeccion(&#39;com&#39;,this)">Común</button>
-          <button class="filter-btn" data-colrar="poco_comun" onclick="filterColeccion(&#39;poco_comun&#39;,this)">Poco común</button>
-          <button class="filter-btn" data-colrar="rara" onclick="filterColeccion(&#39;rara&#39;,this)">Raro</button>
-          <button class="filter-btn" data-colrar="epica" onclick="filterColeccion(&#39;epica&#39;,this)">Épico</button>
-          <button class="filter-btn" data-colrar="legendaria" onclick="filterColeccion(&#39;legendaria&#39;,this)">Legendario</button>
+          <button class="filter-btn active" data-colrar="all" onclick="filterColeccion('all',this)">Todas</button>
+          <button class="filter-btn" data-colrar="com" onclick="filterColeccion('com',this)">Común</button>
+          <button class="filter-btn" data-colrar="poco_comun" onclick="filterColeccion('poco_comun',this)">Poco común</button>
+          <button class="filter-btn" data-colrar="rara" onclick="filterColeccion('rara',this)">Raro</button>
+          <button class="filter-btn" data-colrar="epica" onclick="filterColeccion('epica',this)">Épico</button>
+          <button class="filter-btn" data-colrar="legendaria" onclick="filterColeccion('legendaria',this)">Legendario</button>
         </div>
       </div>
       
       <div style="margin-bottom: 20px;">
-        <label style="display:flex; align-items:center; gap:8px; font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:0.9rem; color:var(--gris); cursor:pointer;">
+        <label style="display:flex; align-items:center; gap:8px; font-family:'Barlow Condensed',sans-serif; font-size:0.9rem; color:var(--gris); cursor:pointer;">
           <input type="checkbox" id="col-dup-only" onchange="renderColeccion()" style="accent-color:var(--verde-brillante); width:16px; height:16px;">
           <span>Mostrar solo duplicados</span>
         </label>
@@ -1594,7 +1598,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <div id="page-perfil" class="page">
   <div class="page-inner">
     <div class="section-header"><h2 class="section-title">Mi Perfil</h2><div class="section-line"></div></div>
-    <div id="perfil-content"><div class="locked-section"><div class="locked-icon">🔒</div><div class="locked-title">Iniciá sesión para ver tu perfil</div><p class="locked-text">Creá una cuenta o iniciá sesión.</p><button class="locked-btn" onclick="openAuthModal()">Iniciar sesión</button></div></div>
+    <div id="perfil-content"></div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
 </div>
@@ -1800,6 +1804,32 @@ function showToast(msg,isError){
 function isLoggedIn(){return !!currentUser;}
 function isAdmin(){return !!(currentUser && currentUser.rank === 'admin');}
 function canPublish(){return !!(currentUser && (currentUser.rank === 'admin' || currentUser.rank === 'editor'));}
+
+function openAuthModal(){
+  var modal=document.getElementById('modal-auth');
+  if(!modal)return;
+  switchAuthTab('login');
+  modal.classList.remove('hidden');
+}
+function closeAuthModal(){
+  var modal=document.getElementById('modal-auth');
+  if(modal)modal.classList.add('hidden');
+}
+function switchAuthTab(tab){
+  var isReg=tab==='register';
+  var loginForm=document.getElementById('auth-login');
+  var regForm=document.getElementById('auth-register');
+  var tabLogin=document.getElementById('tab-login');
+  var tabReg=document.getElementById('tab-reg');
+  if(loginForm)loginForm.style.display=isReg?'none':'block';
+  if(regForm)regForm.style.display=isReg?'block':'none';
+  if(tabLogin)tabLogin.classList.toggle('active',!isReg);
+  if(tabReg)tabReg.classList.toggle('active',isReg);
+  var loginErr=document.getElementById('login-error');
+  var regErr=document.getElementById('reg-error');
+  if(loginErr)loginErr.style.display='none';
+  if(regErr)regErr.style.display='none';
+}
 
 // ══════════════════════════════════════
 // AUTH — Firebase
@@ -3040,6 +3070,46 @@ function buildAwards4Points(votes) {
   return points;
 }
 
+// Exponer handlers usados por onclick para navegadores/modos estrictos.
+Object.assign(window, {
+  openAuthModal: openAuthModal,
+  closeAuthModal: closeAuthModal,
+  switchAuthTab: switchAuthTab,
+  doLogin: doLogin,
+  doRegister: doRegister,
+  doLogout: doLogout,
+  toggleDropdown: toggleDropdown,
+  closeDropdown: closeDropdown,
+  showPage: showPage,
+  toggleMenu: toggleMenu,
+  closeMenu: closeMenu,
+  openNoticiaModal: openNoticiaModal,
+  closeNoticiaModal: closeNoticiaModal,
+  saveNoticia: saveNoticia,
+  deleteNoticia: deleteNoticia,
+  addComentario: addComentario,
+  deleteComentario: deleteComentario,
+  toggleComentarios: toggleComentarios,
+  openPersModal: openPersModal,
+  handlePersImg: handlePersImg,
+  savePersImg: savePersImg,
+  changeRank: changeRank,
+  openFigCreator: openFigCreator,
+  handleFigImg: handleFigImg,
+  updateFigPreview: updateFigPreview,
+  saveFigurita: saveFigurita,
+  deleteFigurita: deleteFigurita,
+  changeAlbumTab: changeAlbumTab,
+  prevAlbumPage: prevAlbumPage,
+  nextAlbumPage: nextAlbumPage,
+  canPegarFig: canPegarFig,
+  triggerPackOpening: triggerPackOpening,
+  flipRevealCard: flipRevealCard,
+  closeRevealModal: closeRevealModal,
+  filterColeccion: filterColeccion,
+  submitAwards4Vote: submitAwards4Vote
+});
+
 // INIT
 // ══════════════════════════════════════
 renderNav();
@@ -3059,6 +3129,5 @@ updateFigPreview();
 document.getElementById('login-pass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 document.getElementById('reg-pass2').addEventListener('keydown',function(e){if(e.key==='Enter')doRegister();});
 </script>
-
-
-</body></html>
+</body>
+</html>
