@@ -1646,6 +1646,42 @@ function getUserDataBucket(username) {
 }
 
 async function loadFirebaseCollections(username) {
+  async function tryLoad(label, loader) {
+    try { return await loader(); }
+    catch(e) {
+      console.warn('Firebase ' + label + ' no disponible todavia:', e && e.message ? e.message : e);
+      return null;
+    }
+  }
+
+  var usersSnap = await tryLoad('users', function(){ return get(ref(db, 'cfineri/users')); });
+  if (usersSnap && usersSnap.exists()) {
+    _usersCache = normalizeFirebaseList(usersSnap.val()).map(function(u){
+      return Object.assign({ rank:'usuario', comments:0, avatar:'', banner:'' }, u);
+    });
+  }
+
+  var noticiasSnap = await tryLoad('noticias', function(){ return get(ref(db, 'cfineri/noticias')); });
+  if (noticiasSnap && noticiasSnap.exists()) {
+    _noticiasCache = normalizeFirebaseList(noticiasSnap.val()).sort(function(a,b){
+      return new Date(b.fecha || 0) - new Date(a.fecha || 0);
+    });
+  }
+
+  var figuritasSnap = await tryLoad('figuritas', function(){ return get(ref(db, 'cfineri/figuritas')); });
+  if (figuritasSnap && figuritasSnap.exists()) {
+    _figuritasCache = normalizeFirebaseList(figuritasSnap.val());
+  }
+
+  if (username) {
+    var userDataSnap = await tryLoad('userdata', function(){ return get(ref(db, 'cfineri/userdata/' + username)); });
+    _userDataCache[username] = userDataSnap && userDataSnap.exists()
+      ? Object.assign({ album:[], inventory:[], packs:0, lastPack:null }, userDataSnap.val())
+      : getUserDataBucket(username);
+  }
+}
+
+async function loadFirebaseCollectionsOld(username) {
   try {
     var usersSnap = await get(ref(db, 'cfineri/users'));
     _usersCache = usersSnap.exists() ? normalizeFirebaseList(usersSnap.val()).map(function(u){
@@ -1682,13 +1718,17 @@ async function refreshFirebaseViews() {
 async function getUserByUsername(username) {
   var cached = _usersCache.find(function(u){ return (u.username || '').toLowerCase() === username.toLowerCase(); });
   if (cached) return cached;
-  var snap = await get(ref(db, 'cfineri/users'));
-  if (!snap.exists()) return null;
-  var users = snap.val();
-  for (var uid in users) {
-    if (users[uid].username.toLowerCase() === username.toLowerCase()) {
-      return { uid, ...users[uid] };
+  try {
+    var snap = await get(ref(db, 'cfineri/users'));
+    if (!snap.exists()) return null;
+    var users = snap.val();
+    for (var uid in users) {
+      if (users[uid].username.toLowerCase() === username.toLowerCase()) {
+        return { uid, ...users[uid] };
+      }
     }
+  } catch(e) {
+    console.warn('No se pudo verificar usuario duplicado en DB:', e && e.message ? e.message : e);
   }
   return null;
 }
@@ -2289,7 +2329,12 @@ function seedDefaultStickers(){
       { id: 10007, nombre: "Mike", rareza: "com", bandera: "🇺🇾", rating: 71, img: "", createdBy: "system", fecha: new Date().toISOString() },
       { id: 10008, nombre: "Coco", rareza: "rara", bandera: "🇦🇷", rating: 83, img: "", createdBy: "system", fecha: new Date().toISOString() }
     ];
-    saveFiguritas(defaultStickers);
+    _figuritasCache = defaultStickers;
+    if (isAdmin()) {
+      saveFiguritas(defaultStickers).catch(function(e){
+        console.warn('No se pudieron guardar figuritas iniciales:', e && e.message ? e.message : e);
+      });
+    }
   }
 }
 
@@ -2948,10 +2993,10 @@ function renderRivalidades(){
 // URIELNETA AWARDS 4 - VOTACION
 var AWARDS4 = [
   {id:'mas_activo', name:'Premio Mas Activo', slots:3, nominees:['17fxbri','Rvssian','Bluex','Samu','Hiiro']},
-  {id:'fantasma', name:'Premio Fantasma del Año', slots:3, nominees:['Milan','Rvssian','Bluex']},
+  {id:'fantasma', name:'Premio Fantasma del Anio', slots:3, nominees:['Milan','Rvssian','Bluex']},
   {id:'balon_playa', name:'Premio Balon de Playa', slots:3, nominees:['Goteras','17fxbri','Gab','Matigol']},
   {id:'balon_reach', name:'Premio Balon de Reach', slots:3, nominees:['Jebedias','Uriel','Rvssian']},
-  {id:'aguatero', name:'Premio Aguatero del Año', slots:3, nominees:['Mike','Chess','Josh']},
+  {id:'aguatero', name:'Premio Aguatero del Anio', slots:3, nominees:['Mike','Chess','Josh']},
   {id:'manager', name:'Premio Mejor Manager', slots:3, nominees:['Uriel | con CF Ineri OLD','Jebedias | con CF Ineri OLD','17fxbri | con CF Ineri TOUCH','Hiiro | con Random Team','Rvssian | con CF Ineri NEW']},
   {id:'team', name:'Premio Mejor Team', slots:3, nominees:['CF Ineri 2025 de TPS','Cruz Azul de SLM','CF Ineri 2025/2026 de TOUCH','Random Team de TPS','Amigos FC de TPS']},
   {id:'old_star', name:'Premio Old Star', slots:3, nominees:['Milan','Rvssian','Hiiro','Gigi','Iker']},
@@ -2962,7 +3007,7 @@ var AWARDS4 = [
   {id:'mamita', name:'Premio Mamita', slots:3, nominees:['Iker','Uriel','Milan','Ryze']},
   {id:'defensa', name:'Premio Mejor Defensa', slots:3, nominees:['Jebedias','Samu','Rayo','Hiiro','Rvssian']},
   {id:'khazir', name:'Premio Khazir', slots:3, nominees:['Jebedias vs Team RANDOM | https://youtu.be/jyiAmFwSZPk','Bluex vs 4KZ | https://youtu.be/dbNXhH4AirY','Rvssian vs Team Random | https://youtu.be/jZzfRSGWkUY']},
-  {id:'partido_anio', name:'Premio Mejor Partido del Año', slots:3, nominees:['CF Ineri vs Galindos 0-0 WIN X Penales | ATF COPA ATF','Racing vs Independiente 8-7 | FTC Libertadores','Cruz Azul vs Guadalajara 12-3 | SLM']},
+  {id:'partido_anio', name:'Premio Mejor Partido del Anio', slots:3, nominees:['CF Ineri vs Galindos 0-0 WIN X Penales | ATF COPA ATF','Racing vs Independiente 8-7 | FTC Libertadores','Cruz Azul vs Guadalajara 12-3 | SLM']},
   {id:'ballon_dor', name:"Ballon D'OR", slots:10, nominees:['Rvssian','Jebedias','Uriel','Azion','Benja','Hiiro','Milan','Bluex','17fxbri','Pemegamer','Yang','Kairo','Matigol','Goteras','Gigi','Samu','Void','2kInco','Sergio','Pelao']}
 ];
 var AWARDS4_FIXED = { name:'Premio Bota de Oro', winners:['Primero: Rvssian','Segundo: Bluex','Tercero: Goteras'] };
@@ -3062,9 +3107,12 @@ async function submitAwards4Vote() {
 function buildAwards4Points(votes) {
   var points = {};
   AWARDS4.forEach(function(award){
-    points[award.id] = {};
+    points[award.id] = [];
     votes[award.id].forEach(function(nominee, index){
-      points[award.id][nominee] = award.slots - index;
+      points[award.id].push({
+        nominee: nominee,
+        points: award.slots - index
+      });
     });
   });
   return points;
