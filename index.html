@@ -1,36 +1,73 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0099)file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/index.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CF Ineri — Club Oficial</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
-<!-- Firebase SDKs — agregar antes de tu <script> principal -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getDatabase, ref, set, get, push, remove, update, onValue }
-    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-  // ⬇ PEGÁ ACÁ TU firebaseConfig del Paso 2
+<link href="./CF Ineri — Club Oficial_files/css2" rel="stylesheet">
+<!-- Firebase SDKs - pegar antes del script principal -->
+<script src="./CF Ineri — Club Oficial_files/firebase-app-compat.js.descarga"></script>
+<script src="./CF Ineri — Club Oficial_files/firebase-auth-compat.js.descarga"></script>
+<script src="./CF Ineri — Club Oficial_files/firebase-database-compat.js.descarga"></script>
+<script>
+  // Pega aca tu firebaseConfig real de Firebase Console.
   const firebaseConfig = {
-    apiKey: "TU_API_KEY",
-    authDomain: "TU_PROYECTO.firebaseapp.com",
-    databaseURL: "https://TU_PROYECTO-default-rtdb.firebaseio.com",
-    projectId: "TU_PROYECTO",
-    storageBucket: "TU_PROYECTO.appspot.com",
-    messagingSenderId: "TU_ID",
-    appId: "TU_APP_ID"
-  };
+  apiKey: "AIzaSyCjGOz1HyMf5oubWUelCfkmo5Dw_uTaC5c",
+  authDomain: "cf-ineri.firebaseapp.com",
+  databaseURL: "https://cf-ineri-default-rtdb.firebaseio.com",
+  projectId: "cf-ineri",
+  storageBucket: "cf-ineri.firebasestorage.app",
+  messagingSenderId: "1038890222432",
+  appId: "1:1038890222432:web:92387869dc2752ba859405",
+  measurementId: "G-JW2K6YJXNF"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getDatabase(app);
-
-  // Exponer globalmente para que el resto del código los use
-  window._fb = { auth, db, ref, set, get, push, remove, update, onValue,
-    createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged };
+  const firebaseConfigured = firebaseConfig.apiKey !== "TU_API_KEY" && firebaseConfig.projectId !== "TU_PROYECTO";
+  if (firebaseConfigured) {
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+    window._fb = {
+      auth: auth,
+      db: db,
+      ref: function(database, path){ return database.ref(path); },
+      set: function(reference, value){ return reference.set(value); },
+      get: function(reference){ return reference.get(); },
+      push: function(reference){ return reference.push(); },
+      remove: function(reference){ return reference.remove(); },
+      update: function(reference, value){ return reference.update(value); },
+      onValue: function(reference, cb){ return reference.on('value', cb); },
+      createUserWithEmailAndPassword: function(authRef, email, pass){ return authRef.createUserWithEmailAndPassword(email, pass); },
+      signInWithEmailAndPassword: function(authRef, email, pass){ return authRef.signInWithEmailAndPassword(email, pass); },
+      signOut: function(authRef){ return authRef.signOut(); },
+      onAuthStateChanged: function(authRef, cb){ return authRef.onAuthStateChanged(cb); }
+    };
+  } else {
+    console.warn('Firebase no configurado: pega tu firebaseConfig real para activar cuentas y base de datos.');
+    const mockStore = {};
+    const snapFrom = function(value){ return { exists:function(){return value !== undefined && value !== null;}, val:function(){return value || null;} }; };
+    const readPath = function(path){ return String(path || '').split('/').filter(Boolean).reduce(function(acc, key){ return acc && acc[key]; }, mockStore); };
+    const writePath = function(path, value){
+      var parts = String(path || '').split('/').filter(Boolean), node = mockStore;
+      for (var i=0;i<parts.length-1;i++) node = node[parts[i]] = node[parts[i]] || {};
+      node[parts[parts.length-1]] = value;
+    };
+    window._fb = {
+      auth: {},
+      db: {},
+      ref: function(database, path){ return { path:path }; },
+      set: function(reference, value){ writePath(reference.path, value); return Promise.resolve(); },
+      get: function(reference){ return Promise.resolve(snapFrom(readPath(reference.path))); },
+      push: function(){ return { key:String(Date.now()) }; },
+      remove: function(reference){ writePath(reference.path, null); return Promise.resolve(); },
+      update: function(reference, value){ writePath(reference.path, Object.assign({}, readPath(reference.path) || {}, value)); return Promise.resolve(); },
+      onValue: function(reference, cb){ cb(snapFrom(readPath(reference.path))); return function(){}; },
+      createUserWithEmailAndPassword: function(){ return Promise.reject(new Error('Firebase no configurado.')); },
+      signInWithEmailAndPassword: function(){ return Promise.reject(new Error('Firebase no configurado.')); },
+      signOut: function(){ return Promise.resolve(); },
+      onAuthStateChanged: function(authRef, cb){ setTimeout(function(){ cb(null); }, 0); return function(){}; }
+    };
+  }
 </script>
 <style>
 :root {
@@ -258,6 +295,31 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 .award-card:hover::before{opacity:1;}
 .award-label{font-family:'Barlow Condensed',sans-serif;font-size:.67rem;letter-spacing:3px;color:#c9a84c;text-transform:uppercase;margin-bottom:4px;opacity:.8;}
 .award-winner{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;background:linear-gradient(90deg,#c9a84c,#f5e6a3,#c9a84c,#f5e6a3,#c9a84c);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:goldShimmer 4s linear infinite;}
+.awards-voting{padding:36px 0 8px;border-top:1px solid rgba(201,168,76,.12);}
+.vote-panel{background:linear-gradient(135deg,rgba(15,25,15,.95),rgba(10,12,10,.98));border:1px solid rgba(201,168,76,.22);border-radius:12px;padding:20px;margin-top:18px;}
+.vote-header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap;}
+.vote-title{font-family:'Bebas Neue',sans-serif;font-size:2.1rem;letter-spacing:4px;color:#f5e6a3;line-height:1;}
+.vote-sub{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:5px;}
+.vote-status{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,.25);border-radius:6px;padding:6px 10px;background:rgba(201,168,76,.06);}
+.vote-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.vote-card{background:#101510;border:1px solid rgba(201,168,76,.14);border-radius:10px;padding:14px;}
+.vote-card.fixed{border-color:rgba(39,166,69,.25);background:linear-gradient(135deg,rgba(10,25,13,.95),rgba(12,12,10,.98));}
+.vote-award-name{font-family:'Bebas Neue',sans-serif;font-size:1.18rem;letter-spacing:2px;color:#f5e6a3;margin-bottom:4px;}
+.vote-help{font-size:.74rem;color:var(--gris);margin-bottom:10px;line-height:1.45;}
+.vote-selects{display:flex;flex-direction:column;gap:8px;}
+.vote-select-row{display:grid;grid-template-columns:58px 1fr;align-items:center;gap:8px;}
+.vote-rank{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:2px;color:#c9a84c;text-transform:uppercase;}
+.vote-select{width:100%;background:#0b0f0b;border:1px solid #2a3a2c;border-radius:7px;padding:8px 10px;color:var(--blanco);font-family:'Barlow',sans-serif;font-size:.86rem;outline:none;}
+.vote-select:focus{border-color:#c9a84c;}
+.vote-fixed-list{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+.vote-fixed-item{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;letter-spacing:1px;color:rgba(245,230,163,.82);}
+.vote-actions{display:flex;align-items:center;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap;}
+.vote-btn{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(201,168,76,.45);background:linear-gradient(135deg,#2b230d,#594719);color:#f5e6a3;border-radius:8px;padding:10px 18px;cursor:pointer;transition:all .2s;}
+.vote-btn:hover:not(:disabled){transform:translateY(-1px);border-color:#f5e6a3;}
+.vote-btn:disabled{opacity:.5;cursor:not-allowed;}
+.vote-error{color:#e05555;font-size:.82rem;display:none;}
+.vote-login{padding:22px;border:1px dashed rgba(201,168,76,.25);border-radius:10px;text-align:center;color:var(--gris);font-family:'Barlow Condensed',sans-serif;font-size:.9rem;letter-spacing:2px;text-transform:uppercase;}
+.vote-link{color:#c9a84c;cursor:pointer;text-decoration:none;}
 .edition-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:3px;color:#0a0a0a;background:#c9a84c;padding:4px 13px;border-radius:20px;text-transform:uppercase;font-weight:700;margin-bottom:22px;}
 
 /* ── NOTICIAS ── */
@@ -1043,10 +1105,10 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL AUTH ══ -->
 <div class="modal-overlay hidden" id="modal-auth">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeAuthModal()">&#10005;</button>
+    <button class="modal-close" onclick="closeAuthModal()">✕</button>
     <div class="form-tabs">
-      <button class="form-tab-btn active" id="tab-login" onclick="switchAuthTab('login')">Iniciar sesión</button>
-      <button class="form-tab-btn" id="tab-reg" onclick="switchAuthTab('register')">Registrarse</button>
+      <button class="form-tab-btn active" id="tab-login" onclick="switchAuthTab(&#39;login&#39;)">Iniciar sesión</button>
+      <button class="form-tab-btn" id="tab-reg" onclick="switchAuthTab(&#39;register&#39;)">Registrarse</button>
     </div>
     <div id="auth-login">
       <div class="form-group"><label class="form-label">Usuario</label><input class="form-input" id="login-user" type="text" placeholder="Tu nombre de usuario" autocomplete="username"></div>
@@ -1068,7 +1130,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL NOTICIA ══ -->
 <div class="modal-overlay hidden" id="modal-noticia">
   <div class="modal-box wide">
-    <button class="modal-close" onclick="closeNoticiaModal()">&#10005;</button>
+    <button class="modal-close" onclick="closeNoticiaModal()">✕</button>
     <h2 id="noticia-modal-title">Nueva Noticia</h2>
     <p class="modal-sub">Solo admins y editores pueden publicar</p>
     <div class="form-group"><label class="form-label">Título</label><input class="form-input" id="n-titulo" type="text" placeholder="Título de la noticia"></div>
@@ -1083,7 +1145,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL FIGURITA CREATOR ══ -->
 <div class="modal-overlay hidden" id="modal-figurita">
   <div class="modal-box wide" style="max-width:520px;">
-    <button class="modal-close" onclick="document.getElementById('modal-figurita').classList.add('hidden')">&#10005;</button>
+    <button class="modal-close" onclick="document.getElementById(&#39;modal-figurita&#39;).classList.add(&#39;hidden&#39;)">✕</button>
     <h2>Crear Figurita</h2>
     <p class="modal-sub">Solo admins pueden crear figuritas</p>
     <div class="fig-creator-grid">
@@ -1104,13 +1166,13 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
           <label class="form-label">Foto del jugador (opcional)</label>
           <label class="img-upload-label" id="fig-img-label" for="fig-img-input">📷 Subir imagen</label>
           <input class="img-upload-input" type="file" id="fig-img-input" accept="image/*" onchange="handleFigImg(this)">
-          <img id="fig-img-preview" class="img-preview" src="" alt="">
+          <img id="fig-img-preview" class="img-preview" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/index.html" alt="">
         </div>
       </div>
       <div class="fig-preview-wrap">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:8px;">Vista previa</div>
-        <div class="fig-preview-card" id="fig-live-preview"></div>
-        <div style="font-size:.68rem;color:#444;margin-top:8px;text-align:center;font-family:'Barlow Condensed',sans-serif;">CF Ineri · Urielneta</div>
+        <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:8px;">Vista previa</div>
+        <div class="fig-preview-card figurita-slot pegada com" id="fig-live-preview"><div class="figurita-card fig-bg-com" style="position:relative; width:100%; height:100%; display:flex; flex-direction:column; border-radius:8px; overflow:hidden;"><div class="fig-watermark">JU</div><div class="fig-top-bar" style="position:relative; z-index:2;"><div><div class="fig-rating">75</div><div class="fig-pos" style="font-size:.45rem;letter-spacing:1px;color:rgba(255,255,255,.5);">CF Ineri</div></div><span class="fig-rareza-badge fig-rareza-com">Común</span></div><div class="fig-img-area" style="position:relative; z-index:1;"><div class="fig-player-initials">JU</div></div><div class="fig-footer" style="position:relative; z-index:2;"><div class="fig-name">Jugador</div><div class="fig-country-team"><span class="fig-flag">🌍</span><div style="display:flex;align-items:center;gap:3px;"><img src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/__LOGO_B64__" class="fig-team-logo" alt="CF Ineri"><span class="fig-team-name">CF Ineri</span></div></div></div></div></div>
+        <div style="font-size:.68rem;color:#444;margin-top:8px;text-align:center;font-family:&#39;Barlow Condensed&#39;,sans-serif;">CF Ineri · Urielneta</div>
       </div>
     </div>
     <div class="form-error" id="fig-error"></div>
@@ -1121,13 +1183,13 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <!-- ══ MODAL AVATAR/BANNER ══ -->
 <div class="modal-overlay hidden" id="modal-personalizar">
   <div class="modal-box" style="max-width:440px;">
-    <button class="modal-close" onclick="document.getElementById('modal-personalizar').classList.add('hidden')">&#10005;</button>
+    <button class="modal-close" onclick="document.getElementById(&#39;modal-personalizar&#39;).classList.add(&#39;hidden&#39;)">✕</button>
     <h2 id="personalizar-title">Cambiar Avatar</h2>
     <p class="modal-sub">Personalizá tu perfil</p>
     <div class="form-group">
       <label class="img-upload-label" id="pers-label" for="pers-input">📷 Seleccionar imagen</label>
       <input class="img-upload-input" type="file" id="pers-input" accept="image/*" onchange="handlePersImg(this)">
-      <img id="pers-preview" class="img-preview" src="" alt="">
+      <img id="pers-preview" class="img-preview" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/index.html" alt="">
     </div>
     <div class="form-error" id="pers-error"></div>
     <button class="form-btn" onclick="savePersImg()">Guardar</button>
@@ -1137,41 +1199,39 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
 <!-- ══ USER DROPDOWN ══ -->
 <div class="user-dropdown" id="user-dropdown">
-  <button class="dd-item" onclick="showPage('perfil');closeDropdown()">👤 Mi Perfil</button>
-  <button class="dd-item" onclick="showPage('album');closeDropdown()">🃏 Mi Álbum</button>
+  <button class="dd-item" onclick="showPage(&#39;perfil&#39;);closeDropdown()">👤 Mi Perfil</button>
+  <button class="dd-item" onclick="showPage(&#39;album&#39;);closeDropdown()">🃏 Mi Álbum</button>
   <div class="dd-sep"></div>
   <button class="dd-item danger" onclick="doLogout()">🚪 Cerrar sesión</button>
 </div>
 
 <!-- ══ NAV ══ -->
 <nav id="main-nav">
-  <div class="nav-logo" onclick="showPage('historia')">
-    <img id="nav-logo-img" src="" alt="CF Ineri">
+  <div class="nav-logo" onclick="showPage(&#39;historia&#39;)">
+    <img id="nav-logo-img" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/__LOGO_B64__" alt="CF Ineri">
     <span class="nav-brand">CF INERI</span>
   </div>
-  <button class="nav-hamburger" onclick="toggleMenu()" id="hamburger">&#9776;</button>
+  <button class="nav-hamburger" onclick="toggleMenu()" id="hamburger">☰</button>
   <ul class="nav-center" id="nav-tabs">
-    <li><button class="nav-tab active" data-page="historia" onclick="showPage('historia');closeMenu()">Historia</button></li>
-    <li><button class="nav-tab" data-page="palmares" onclick="showPage('palmares');closeMenu()">Palmarés</button></li>
-    <li><button class="nav-tab" data-page="estadisticas" onclick="showPage('estadisticas');closeMenu()">Estadísticas</button></li>
-    <li><button class="nav-tab" data-page="partidos" onclick="showPage('partidos');closeMenu()">Partidos</button></li>
-    <li><button class="nav-tab" data-page="general" onclick="showPage('general');closeMenu()">General</button></li>
-    <li><button class="nav-tab" data-page="awards" onclick="showPage('awards');closeMenu()">Awards</button></li>
-    <li><button class="nav-tab" data-page="noticias" onclick="showPage('noticias');closeMenu()">Noticias</button></li>
-    <li><button class="nav-tab" data-page="album" onclick="showPage('album');closeMenu()">🃏 Álbum</button></li>
+    <li><button class="nav-tab active" data-page="historia" onclick="showPage(&#39;historia&#39;);closeMenu()">Historia</button></li>
+    <li><button class="nav-tab" data-page="palmares" onclick="showPage(&#39;palmares&#39;);closeMenu()">Palmarés</button></li>
+    <li><button class="nav-tab" data-page="estadisticas" onclick="showPage(&#39;estadisticas&#39;);closeMenu()">Estadísticas</button></li>
+    <li><button class="nav-tab" data-page="partidos" onclick="showPage(&#39;partidos&#39;);closeMenu()">Partidos</button></li>
+    <li><button class="nav-tab" data-page="general" onclick="showPage(&#39;general&#39;);closeMenu()">General</button></li>
+    <li><button class="nav-tab" data-page="awards" onclick="showPage(&#39;awards&#39;);closeMenu()">Awards</button></li>
+    <li><button class="nav-tab" data-page="noticias" onclick="showPage(&#39;noticias&#39;);closeMenu()">Noticias</button></li>
+    <li><button class="nav-tab" data-page="album" onclick="showPage(&#39;album&#39;);closeMenu()">🃏 Álbum</button></li>
   </ul>
-  <div class="nav-right" id="nav-right">
-    <button class="nav-user-btn" onclick="openAuthModal()">Iniciar sesión</button>
-  </div>
+  <div class="nav-right" id="nav-right"><button class="nav-user-btn" onclick="openAuthModal()">Iniciar sesión</button></div>
 </nav>
 
 <!-- ══════════ HISTORIA ══════════ -->
 <div id="page-historia" class="page active">
   <div class="historia-hero">
-    <img id="hero-logo" class="historia-hero-logo" src="" alt="CF Ineri">
+    <img id="hero-logo" class="historia-hero-logo" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/__LOGO_B64__" alt="CF Ineri">
     <h1>CF INERI</h1>
     <p class="historia-hero-sub">Urielneta · Fundado 2021 · TPS · Touch Football · ATF</p>
-    <div class="historia-quick-stats" id="historia-quick-stats"></div>
+    <div class="historia-quick-stats" id="historia-quick-stats"><div class="hqs"><div class="hqs-num">251</div><div class="hqs-label">Partidos</div></div><div class="hqs"><div class="hqs-num">144</div><div class="hqs-label">Victorias</div></div><div class="hqs"><div class="hqs-num">12</div><div class="hqs-label">Títulos</div></div><div class="hqs"><div class="hqs-num">718</div><div class="hqs-label">Goles totales</div></div></div>
   </div>
   <div class="page-inner">
     <div class="section-header"><h2 class="section-title">Historia</h2><div class="section-line"></div></div>
@@ -1205,7 +1265,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">SLM Season 2</div><div class="trofeo-comp">SLM · TPS</div><div class="trofeo-año">2025</div><div class="trofeo-detalle">Final: 12-3</div></div>
       <div class="trofeo-card"><span class="trofeo-emoji">🏆</span><div class="trofeo-titulo">SLM Season 3</div><div class="trofeo-comp">SLM · Boca Juniors</div><div class="trofeo-año">2025</div><div class="trofeo-detalle">Final: 19-15 · Mundial de Clubes</div></div>
     </div>
-    <div style="margin-top:44px"><h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;color:#c0c0c0;margin-bottom:18px;">Subcampeonatos</h3>
+    <div style="margin-top:44px"><h3 style="font-family:&#39;Bebas Neue&#39;,sans-serif;font-size:1.7rem;letter-spacing:3px;color:#c0c0c0;margin-bottom:18px;">Subcampeonatos</h3>
     <div class="subcamps-grid">
       <div class="subcamp-card"><span style="font-size:1.3rem">🥈</span><div class="subcamp-info"><div class="subcamp-titulo">LaLiga MOS S2</div><div class="subcamp-det">Cádiz · 2022</div></div></div>
       <div class="subcamp-card"><span style="font-size:1.3rem">🥈</span><div class="subcamp-info"><div class="subcamp-titulo">Copa del Rey MOS S2</div><div class="subcamp-det">Cádiz · 2022</div></div></div>
@@ -1229,11 +1289,11 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <button class="filter-btn" data-stat="total">📊 G+A</button>
       <button class="filter-btn" data-stat="partidos">🎮 Partidos</button>
     </div>
-    <div class="stats-grid" id="stats-grid"></div>
-    <div style="margin-top:52px"><div class="section-header"><h2 class="section-title">Hall of Fame</h2><div class="section-line"></div></div><div class="hof-grid" id="hof-grid"></div></div>
+    <div class="stats-grid" id="stats-grid"><div class="player-card"><div class="player-rank gold">1</div><div style="flex:1"><div class="player-name">Azion</div><div class="player-stats-row"><div class="stat-chip">G <span>153</span></div><div class="stat-chip">A <span>50</span></div><div class="stat-chip">G+A <span>203</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">153</div><div class="stat-bar"><div class="stat-bar-fill" style="width:100%"></div></div></div></div><div class="player-card"><div class="player-rank silver">2</div><div style="flex:1"><div class="player-name">Rvssian</div><div class="player-stats-row"><div class="stat-chip">G <span>116</span></div><div class="stat-chip">A <span>93</span></div><div class="stat-chip">G+A <span>209</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">116</div><div class="stat-bar"><div class="stat-bar-fill" style="width:76%"></div></div></div></div><div class="player-card"><div class="player-rank bronze">3</div><div style="flex:1"><div class="player-name">Jebedias</div><div class="player-stats-row"><div class="stat-chip">G <span>84</span></div><div class="stat-chip">A <span>86</span></div><div class="stat-chip">G+A <span>170</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">84</div><div class="stat-bar"><div class="stat-bar-fill" style="width:55%"></div></div></div></div><div class="player-card"><div class="player-rank ">4</div><div style="flex:1"><div class="player-name">Uriel</div><div class="player-stats-row"><div class="stat-chip">G <span>71</span></div><div class="stat-chip">A <span>52</span></div><div class="stat-chip">G+A <span>123</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">71</div><div class="stat-bar"><div class="stat-bar-fill" style="width:46%"></div></div></div></div><div class="player-card"><div class="player-rank ">5</div><div style="flex:1"><div class="player-name">Leo</div><div class="player-stats-row"><div class="stat-chip">G <span>56</span></div><div class="stat-chip">A <span>8</span></div><div class="stat-chip">G+A <span>64</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">56</div><div class="stat-bar"><div class="stat-bar-fill" style="width:37%"></div></div></div></div><div class="player-card"><div class="player-rank ">6</div><div style="flex:1"><div class="player-name">Goteras</div><div class="player-stats-row"><div class="stat-chip">G <span>45</span></div><div class="stat-chip">A <span>55</span></div><div class="stat-chip">G+A <span>100</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">45</div><div class="stat-bar"><div class="stat-bar-fill" style="width:29%"></div></div></div></div><div class="player-card"><div class="player-rank ">7</div><div style="flex:1"><div class="player-name">Coco</div><div class="player-stats-row"><div class="stat-chip">G <span>20</span></div><div class="stat-chip">A <span>8</span></div><div class="stat-chip">G+A <span>28</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">20</div><div class="stat-bar"><div class="stat-bar-fill" style="width:13%"></div></div></div></div><div class="player-card"><div class="player-rank ">8</div><div style="flex:1"><div class="player-name">Hiiro</div><div class="player-stats-row"><div class="stat-chip">G <span>19</span></div><div class="stat-chip">A <span>33</span></div><div class="stat-chip">G+A <span>52</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">19</div><div class="stat-bar"><div class="stat-bar-fill" style="width:12%"></div></div></div></div><div class="player-card"><div class="player-rank ">9</div><div style="flex:1"><div class="player-name">Gigi</div><div class="player-stats-row"><div class="stat-chip">G <span>18</span></div><div class="stat-chip">A <span>7</span></div><div class="stat-chip">G+A <span>25</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">18</div><div class="stat-bar"><div class="stat-bar-fill" style="width:12%"></div></div></div></div><div class="player-card"><div class="player-rank ">10</div><div style="flex:1"><div class="player-name">44aaron</div><div class="player-stats-row"><div class="stat-chip">G <span>14</span></div><div class="stat-chip">A <span>3</span></div><div class="stat-chip">G+A <span>17</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">14</div><div class="stat-bar"><div class="stat-bar-fill" style="width:9%"></div></div></div></div><div class="player-card"><div class="player-rank ">11</div><div style="flex:1"><div class="player-name">Adri</div><div class="player-stats-row"><div class="stat-chip">G <span>13</span></div><div class="stat-chip">A <span>8</span></div><div class="stat-chip">G+A <span>21</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">13</div><div class="stat-bar"><div class="stat-bar-fill" style="width:8%"></div></div></div></div><div class="player-card"><div class="player-rank ">12</div><div style="flex:1"><div class="player-name">Wicho</div><div class="player-stats-row"><div class="stat-chip">G <span>13</span></div><div class="stat-chip">A <span>4</span></div><div class="stat-chip">G+A <span>17</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">13</div><div class="stat-bar"><div class="stat-bar-fill" style="width:8%"></div></div></div></div><div class="player-card"><div class="player-rank ">13</div><div style="flex:1"><div class="player-name">17jxvrix</div><div class="player-stats-row"><div class="stat-chip">G <span>12</span></div><div class="stat-chip">A <span>3</span></div><div class="stat-chip">G+A <span>15</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">12</div><div class="stat-bar"><div class="stat-bar-fill" style="width:8%"></div></div></div></div><div class="player-card"><div class="player-rank ">14</div><div style="flex:1"><div class="player-name">Gabe</div><div class="player-stats-row"><div class="stat-chip">G <span>10</span></div><div class="stat-chip">A <span>8</span></div><div class="stat-chip">G+A <span>18</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">10</div><div class="stat-bar"><div class="stat-bar-fill" style="width:7%"></div></div></div></div><div class="player-card"><div class="player-rank ">15</div><div style="flex:1"><div class="player-name">Bluexihno</div><div class="player-stats-row"><div class="stat-chip">G <span>10</span></div><div class="stat-chip">A <span>14</span></div><div class="stat-chip">G+A <span>24</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">10</div><div class="stat-bar"><div class="stat-bar-fill" style="width:7%"></div></div></div></div><div class="player-card"><div class="player-rank ">16</div><div style="flex:1"><div class="player-name">Somating</div><div class="player-stats-row"><div class="stat-chip">G <span>9</span></div><div class="stat-chip">A <span>16</span></div><div class="stat-chip">G+A <span>25</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">9</div><div class="stat-bar"><div class="stat-bar-fill" style="width:6%"></div></div></div></div><div class="player-card"><div class="player-rank ">17</div><div style="flex:1"><div class="player-name">Camilo</div><div class="player-stats-row"><div class="stat-chip">G <span>8</span></div><div class="stat-chip">A <span>16</span></div><div class="stat-chip">G+A <span>24</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">8</div><div class="stat-bar"><div class="stat-bar-fill" style="width:5%"></div></div></div></div><div class="player-card"><div class="player-rank ">18</div><div style="flex:1"><div class="player-name">Nhelv</div><div class="player-stats-row"><div class="stat-chip">G <span>8</span></div><div class="stat-chip">A <span>1</span></div><div class="stat-chip">G+A <span>9</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">8</div><div class="stat-bar"><div class="stat-bar-fill" style="width:5%"></div></div></div></div><div class="player-card"><div class="player-rank ">19</div><div style="flex:1"><div class="player-name">Frizao</div><div class="player-stats-row"><div class="stat-chip">G <span>8</span></div><div class="stat-chip">A <span>6</span></div><div class="stat-chip">G+A <span>14</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">8</div><div class="stat-bar"><div class="stat-bar-fill" style="width:5%"></div></div></div></div><div class="player-card"><div class="player-rank ">20</div><div style="flex:1"><div class="player-name">Golem</div><div class="player-stats-row"><div class="stat-chip">G <span>6</span></div><div class="stat-chip">A <span>7</span></div><div class="stat-chip">G+A <span>13</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">6</div><div class="stat-bar"><div class="stat-bar-fill" style="width:4%"></div></div></div></div><div class="player-card"><div class="player-rank ">21</div><div style="flex:1"><div class="player-name">Bizaa</div><div class="player-stats-row"><div class="stat-chip">G <span>6</span></div><div class="stat-chip">A <span>2</span></div><div class="stat-chip">G+A <span>8</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">6</div><div class="stat-bar"><div class="stat-bar-fill" style="width:4%"></div></div></div></div><div class="player-card"><div class="player-rank ">22</div><div style="flex:1"><div class="player-name">ynacho</div><div class="player-stats-row"><div class="stat-chip">G <span>4</span></div><div class="stat-chip">A <span>2</span></div><div class="stat-chip">G+A <span>6</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">4</div><div class="stat-bar"><div class="stat-bar-fill" style="width:3%"></div></div></div></div><div class="player-card"><div class="player-rank ">23</div><div style="flex:1"><div class="player-name">Pemegamer6</div><div class="player-stats-row"><div class="stat-chip">G <span>4</span></div><div class="stat-chip">A <span>1</span></div><div class="stat-chip">G+A <span>5</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">4</div><div class="stat-bar"><div class="stat-bar-fill" style="width:3%"></div></div></div></div><div class="player-card"><div class="player-rank ">24</div><div style="flex:1"><div class="player-name">Hydro</div><div class="player-stats-row"><div class="stat-chip">G <span>3</span></div><div class="stat-chip">A <span>1</span></div><div class="stat-chip">G+A <span>4</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">3</div><div class="stat-bar"><div class="stat-bar-fill" style="width:2%"></div></div></div></div><div class="player-card"><div class="player-rank ">25</div><div style="flex:1"><div class="player-name">ElBiza</div><div class="player-stats-row"><div class="stat-chip">G <span>3</span></div><div class="stat-chip">A <span>1</span></div><div class="stat-chip">G+A <span>4</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">3</div><div class="stat-bar"><div class="stat-bar-fill" style="width:2%"></div></div></div></div><div class="player-card"><div class="player-rank ">26</div><div style="flex:1"><div class="player-name">14skxz</div><div class="player-stats-row"><div class="stat-chip">G <span>2</span></div><div class="stat-chip">A <span>3</span></div><div class="stat-chip">G+A <span>5</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">2</div><div class="stat-bar"><div class="stat-bar-fill" style="width:1%"></div></div></div></div><div class="player-card"><div class="player-rank ">27</div><div style="flex:1"><div class="player-name">rxf</div><div class="player-stats-row"><div class="stat-chip">G <span>2</span></div><div class="stat-chip">A <span>0</span></div><div class="stat-chip">G+A <span>2</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">2</div><div class="stat-bar"><div class="stat-bar-fill" style="width:1%"></div></div></div></div><div class="player-card"><div class="player-rank ">28</div><div style="flex:1"><div class="player-name">Chees</div><div class="player-stats-row"><div class="stat-chip">G <span>1</span></div><div class="stat-chip">A <span>3</span></div><div class="stat-chip">G+A <span>4</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">1</div><div class="stat-bar"><div class="stat-bar-fill" style="width:1%"></div></div></div></div><div class="player-card"><div class="player-rank ">29</div><div style="flex:1"><div class="player-name">Samuswp</div><div class="player-stats-row"><div class="stat-chip">G <span>0</span></div><div class="stat-chip">A <span>2</span></div><div class="stat-chip">G+A <span>2</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">0</div><div class="stat-bar"><div class="stat-bar-fill" style="width:0%"></div></div></div></div><div class="player-card"><div class="player-rank ">30</div><div style="flex:1"><div class="player-name">Iker</div><div class="player-stats-row"><div class="stat-chip">G <span>0</span></div><div class="stat-chip">A <span>4</span></div><div class="stat-chip">G+A <span>4</span></div></div></div><div class="stat-bar-wrap"><div style="text-align:right;font-size:.86rem;font-weight:700;color:var(--verde-brillante)">0</div><div class="stat-bar"><div class="stat-bar-fill" style="width:0%"></div></div></div></div></div>
+    <div style="margin-top:52px"><div class="section-header"><h2 class="section-title">Hall of Fame</h2><div class="section-line"></div></div><div class="hof-grid" id="hof-grid"><div class="hof-card"><div class="hof-nombre">Azion</div><div class="hof-rol">Delantero - Leyenda</div><div class="hof-stats"><div><div class="hof-stat-val">153</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">50</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">203</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">Maximo Goleador All-Time</span><span class="hof-badge">Balon de Playa Ed.3</span><span class="hof-badge">The New ERA</span></div></div><div class="hof-card"><div class="hof-nombre">Rvssian</div><div class="hof-rol">Mediocampista - Capitan</div><div class="hof-stats"><div><div class="hof-stat-val">116</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">93</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">209</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">LNH S1 Campeon</span><span class="hof-badge">LNH S2 Campeon</span><span class="hof-badge">Banca D'Or Ed.3</span><span class="hof-badge">Mas Activo Ed.3</span></div></div><div class="hof-card"><div class="hof-nombre">Jebedias</div><div class="hof-rol">Defensa - Co-Fundador</div><div class="hof-stats"><div><div class="hof-stat-val">84</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">86</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">170</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">CWL Campeon</span><span class="hof-badge">MOS 2.0 Campeon</span><span class="hof-badge">Old Star Ed.3</span><span class="hof-badge">Best CB Ed.3</span></div></div><div class="hof-card"><div class="hof-nombre">Uriel</div><div class="hof-rol">DT - Fundador</div><div class="hof-stats"><div><div class="hof-stat-val">71</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">52</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">123</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">CWL Campeon</span><span class="hof-badge">MOS 2.0 Campeon</span><span class="hof-badge">Old Star Ed.2</span><span class="hof-badge">Mejor Staff CPA 2021</span></div></div><div class="hof-card"><div class="hof-nombre">Gabe</div><div class="hof-rol">Extremo - The Remontada</div><div class="hof-stats"><div><div class="hof-stat-val">10</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">8</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">18</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">Future Star Ed.2</span><span class="hof-badge">Ballon D'Or Ed.2</span></div></div><div class="hof-card"><div class="hof-nombre">Goteras</div><div class="hof-rol">Extremo - Asistidor</div><div class="hof-stats"><div><div class="hof-stat-val">45</div><div class="hof-stat-lbl">Goles</div></div><div><div class="hof-stat-val">55</div><div class="hof-stat-lbl">Asist.</div></div><div><div class="hof-stat-val">100</div><div class="hof-stat-lbl">G+A</div></div></div><div class="hof-logros"><span class="hof-badge">SLM S2 Campeon</span><span class="hof-badge">LNH S1 Campeon</span><span class="hof-badge">Balon de Playa Ed.2</span></div></div></div></div>
     <div style="margin-top:52px">
       <div class="section-header"><h2 class="section-title">Forma Reciente</h2><div class="section-line"></div><p style="font-size:.8rem;color:var(--gris);margin-top:7px">Últimos 10 partidos del club</p></div>
-      <div class="forma-card" id="forma-reciente"></div>
+      <div class="forma-card" id="forma-reciente"><div style="margin-bottom:10px;font-family:Barlow Condensed,sans-serif;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris)">Últimos 10 partidos</div><div class="forma-dots"><div class="forma-dot e" title="Team Random 7-7">E</div><div class="forma-dot v" title="Team Random 6-5">V</div><div class="forma-dot v" title="Team Random 5-4">V</div><div class="forma-dot d" title="Arsenal 3-4">D</div><div class="forma-dot v" title="Real Madrid 9-1">V</div><div class="forma-dot d" title="Cambridge 3-11">D</div><div class="forma-dot v" title="FxckAll 10-2">V</div><div class="forma-dot d" title="San Lorenzo 8-9">D</div><div class="forma-dot v" title="Independiente 9-7">V</div><div class="forma-dot v" title="Independiente 4-1">V</div></div><div style="margin-top:11px;font-size:.78rem;color:var(--gris)">6V · 1E · 3D</div></div>
     </div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
@@ -1250,7 +1310,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       </select>
       <select class="match-filters-select" id="mob-year" onchange="yearFilter=this.value;currentPage=1;renderMatches()">
         <option value="all">Todos los años</option>
-      </select>
+      <option value="2021">2021</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option></select>
     </div>
     <!-- Desktop filters -->
     <div class="matches-filters" id="match-filters">
@@ -1260,9 +1320,9 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <button class="filter-btn" data-f="empate">Empates</button>
       <button class="filter-btn" data-f="copa">Copa 🏆</button>
     </div>
-    <div class="matches-filters match-year-filters-wrap" id="match-year-filters"></div>
-    <div class="matches-list" id="matches-list"></div>
-    <div class="pagination" id="pagination"></div>
+    <div class="matches-filters match-year-filters-wrap" id="match-year-filters"><button class="filter-btn active" data-y="all">Todos</button><button class="filter-btn" data-y="2021">2021</button><button class="filter-btn" data-y="2023">2023</button><button class="filter-btn" data-y="2024">2024</button><button class="filter-btn" data-y="2025">2025</button><button class="filter-btn" data-y="2026">2026</button></div>
+    <div class="matches-list" id="matches-list"><div class="match-row empate"><div class="match-tipo empate">E</div><div class="match-rival">Team Random</div><div class="match-score" style="color:#888">7 - 7</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Team Random</div><div class="match-score" style="color:var(--verde-brillante)">6 - 5</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Team Random</div><div class="match-score" style="color:var(--verde-brillante)">5 - 4</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row derrota"><div class="match-tipo derrota">D</div><div class="match-rival">Arsenal</div><div class="match-score" style="color:var(--rojo)">3 - 4</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Real Madrid</div><div class="match-score" style="color:var(--verde-brillante)">9 - 1</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row derrota"><div class="match-tipo derrota">D</div><div class="match-rival">Cambridge</div><div class="match-score" style="color:var(--rojo)">3 - 11</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">FxckAll</div><div class="match-score" style="color:var(--verde-brillante)">10 - 2</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row derrota"><div class="match-tipo derrota">D</div><div class="match-rival">San Lorenzo</div><div class="match-score" style="color:var(--rojo)">8 - 9</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Independiente</div><div class="match-score" style="color:var(--verde-brillante)">9 - 7</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Independiente</div><div class="match-score" style="color:var(--verde-brillante)">4 - 1</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Golemneta</div><div class="match-score" style="color:var(--verde-brillante)">2 - 1</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Real Esteli</div><div class="match-score" style="color:var(--verde-brillante)">10 - 2</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Neo United</div><div class="match-score" style="color:var(--verde-brillante)">3 - 0</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row victoria"><div class="match-tipo victoria">V</div><div class="match-rival">Bayern Munich</div><div class="match-score" style="color:var(--verde-brillante)">3 - 2</div><div class="match-meta">ULS<br>2026 · TPS</div></div><div class="match-row derrota"><div class="match-tipo derrota">D</div><div class="match-rival">Manchester Piggy</div><div class="match-score" style="color:var(--rojo)">3 - 4</div><div class="match-meta">ULS<br>2026 · TPS</div></div></div>
+    <div class="pagination" id="pagination"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">5</button><button class="page-btn">6</button><button class="page-btn">7</button><button class="page-btn">8</button><button class="page-btn">9</button><button class="page-btn">10</button><button class="page-btn">11</button><button class="page-btn">12</button><button class="page-btn">13</button><button class="page-btn">14</button><button class="page-btn">15</button><button class="page-btn">16</button><button class="page-btn">17</button></div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
 </div>
@@ -1271,10 +1331,10 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <div id="page-general" class="page">
   <div class="page-inner">
     <div class="section-header"><h2 class="section-title">Resumen General</h2><div class="section-line"></div></div>
-    <div class="overview-grid" id="overview-grid"></div>
+    <div class="overview-grid" id="overview-grid"><div class="chart-card"><div class="chart-title">Resultados</div><div class="donut-wrap"><svg viewBox="0 0 140 140" width="125" height="125"><circle cx="70" cy="70" r="50" fill="none" stroke="var(--verde-brillante)" stroke-width="16" stroke-dasharray="180.23479765614752 133.9244677028318" stroke-dashoffset="0" transform="rotate(-90 70 70)"></circle><circle cx="70" cy="70" r="50" fill="none" stroke="var(--rojo)" stroke-width="16" stroke-dasharray="115.1500096136498 199.00925574532954" stroke-dashoffset="-180.23479765614752" transform="rotate(-90 70 70)"></circle><circle cx="70" cy="70" r="50" fill="none" stroke="#555" stroke-width="16" stroke-dasharray="18.774458089182033 295.3848072697973" stroke-dashoffset="-295.3848072697973" transform="rotate(-90 70 70)"></circle><text x="70" y="65" text-anchor="middle" fill="#fff" font-family="Bebas Neue,sans-serif" font-size="20">57%</text><text x="70" y="83" text-anchor="middle" fill="#666" font-family="Barlow Condensed,sans-serif" font-size="9" letter-spacing="1">WIN RATE</text></svg><div class="donut-labels"><div class="donut-label"><div class="dot" style="background:var(--verde-brillante)"></div>Victorias: <strong>144</strong></div><div class="donut-label"><div class="dot" style="background:var(--rojo)"></div>Derrotas: <strong>92</strong></div><div class="donut-label"><div class="dot" style="background:#555"></div>Empates: <strong>15</strong></div><div class="donut-label"><div class="dot" style="background:#333"></div>Total: <strong>251</strong></div></div></div></div><div class="chart-card"><div class="chart-title">Goles</div><div class="bar-chart"><div class="bar-row"><div class="bar-label">A favor</div><div class="bar-outer"><div class="bar-inner" style="width:100%"></div></div><div class="bar-val">1229</div></div><div class="bar-row"><div class="bar-label">En contra</div><div class="bar-outer"><div class="bar-inner" style="width:86%;background:var(--rojo)"></div></div><div class="bar-val">1061</div></div><div style="margin-top:12px" class="chart-title">Partidos por liga</div><div class="bar-row"><div class="bar-label">ATF</div><div class="bar-outer"><div class="bar-inner" style="width:100%"></div></div><div class="bar-val">75</div></div><div class="bar-row"><div class="bar-label">SLM</div><div class="bar-outer"><div class="bar-inner" style="width:53%"></div></div><div class="bar-val">40</div></div><div class="bar-row"><div class="bar-label">FTC</div><div class="bar-outer"><div class="bar-inner" style="width:40%"></div></div><div class="bar-val">30</div></div><div class="bar-row"><div class="bar-label">UL</div><div class="bar-outer"><div class="bar-inner" style="width:33%"></div></div><div class="bar-val">25</div></div><div class="bar-row"><div class="bar-label">LNH</div><div class="bar-outer"><div class="bar-inner" style="width:29%"></div></div><div class="bar-val">22</div></div><div class="bar-row"><div class="bar-label">Amistoso</div><div class="bar-outer"><div class="bar-inner" style="width:21%"></div></div><div class="bar-val">16</div></div></div></div><div class="chart-card"><div class="chart-title">Records</div><div style="display:flex;flex-direction:column;gap:14px"><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Mayor victoria</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--verde-brillante)">18-2 vs Marruecos</div><div style="font-size:.72rem;color:var(--gris)">CWL · 2023</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Mayor derrota</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--rojo)">2-20 vs River Plate</div><div style="font-size:.72rem;color:var(--gris)">TSL · 2023</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Max. goleador</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:#f4c430">Azion · 153 goles</div></div><div><div style="font-size:.7rem;color:var(--gris);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px">Diferencia de goles</div><div style="font-family:Bebas Neue,sans-serif;font-size:1.15rem;color:var(--verde-brillante)">+168 goles</div></div></div></div><div class="chart-card"><div class="chart-title">Por juego</div><div class="bar-chart"><div class="bar-row"><div class="bar-label">TPS</div><div class="bar-outer"><div class="bar-inner" style="width:70%"></div></div><div class="bar-val">176</div></div><div style="font-size:.7rem;color:var(--gris);margin:-5px 0 5px 76px">108V (61%)</div><div class="bar-row"><div class="bar-label">Touch</div><div class="bar-outer"><div class="bar-inner" style="width:30%"></div></div><div class="bar-val">75</div></div><div style="font-size:.7rem;color:var(--gris);margin:-5px 0 5px 76px">36V (48%)</div><div style="margin-top:8px" class="chart-title">Por año</div><div class="bar-row"><div class="bar-label">2021</div><div class="bar-outer"><div class="bar-inner" style="width:2%"></div></div><div class="bar-val">3</div></div><div class="bar-row"><div class="bar-label">2023</div><div class="bar-outer"><div class="bar-inner" style="width:8%"></div></div><div class="bar-val">12</div></div><div class="bar-row"><div class="bar-label">2024</div><div class="bar-outer"><div class="bar-inner" style="width:14%"></div></div><div class="bar-val">22</div></div><div class="bar-row"><div class="bar-label">2025</div><div class="bar-outer"><div class="bar-inner" style="width:100%"></div></div><div class="bar-val">154</div></div><div class="bar-row"><div class="bar-label">2026</div><div class="bar-outer"><div class="bar-inner" style="width:39%"></div></div><div class="bar-val">60</div></div></div></div></div>
     <div style="margin-top:52px">
       <div class="section-header"><h2 class="section-title">Rivalidades</h2><div class="section-line"></div><p style="font-size:.8rem;color:var(--gris);margin-top:7px">Rivales con 3 o más enfrentamientos</p></div>
-      <div class="rivalidades-grid" id="rivalidades-grid"></div>
+      <div class="rivalidades-grid" id="rivalidades-grid"><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Team Random</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">27</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">6</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">19</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">52</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">191 GF · 174 GC</div><div class="rival-bar"><div class="rb-v" style="flex:52"></div><div class="rb-e" style="flex:12"></div><div class="rb-d" style="flex:36"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--rojo)">Atletico Nacional</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">1</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">8</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">9</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">19 GF · 53 GC</div><div class="rival-bar"><div class="rb-v" style="flex:11"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:89"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:#888">Otaku FC</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">4</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">4</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">8</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">43 GF · 31 GC</div><div class="rival-bar"><div class="rb-v" style="flex:50"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:50"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Corinthians</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">5</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">3</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">8</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">55 GF · 39 GC</div><div class="rival-bar"><div class="rb-v" style="flex:63"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:37"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Kickers</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">8</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">8</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">55 GF · 18 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Universitario</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">5</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">1</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">1</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">7</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">56 GF · 41 GC</div><div class="rival-bar"><div class="rb-v" style="flex:71"></div><div class="rb-e" style="flex:14"></div><div class="rb-d" style="flex:15"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Santos</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">6</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">6</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">40 GF · 20 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Alianza Lima</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">6</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">6</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">45 GF · 23 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Guadalajara</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">6</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">6</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">41 GF · 21 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Athletico Paranaense</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">4</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">2</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">6</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">31 GF · 28 GC</div><div class="rival-bar"><div class="rb-v" style="flex:67"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:33"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:var(--verde-brillante)">Saiyans FC</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">5</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">0</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">5</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">39 GF · 20 GC</div><div class="rival-bar"><div class="rb-v" style="flex:100"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:0"></div></div></div><div class="rival-card"><div class="rival-nombre" style="color:#888">Estudiantes de la Plata</div><div class="rival-record"><div class="rr"><div class="rr-num" style="color:var(--verde-brillante)">2</div><div class="rr-lbl">V</div></div><div class="rr"><div class="rr-num" style="color:#888">0</div><div class="rr-lbl">E</div></div><div class="rr"><div class="rr-num" style="color:var(--rojo)">2</div><div class="rr-lbl">D</div></div><div class="rr"><div class="rr-num" style="color:var(--gris)">4</div><div class="rr-lbl">PJ</div></div></div><div style="font-size:.7rem;color:var(--gris);margin-bottom:3px">21 GF · 28 GC</div><div class="rival-bar"><div class="rb-v" style="flex:50"></div><div class="rb-e" style="flex:0"></div><div class="rb-d" style="flex:50"></div></div></div></div>
     </div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
@@ -1293,12 +1353,12 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div style="text-align:center;margin-bottom:48px;">
         <div style="display:flex;justify-content:center;margin-bottom:24px;">
           <div style="animation:awardsFloat 4s ease-in-out infinite,awardsGlow 3s ease-in-out infinite;">
-            <img id="awards-logo-img" src="" style="width:180px;height:auto;" alt="Urielneta Awards">
+            <img id="awards-logo-img" src="file:///C:/Users/uriel/Documents/Codex/2026-06-01/files-mentioned-by-the-user-texto/work/__AWARDS_B64__" style="width:180px;height:auto;" alt="Urielneta Awards">
           </div>
         </div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,5vw,3.2rem);letter-spacing:6px;margin:0 0 5px;">URIELNETA <span style="background:linear-gradient(90deg,#c9a84c,#f5e6a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AWARDS</span></h2>
+        <h2 style="font-family:&#39;Bebas Neue&#39;,sans-serif;font-size:clamp(1.8rem,5vw,3.2rem);letter-spacing:6px;margin:0 0 5px;">URIELNETA <span style="background:linear-gradient(90deg,#c9a84c,#f5e6a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AWARDS</span></h2>
         <div style="width:56px;height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin:12px auto 18px;"></div>
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:.88rem;letter-spacing:3px;color:rgba(255,255,255,.32);text-transform:uppercase;">Los premios oficiales del CF Ineri</p>
+        <p style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.88rem;letter-spacing:3px;color:rgba(255,255,255,.32);text-transform:uppercase;">Los premios oficiales del CF Ineri</p>
       </div>
       <!-- Ed 1 -->
       <div style="margin-bottom:48px;">
@@ -1313,8 +1373,8 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
             <div class="award-label">🏆 Ballon D'Or</div>
             <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
               <div style="display:flex;align-items:center;gap:6px;"><span>🥇</span><span class="award-winner" style="font-size:1.4rem;">Coco</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Khazir</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Gabe</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Khazir</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Gabe</span></div>
             </div>
           </div>
         </div>
@@ -1338,8 +1398,8 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
             <div class="award-label">🏆 Balón de Oro</div>
             <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
               <div style="display:flex;align-items:center;gap:6px;"><span>🥇</span><span class="award-winner" style="font-size:1.4rem;">Gabe</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Jebedias</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Goteras</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Jebedias</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Goteras</span></div>
             </div>
           </div>
         </div>
@@ -1357,24 +1417,20 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
           <div class="award-card"><div class="award-label">Old Star</div><div class="award-winner">Jebedias</div></div>
           <div class="award-card"><div class="award-label">Future Star</div><div class="award-winner">17fxbri</div></div>
           <div class="award-card"><div class="award-label">Premio Mamita</div><div class="award-winner">Ryze</div></div>
-          <div class="award-card"><div class="award-label">Premio Khazir</div><div class="award-winner">Uriel</div><a href="https://medal.tv/es/games/roblox/clips/ljhhrDPsqmwUyqpx5?invite=cr-MSxpOFosMTgzNTM2MDc3" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-family:'Barlow Condensed',sans-serif;font-size:.67rem;letter-spacing:2px;color:#c9a84c;text-decoration:none;border:1px solid rgba(201,168,76,.3);padding:3px 8px;border-radius:4px;">▶ Ver GOL</a></div>
+          <div class="award-card"><div class="award-label">Premio Khazir</div><div class="award-winner">Uriel</div><a href="https://medal.tv/es/games/roblox/clips/ljhhrDPsqmwUyqpx5?invite=cr-MSxpOFosMTgzNTM2MDc3" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.67rem;letter-spacing:2px;color:#c9a84c;text-decoration:none;border:1px solid rgba(201,168,76,.3);padding:3px 8px;border-radius:4px;">▶ Ver GOL</a></div>
           <div class="award-card"><div class="award-label">Best CB</div><div class="award-winner">Jebedias</div></div>
           <div class="award-card"><div class="award-label">Premio Goteras</div><div class="award-winner">Rvssian</div></div>
           <div class="award-card" style="border-color:rgba(201,168,76,.5);background:linear-gradient(135deg,rgba(20,18,8,.98),rgba(10,8,2,.99));">
             <div class="award-label">🏆 Balón de Oro</div>
             <div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;">
               <div style="display:flex;align-items:center;gap:6px;"><span>🥇</span><span class="award-winner" style="font-size:1.4rem;">17fxbri</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Jebedias</span></div>
-              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Azion / Uriel / Carter</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥈</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.7);">Jebedias</span></div>
+              <div style="display:flex;align-items:center;gap:6px;"><span>🥉</span><span style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.95rem;color:rgba(201,168,76,.5);">Azion / Uriel / Carter</span></div>
             </div>
           </div>
         </div>
       </div>
-      <div style="text-align:center;padding:48px 20px;border-top:1px solid rgba(201,168,76,.12);">
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,7vw,4.5rem);letter-spacing:8px;background:linear-gradient(90deg,rgba(201,168,76,.3),rgba(201,168,76,.9),rgba(201,168,76,.3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Y PRÓXIMAMENTE...</p>
-        <div style="width:46px;height:2px;background:#c9a84c;margin:16px auto;"></div>
-        <p style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(.9rem,2.5vw,1.35rem);letter-spacing:6px;color:rgba(201,168,76,.6);">✦ URIELNETA AWARDS 4 · 01/06 ✦</p>
-      </div>
+      <div class="awards-voting" id="awards-voting"><div class="vote-panel"><div class="vote-header"><div><div class="vote-title">URIELNETA AWARDS 4</div><div class="vote-sub">Elegi top 3 por premio. En Ballon D'OR elegi top 10.</div></div><div class="vote-status">Necesitas cuenta</div></div><div class="vote-login"><a class="vote-link" onclick="openAuthModal()">Inicia sesion</a> o crea una cuenta para votar.</div></div></div>
     </div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
@@ -1387,7 +1443,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div><div class="section-header" style="margin-bottom:0"><h2 class="section-title">Noticias</h2><div class="section-line"></div></div></div>
       <button class="btn-publish hidden" id="btn-publish" onclick="openNoticiaModal()">+ Publicar noticia</button>
     </div>
-    <div class="noticias-grid" id="noticias-grid"></div>
+    <div class="noticias-grid" id="noticias-grid"><div class="empty-news"><div class="empty-news-icon">📰</div><div class="empty-news-text">No hay noticias publicadas aún</div></div></div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
 </div>
@@ -1402,10 +1458,10 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
     <!-- Menú Principal del Álbum -->
     <div class="album-subnav">
-      <button class="album-subtab active" id="subtab-dashboard" onclick="changeAlbumTab('dashboard')">📊 Dashboard</button>
-      <button class="album-subtab" id="subtab-album_pages" onclick="changeAlbumTab('album_pages')">📖 Álbum por páginas</button>
-      <button class="album-subtab" id="subtab-sobres" onclick="changeAlbumTab('sobres')">📦 Sobres (<span id="stock-count-nav">0</span>)</button>
-      <button class="album-subtab" id="subtab-coleccion" onclick="changeAlbumTab('coleccion')">🗃️ Mi Colección</button>
+      <button class="album-subtab active" id="subtab-dashboard" onclick="changeAlbumTab(&#39;dashboard&#39;)">📊 Dashboard</button>
+      <button class="album-subtab" id="subtab-album_pages" onclick="changeAlbumTab(&#39;album_pages&#39;)">📖 Álbum por páginas</button>
+      <button class="album-subtab" id="subtab-sobres" onclick="changeAlbumTab(&#39;sobres&#39;)">📦 Sobres (<span id="stock-count-nav">0</span>)</button>
+      <button class="album-subtab" id="subtab-coleccion" onclick="changeAlbumTab(&#39;coleccion&#39;)">🗃️ Mi Colección</button>
     </div>
 
     <!-- 1. VISTA: DASHBOARD -->
@@ -1416,7 +1472,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
           <div class="db-lbl">Obtenidas (Únicas)</div>
         </div>
         <div class="db-card">
-          <div class="db-val" id="db-val-faltantes">0</div>
+          <div class="db-val" id="db-val-faltantes">8</div>
           <div class="db-lbl">Faltantes</div>
         </div>
         <div class="db-card">
@@ -1431,15 +1487,13 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
       <div class="db-section">
         <div class="db-title">Estadísticas por Rareza</div>
-        <div id="db-rarity-stats">
-          <!-- Rarity rows dynamically loaded -->
-        </div>
+        <div id="db-rarity-stats"><div class="db-row"><div class="db-row-lbl">Común</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#888"></div></div><div class="db-row-val">0 / 2 (0%)</div></div><div class="db-row"><div class="db-row-lbl">Poco común</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#27a645"></div></div><div class="db-row-val">0 / 1 (0%)</div></div><div class="db-row"><div class="db-row-lbl">Raro</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#0055ff"></div></div><div class="db-row-val">0 / 2 (0%)</div></div><div class="db-row"><div class="db-row-lbl">Épico</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#8b00ff"></div></div><div class="db-row-val">0 / 1 (0%)</div></div><div class="db-row"><div class="db-row-lbl">Legendario</div><div class="db-bar-outer"><div class="db-bar-inner" style="width:0%; background:#ffcc00"></div></div><div class="db-row-val">0 / 2 (0%)</div></div></div>
       </div>
     </div>
 
     <!-- 2. VISTA: ÁLBUM POR PÁGINAS -->
     <div id="album-view-album_pages" class="album-view" style="display:none">
-      <div id="album-login-msg" class="hidden" style="margin-bottom:16px;padding:12px 16px;background:rgba(39,166,69,.07);border:1px solid rgba(39,166,69,.2);border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;color:var(--gris);letter-spacing:1px;">
+      <div id="album-login-msg" class="hidden" style="margin-bottom:16px;padding:12px 16px;background:rgba(39,166,69,.07);border:1px solid rgba(39,166,69,.2);border-radius:8px;font-family:&#39;Barlow Condensed&#39;,sans-serif;font-size:.82rem;color:var(--gris);letter-spacing:1px;">
         <a onclick="openAuthModal()" style="color:var(--verde-brillante);cursor:pointer;">Iniciá sesión</a> para guardar tu progreso y pegar figuritas.
       </div>
       
@@ -1471,7 +1525,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
         <!-- Navigation of pages -->
         <div class="album-book-nav">
           <button class="album-nav-btn" id="btn-page-prev" onclick="prevAlbumPage()">◀ Anterior</button>
-          <span style="font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:1px;" id="album-page-indicator">Páginas 1 - 2</span>
+          <span style="font-family:&#39;Barlow Condensed&#39;,sans-serif; font-weight:700; letter-spacing:1px;" id="album-page-indicator">Páginas 1 - 2</span>
           <button class="album-nav-btn" id="btn-page-next" onclick="nextAlbumPage()">Siguiente ▶</button>
         </div>
       </div>
@@ -1482,7 +1536,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div class="sobres-tab-container">
         <div class="timer-container">
           <div class="timer-text" id="pack-timer">00:00</div>
-          <div class="timer-sub" id="pack-timer-label">Siguiente sobre gratuito</div>
+          <div class="timer-sub" id="pack-timer-label">Iniciá sesión para reclamar</div>
         </div>
 
         <div class="sobre-virtual" id="virtual-pack-element" onclick="triggerPackOpening()">
@@ -1502,17 +1556,17 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
       <div class="col-header">
         <input class="col-search" id="col-search-input" type="text" placeholder="🔍 Buscar jugador..." oninput="renderColeccion()">
         <div class="col-filters" id="col-rarity-filters">
-          <button class="filter-btn active" data-colrar="all" onclick="filterColeccion('all',this)">Todas</button>
-          <button class="filter-btn" data-colrar="com" onclick="filterColeccion('com',this)">Común</button>
-          <button class="filter-btn" data-colrar="poco_comun" onclick="filterColeccion('poco_comun',this)">Poco común</button>
-          <button class="filter-btn" data-colrar="rara" onclick="filterColeccion('rara',this)">Raro</button>
-          <button class="filter-btn" data-colrar="epica" onclick="filterColeccion('epica',this)">Épico</button>
-          <button class="filter-btn" data-colrar="legendaria" onclick="filterColeccion('legendaria',this)">Legendario</button>
+          <button class="filter-btn active" data-colrar="all" onclick="filterColeccion(&#39;all&#39;,this)">Todas</button>
+          <button class="filter-btn" data-colrar="com" onclick="filterColeccion(&#39;com&#39;,this)">Común</button>
+          <button class="filter-btn" data-colrar="poco_comun" onclick="filterColeccion(&#39;poco_comun&#39;,this)">Poco común</button>
+          <button class="filter-btn" data-colrar="rara" onclick="filterColeccion(&#39;rara&#39;,this)">Raro</button>
+          <button class="filter-btn" data-colrar="epica" onclick="filterColeccion(&#39;epica&#39;,this)">Épico</button>
+          <button class="filter-btn" data-colrar="legendaria" onclick="filterColeccion(&#39;legendaria&#39;,this)">Legendario</button>
         </div>
       </div>
       
       <div style="margin-bottom: 20px;">
-        <label style="display:flex; align-items:center; gap:8px; font-family:'Barlow Condensed',sans-serif; font-size:0.9rem; color:var(--gris); cursor:pointer;">
+        <label style="display:flex; align-items:center; gap:8px; font-family:&#39;Barlow Condensed&#39;,sans-serif; font-size:0.9rem; color:var(--gris); cursor:pointer;">
           <input type="checkbox" id="col-dup-only" onchange="renderColeccion()" style="accent-color:var(--verde-brillante); width:16px; height:16px;">
           <span>Mostrar solo duplicados</span>
         </label>
@@ -1540,7 +1594,7 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 <div id="page-perfil" class="page">
   <div class="page-inner">
     <div class="section-header"><h2 class="section-title">Mi Perfil</h2><div class="section-line"></div></div>
-    <div id="perfil-content"></div>
+    <div id="perfil-content"><div class="locked-section"><div class="locked-icon">🔒</div><div class="locked-title">Iniciá sesión para ver tu perfil</div><p class="locked-text">Creá una cuenta o iniciá sesión.</p><button class="locked-btn" onclick="openAuthModal()">Iniciar sesión</button></div></div>
   </div>
   <div class="page-footer">CF INERI · URIELNETA · Fundado 2021</div>
 </div>
@@ -1562,6 +1616,11 @@ document.getElementById('awards-logo-img').src = AWARDS_SRC;
 var ADMIN_PASSWORD = 'ineri2025';
 var RANKS = ['visitante','usuario','editor','admin'];
 var RANK_LABELS = {visitante:'Visitante',usuario:'Usuario',editor:'Editor',admin:'Admin'};
+var currentUser = null;
+var _usersCache = [];
+var _noticiasCache = [];
+var _figuritasCache = [];
+var _userDataCache = {};
 
 // ══════════════════════════════════════
 // STORAGE HELPERS — Firebase
@@ -1570,8 +1629,55 @@ var { auth, db, ref, set, get, push, remove, update, onValue,
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
   signOut, onAuthStateChanged } = window._fb;
 
+function normalizeFirebaseList(obj) {
+  if (!obj) return [];
+  if (Array.isArray(obj)) return obj.filter(Boolean);
+  return Object.keys(obj).map(function(id){ return Object.assign({ id:id }, obj[id]); });
+}
+
+function getUserDataBucket(username) {
+  if (!username) return { album:[], inventory:[], packs:0, lastPack:null };
+  if (!_userDataCache[username]) _userDataCache[username] = { album:[], inventory:[], packs:0, lastPack:null };
+  return _userDataCache[username];
+}
+
+async function loadFirebaseCollections(username) {
+  try {
+    var usersSnap = await get(ref(db, 'cfineri/users'));
+    _usersCache = usersSnap.exists() ? normalizeFirebaseList(usersSnap.val()).map(function(u){
+      return Object.assign({ rank:'usuario', comments:0, avatar:'', banner:'' }, u);
+    }) : [];
+
+    var noticiasSnap = await get(ref(db, 'cfineri/noticias'));
+    _noticiasCache = noticiasSnap.exists() ? normalizeFirebaseList(noticiasSnap.val()).sort(function(a,b){
+      return new Date(b.fecha || 0) - new Date(a.fecha || 0);
+    }) : [];
+
+    var figuritasSnap = await get(ref(db, 'cfineri/figuritas'));
+    _figuritasCache = figuritasSnap.exists() ? normalizeFirebaseList(figuritasSnap.val()) : [];
+
+    if (username) {
+      var userDataSnap = await get(ref(db, 'cfineri/userdata/' + username));
+      _userDataCache[username] = userDataSnap.exists()
+        ? Object.assign({ album:[], inventory:[], packs:0, lastPack:null }, userDataSnap.val())
+        : { album:[], inventory:[], packs:0, lastPack:null };
+    }
+  } catch(e) {
+    console.error('Firebase load error', e);
+    showToast('No se pudo conectar con Firebase. Revisá la configuración.', true);
+  }
+}
+
+async function refreshFirebaseViews() {
+  await loadFirebaseCollections(currentUser && currentUser.username);
+  await loadAwards4Vote();
+  renderNav(); renderNoticias(); renderPerfil(); renderAlbum(); renderAwardsVoting(); startPackTimer();
+}
+
 // USUARIOS
 async function getUserByUsername(username) {
+  var cached = _usersCache.find(function(u){ return (u.username || '').toLowerCase() === username.toLowerCase(); });
+  if (cached) return cached;
   var snap = await get(ref(db, 'cfineri/users'));
   if (!snap.exists()) return null;
   var users = snap.val();
@@ -1582,66 +1688,102 @@ async function getUserByUsername(username) {
   }
   return null;
 }
+function getUsers() {
+  return _usersCache.slice().sort(function(a,b){ return (a.username || '').localeCompare(b.username || ''); });
+}
+async function saveUsers(users) {
+  _usersCache = users;
+  var payload = {};
+  users.forEach(function(u){
+    if (u.uid) {
+      var copy = Object.assign({}, u);
+      delete copy.uid;
+      payload[u.uid] = copy;
+    }
+  });
+  await set(ref(db, 'cfineri/users'), payload);
+}
+async function setCurrentUser(user) {
+  currentUser = user;
+  if (user && user.uid) await update(ref(db, 'cfineri/users/' + user.uid), {
+    username:user.username,
+    rank:user.rank || 'usuario',
+    joined:user.joined || new Date().toISOString(),
+    comments:user.comments || 0,
+    avatar:user.avatar || '',
+    banner:user.banner || ''
+  });
+}
 
 // NOTICIAS
-async function getNoticias() {
-  var snap = await get(ref(db, 'cfineri/noticias'));
-  if (!snap.exists()) return [];
-  var obj = snap.val();
-  return Object.entries(obj).map(([id, n]) => ({ id, ...n }))
-    .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+function getNoticias() {
+  return _noticiasCache.slice().sort(function(a,b){ return new Date(b.fecha || 0) - new Date(a.fecha || 0); });
 }
-async function saveNoticia(noticia) {
-  var id = noticia.id || push(ref(db, 'cfineri/noticias')).key;
-  await set(ref(db, 'cfineri/noticias/' + id), { ...noticia, id });
-  return id;
+async function saveNoticias(noticias) {
+  _noticiasCache = noticias;
+  var payload = {};
+  noticias.forEach(function(n){
+    var id = String(n.id || push(ref(db, 'cfineri/noticias')).key);
+    payload[id] = Object.assign({}, n, { id:id, comentarios:n.comentarios || [] });
+  });
+  await set(ref(db, 'cfineri/noticias'), payload);
 }
 async function deleteNoticiaDB(id) {
+  _noticiasCache = _noticiasCache.filter(function(n){ return String(n.id) !== String(id); });
   await remove(ref(db, 'cfineri/noticias/' + id));
 }
 
 // FIGURITAS
-async function getFiguritas() {
-  var snap = await get(ref(db, 'cfineri/figuritas'));
-  if (!snap.exists()) return [];
-  var obj = snap.val();
-  return Object.entries(obj).map(([id, f]) => ({ ...f, id: f.id || id }));
+function getFiguritas() {
+  return _figuritasCache.slice();
+}
+async function saveFiguritas(figuritas) {
+  _figuritasCache = figuritas;
+  var payload = {};
+  figuritas.forEach(function(f){
+    var id = String(f.id || push(ref(db, 'cfineri/figuritas')).key);
+    payload[id] = Object.assign({}, f, { id:id });
+  });
+  await set(ref(db, 'cfineri/figuritas'), payload);
 }
 async function saveFigurita(fig) {
-  var id = fig.id || push(ref(db, 'cfineri/figuritas')).key;
-  await set(ref(db, 'cfineri/figuritas/' + id), { ...fig, id });
+  var id = String(fig.id || push(ref(db, 'cfineri/figuritas')).key);
+  var saved = Object.assign({}, fig, { id:id });
+  _figuritasCache = _figuritasCache.filter(function(f){ return String(f.id) !== id; }).concat(saved);
+  await set(ref(db, 'cfineri/figuritas/' + id), saved);
 }
 async function deleteFiguritaDB(id) {
+  _figuritasCache = _figuritasCache.filter(function(f){ return String(f.id) !== String(id); });
   await remove(ref(db, 'cfineri/figuritas/' + id));
 }
 
 // ÁLBUM E INVENTARIO POR USUARIO
-async function getUserAlbum(username) {
-  var snap = await get(ref(db, 'cfineri/userdata/' + username + '/album'));
-  return snap.exists() ? snap.val() : [];
+function getUserAlbum(username) {
+  return (getUserDataBucket(username).album || []).slice();
 }
 async function saveUserAlbum(username, data) {
+  getUserDataBucket(username).album = data;
   await set(ref(db, 'cfineri/userdata/' + username + '/album'), data);
 }
-async function getUserInventory(username) {
-  var snap = await get(ref(db, 'cfineri/userdata/' + username + '/inventory'));
-  return snap.exists() ? snap.val() : [];
+function getUserInventory(username) {
+  return (getUserDataBucket(username).inventory || []).slice();
 }
 async function saveUserInventory(username, data) {
+  getUserDataBucket(username).inventory = data;
   await set(ref(db, 'cfineri/userdata/' + username + '/inventory'), data);
 }
-async function getUserPacks(username) {
-  var snap = await get(ref(db, 'cfineri/userdata/' + username + '/packs'));
-  return snap.exists() ? snap.val() : 0;
+function getUserPacks(username) {
+  return parseInt(getUserDataBucket(username).packs || 0);
 }
 async function saveUserPacks(username, packs) {
+  getUserDataBucket(username).packs = packs;
   await set(ref(db, 'cfineri/userdata/' + username + '/packs'), packs);
 }
-async function getLastPackTime(username) {
-  var snap = await get(ref(db, 'cfineri/userdata/' + username + '/lastPack'));
-  return snap.exists() ? snap.val() : null;
+function getLastPackTime(username) {
+  return getUserDataBucket(username).lastPack || null;
 }
 async function saveLastPackTime(username, time) {
+  getUserDataBucket(username).lastPack = time;
   await set(ref(db, 'cfineri/userdata/' + username + '/lastPack'), time);
 }
 
@@ -1655,6 +1797,9 @@ function showToast(msg,isError){
   t.classList.add('show');
   setTimeout(function(){t.classList.remove('show');},3000);
 }
+function isLoggedIn(){return !!currentUser;}
+function isAdmin(){return !!(currentUser && currentUser.rank === 'admin');}
+function canPublish(){return !!(currentUser && (currentUser.rank === 'admin' || currentUser.rank === 'editor'));}
 
 // ══════════════════════════════════════
 // AUTH — Firebase
@@ -1672,7 +1817,7 @@ async function doLogin() {
     var snap = await get(ref(db, 'cfineri/users/' + cred.user.uid));
     currentUser = { uid: cred.user.uid, ...snap.val() };
     closeAuthModal();
-    renderNav(); renderNoticias(); renderPerfil(); renderAlbum(); startPackTimer();
+    await refreshFirebaseViews();
     showToast('Bienvenido, ' + currentUser.username + '!');
   } catch(e) {
     err.textContent = 'Usuario o contraseña incorrectos.'; err.style.display = 'block';
@@ -1706,7 +1851,7 @@ async function doRegister() {
     await set(ref(db, 'cfineri/users/' + cred.user.uid), newUser);
     currentUser = { uid: cred.user.uid, ...newUser };
     closeAuthModal();
-    renderNav(); renderNoticias(); renderPerfil(); renderAlbum(); startPackTimer();
+    await refreshFirebaseViews();
     showToast('Cuenta creada! Bienvenido, ' + user);
   } catch(e) {
     err.textContent = 'Error al crear cuenta: ' + e.message; err.style.display = 'block';
@@ -1716,7 +1861,7 @@ async function doRegister() {
 async function doLogout() {
   await signOut(auth);
   currentUser = null; closeDropdown();
-  renderNav(); renderNoticias(); renderPerfil(); renderAlbum(); startPackTimer();
+  renderNav(); renderNoticias(); renderPerfil(); renderAlbum(); renderAwardsVoting(); startPackTimer();
   if (document.getElementById('page-perfil').classList.contains('active')) showPage('historia');
   showToast('Sesión cerrada.');
 }
@@ -1727,8 +1872,11 @@ onAuthStateChanged(auth, async function(firebaseUser) {
     var snap = await get(ref(db, 'cfineri/users/' + firebaseUser.uid));
     if (snap.exists()) {
       currentUser = { uid: firebaseUser.uid, ...snap.val() };
-      renderNav(); renderNoticias(); renderPerfil(); renderAlbum(); startPackTimer();
+      await refreshFirebaseViews();
     }
+  } else {
+    currentUser = null;
+    await refreshFirebaseViews();
   }
 });
 
@@ -2119,7 +2267,7 @@ function renderAlbum(){
   seedDefaultStickers();
   
   if(currentUser){
-    var packs = parseInt(localStorage.getItem('cfineri_packs_' + currentUser.username) || '0');
+    var packs = getUserPacks(currentUser.username);
     var stockBadgeNav = document.getElementById('stock-count-nav');
     if(stockBadgeNav) stockBadgeNav.textContent = packs;
     var stockBadgeVirtual = document.getElementById('pack-stock-badge');
@@ -2312,22 +2460,22 @@ function updatePackTimer(){
   }
   
   var now = Date.now();
-  var lastTime = parseInt(localStorage.getItem('cfineri_last_pack_' + currentUser.username));
+  var lastTime = parseInt(getLastPackTime(currentUser.username));
   if(isNaN(lastTime)){
     lastTime = now - freePackCooldown;
-    localStorage.setItem('cfineri_last_pack_' + currentUser.username, lastTime);
+    saveLastPackTime(currentUser.username, lastTime);
   }
   
   var elapsed = now - lastTime;
   var hoursAvailable = Math.floor(elapsed / freePackCooldown);
   
   if(hoursAvailable > 0){
-    var currentPacks = parseInt(localStorage.getItem('cfineri_packs_' + currentUser.username) || '0');
+    var currentPacks = getUserPacks(currentUser.username);
     currentPacks += hoursAvailable;
-    localStorage.setItem('cfineri_packs_' + currentUser.username, currentPacks);
+    saveUserPacks(currentUser.username, currentPacks);
     
     lastTime += hoursAvailable * freePackCooldown;
-    localStorage.setItem('cfineri_last_pack_' + currentUser.username, lastTime);
+    saveLastPackTime(currentUser.username, lastTime);
     
     var stockBadgeNav = document.getElementById('stock-count-nav');
     if(stockBadgeNav) stockBadgeNav.textContent = currentPacks;
@@ -2362,7 +2510,7 @@ function renderSobresTab(){
     return;
   }
   
-  var packs = parseInt(localStorage.getItem('cfineri_packs_' + currentUser.username) || '0');
+  var packs = getUserPacks(currentUser.username);
   document.getElementById('pack-stock-badge').textContent = packs;
   
   if(packs > 0){
@@ -2414,7 +2562,7 @@ function triggerPackOpening(){
     return;
   }
   
-  var packs = parseInt(localStorage.getItem('cfineri_packs_' + currentUser.username) || '0');
+  var packs = getUserPacks(currentUser.username);
   if(packs <= 0){
     showToast('No tenés sobres disponibles.',true);
     return;
@@ -2427,7 +2575,7 @@ function triggerPackOpening(){
     if(packEl) packEl.classList.remove('tearing');
     
     packs--;
-    localStorage.setItem('cfineri_packs_' + currentUser.username, packs);
+    saveUserPacks(currentUser.username, packs);
     document.getElementById('pack-stock-badge').textContent = packs;
     var stockBadgeNav = document.getElementById('stock-count-nav');
     if(stockBadgeNav) stockBadgeNav.textContent = packs;
@@ -2558,6 +2706,7 @@ function showPage(name){
   if(name==='noticias')renderNoticias();
   if(name==='perfil')renderPerfil();
   if(name==='album')renderAlbum();
+  if(name==='awards')renderAwardsVoting();
 }
 function toggleMenu(){document.getElementById('nav-tabs').classList.toggle('open');}
 function closeMenu(){if(window.innerWidth<=900)document.getElementById('nav-tabs').classList.remove('open');}
@@ -2765,6 +2914,132 @@ function renderRivalidades(){
 }
 
 // ══════════════════════════════════════
+
+// URIELNETA AWARDS 4 - VOTACION
+var AWARDS4 = [
+  {id:'mas_activo', name:'Premio Mas Activo', slots:3, nominees:['17fxbri','Rvssian','Bluex','Samu','Hiiro']},
+  {id:'fantasma', name:'Premio Fantasma del Anio', slots:3, nominees:['Milan','Rvssian','Bluex']},
+  {id:'balon_playa', name:'Premio Balon de Playa', slots:3, nominees:['Goteras','17fxbri','Gab','Matigol']},
+  {id:'balon_reach', name:'Premio Balon de Reach', slots:3, nominees:['Jebedias','Uriel','Rvssian']},
+  {id:'aguatero', name:'Premio Aguatero del Anio', slots:3, nominees:['Mike','Chess','Josh']},
+  {id:'manager', name:'Premio Mejor Manager', slots:3, nominees:['Uriel | con CF Ineri OLD','Jebedias | con CF Ineri OLD','17fxbri | con CF Ineri TOUCH','Hiiro | con Random Team','Rvssian | con CF Ineri NEW']},
+  {id:'team', name:'Premio Mejor Team', slots:3, nominees:['CF Ineri 2025 de TPS','Cruz Azul de SLM','CF Ineri 2025/2026 de TOUCH','Random Team de TPS','Amigos FC de TPS']},
+  {id:'old_star', name:'Premio Old Star', slots:3, nominees:['Milan','Rvssian','Hiiro','Gigi','Iker']},
+  {id:'future_star', name:'Premio Future Star', slots:3, nominees:['17fxbri','Bluex','Matigol','Samu','Goku','Kairo']},
+  {id:'banca_dor', name:"Premio Banca D'OR", slots:3, nominees:['Chess','Uriel','Josh','Iker']},
+  {id:'respect', name:'Premio Respect', slots:3, nominees:['Bluex | por lavar panes en cook burguers','Goteras | por saludar a sus fanes','Rvssian | por decir NPC a cada rato']},
+  {id:'goteras', name:'Premio Goteras', slots:3, nominees:['Bluex','Goteras','Chess']},
+  {id:'mamita', name:'Premio Mamita', slots:3, nominees:['Iker','Uriel','Milan','Ryze']},
+  {id:'defensa', name:'Premio Mejor Defensa', slots:3, nominees:['Jebedias','Samu','Rayo','Hiiro','Rvssian']},
+  {id:'khazir', name:'Premio Khazir', slots:3, nominees:['Jebedias vs Team RANDOM | https://youtu.be/jyiAmFwSZPk','Bluex vs 4KZ | https://youtu.be/dbNXhH4AirY','Rvssian vs Team Random | https://youtu.be/jZzfRSGWkUY']},
+  {id:'partido_anio', name:'Premio Mejor Partido del Anio', slots:3, nominees:['CF Ineri vs Galindos 0-0 WIN X Penales | ATF COPA ATF','Racing vs Independiente 8-7 | FTC Libertadores','Cruz Azul vs Guadalajara 12-3 | SLM']},
+  {id:'ballon_dor', name:"Ballon D'OR", slots:10, nominees:['Rvssian','Jebedias','Uriel','Azion','Benja','Hiiro','Milan','Bluex','17fxbri','Pemegamer','Yang','Kairo','Matigol','Goteras','Gigi','Samu','Void','2kInco','Sergio','Pelao']}
+];
+var AWARDS4_FIXED = { name:'Premio Bota de Oro', winners:['Primero: Rvssian','Segundo: Bluex','Tercero: Goteras'] };
+var _awards4MyVote = null;
+
+async function loadAwards4Vote() {
+  _awards4MyVote = null;
+  if (!currentUser || !currentUser.uid) return;
+  try {
+    var snap = await get(ref(db, 'cfineri/awards4Votes/' + currentUser.uid));
+    _awards4MyVote = snap.exists() ? snap.val() : null;
+  } catch(e) {
+    console.error('Awards vote load error', e);
+  }
+}
+
+function renderAwardsVoting() {
+  var el = document.getElementById('awards-voting'); if(!el) return;
+  var voted = !!_awards4MyVote;
+  var header =
+    '<div class="vote-header"><div><div class="vote-title">URIELNETA AWARDS 4</div>'+
+    '<div class="vote-sub">Elegi top 3 por premio. En Ballon D\'OR elegi top 10.</div></div>'+
+    '<div class="vote-status">'+(currentUser ? (voted ? 'Voto registrado' : 'Cuenta: '+escHtml(currentUser.username)) : 'Necesitas cuenta')+'</div></div>';
+  if (!currentUser) {
+    el.innerHTML = '<div class="vote-panel">'+header+'<div class="vote-login"><a class="vote-link" onclick="openAuthModal()">Inicia sesion</a> o crea una cuenta para votar.</div></div>';
+    return;
+  }
+
+  var html = '<div class="vote-panel">'+header+'<div class="vote-grid">';
+  html += '<div class="vote-card fixed"><div class="vote-award-name">'+escHtml(AWARDS4_FIXED.name)+'</div><div class="vote-help">Este premio ya esta definido y no se vota.</div><div class="vote-fixed-list">'+AWARDS4_FIXED.winners.map(function(w){return '<div class="vote-fixed-item">'+escHtml(w)+'</div>';}).join('')+'</div></div>';
+  AWARDS4.forEach(function(award){
+    html += '<div class="vote-card"><div class="vote-award-name">'+escHtml(award.name)+'</div>'+
+      '<div class="vote-help">'+(award.slots === 10 ? 'Top 10: 10 puntos al primero, 9 al segundo y asi.' : 'Top 3: 3, 2 y 1 puntos.')+'</div>'+
+      '<div class="vote-selects">';
+    for (var i=0;i<award.slots;i++) {
+      var saved = _awards4MyVote && _awards4MyVote.votes && _awards4MyVote.votes[award.id] ? _awards4MyVote.votes[award.id][i] : '';
+      html += '<div class="vote-select-row"><div class="vote-rank">#'+(i+1)+'</div><select class="vote-select" data-award="'+award.id+'" data-slot="'+i+'" '+(voted?'disabled':'')+'><option value="">Elegir</option>'+
+        award.nominees.map(function(n){return '<option value="'+escHtml(n)+'"'+(saved===n?' selected':'')+'>'+escHtml(n)+'</option>';}).join('')+
+        '</select></div>';
+    }
+    html += '</div></div>';
+  });
+  html += '</div><div class="vote-actions"><span class="vote-error" id="vote-error"></span><button class="vote-btn" onclick="submitAwards4Vote()" '+(voted?'disabled':'')+'>'+(voted?'Ya votaste':'Guardar voto')+'</button></div></div>';
+  el.innerHTML = html;
+}
+
+function collectAwards4Vote() {
+  var votes = {};
+  for (var a=0;a<AWARDS4.length;a++) {
+    var award = AWARDS4[a];
+    votes[award.id] = [];
+    for (var i=0;i<award.slots;i++) {
+      var sel = document.querySelector('.vote-select[data-award="'+award.id+'"][data-slot="'+i+'"]');
+      var val = sel ? sel.value : '';
+      if (!val) return { error:'Completa todos los puestos de '+award.name+'.' };
+      votes[award.id].push(val);
+    }
+    var unique = {};
+    for (var j=0;j<votes[award.id].length;j++) {
+      if (unique[votes[award.id][j]]) return { error:'No podes repetir nominados en '+award.name+'.' };
+      unique[votes[award.id][j]] = true;
+    }
+  }
+  return { votes:votes };
+}
+
+async function submitAwards4Vote() {
+  if (!currentUser || !currentUser.uid) { showToast('Inicia sesion para votar.', true); return; }
+  var err = document.getElementById('vote-error');
+  if (err) err.style.display = 'none';
+  await loadAwards4Vote();
+  if (_awards4MyVote) { showToast('Ya realizaste las votaciones una vez.', true); renderAwardsVoting(); return; }
+  var collected = collectAwards4Vote();
+  if (collected.error) {
+    if (err) { err.textContent = collected.error; err.style.display = 'inline'; }
+    else showToast(collected.error, true);
+    return;
+  }
+  var payload = {
+    uid: currentUser.uid,
+    username: currentUser.username,
+    createdAt: new Date().toISOString(),
+    votes: collected.votes,
+    points: buildAwards4Points(collected.votes)
+  };
+  try {
+    await set(ref(db, 'cfineri/awards4Votes/' + currentUser.uid), payload);
+    _awards4MyVote = payload;
+    renderAwardsVoting();
+    showToast('Voto guardado en Firebase.');
+  } catch(e) {
+    console.error('Awards vote save error', e);
+    showToast('No se pudo guardar el voto en Firebase.', true);
+  }
+}
+
+function buildAwards4Points(votes) {
+  var points = {};
+  AWARDS4.forEach(function(award){
+    points[award.id] = {};
+    votes[award.id].forEach(function(nominee, index){
+      points[award.id][nominee] = award.slots - index;
+    });
+  });
+  return points;
+}
+
 // INIT
 // ══════════════════════════════════════
 renderNav();
@@ -2774,6 +3049,7 @@ renderForma();
 renderMatches();
 renderOverview();
 renderRivalidades();
+renderAwardsVoting();
 renderNoticias();
 renderAlbum();
 renderPerfil();
@@ -2783,5 +3059,6 @@ updateFigPreview();
 document.getElementById('login-pass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 document.getElementById('reg-pass2').addEventListener('keydown',function(e){if(e.key==='Enter')doRegister();});
 </script>
-</body>
-</html>
+
+
+</body></html>
