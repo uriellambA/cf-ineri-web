@@ -320,6 +320,19 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 .vote-error{color:#e05555;font-size:.82rem;display:none;}
 .vote-login{padding:22px;border:1px dashed rgba(201,168,76,.25);border-radius:10px;text-align:center;color:var(--gris);font-family:'Barlow Condensed',sans-serif;font-size:.9rem;letter-spacing:2px;text-transform:uppercase;}
 .vote-link{color:#c9a84c;cursor:pointer;text-decoration:none;}
+.vote-admin-panel{margin-top:18px;border:1px solid rgba(201,168,76,.2);border-radius:12px;background:rgba(6,10,6,.72);padding:18px;}
+.vote-admin-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+.vote-admin-title{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:3px;color:#f5e6a3;}
+.vote-admin-meta{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;letter-spacing:2px;color:var(--gris);text-transform:uppercase;}
+.vote-admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.vote-result-card,.vote-user-card{background:#0d120d;border:1px solid rgba(201,168,76,.12);border-radius:9px;padding:12px;}
+.vote-result-title,.vote-user-name{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:1px;color:#f5e6a3;text-transform:uppercase;margin-bottom:8px;}
+.vote-rank-line{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.82rem;color:rgba(255,255,255,.78);border-top:1px solid rgba(255,255,255,.04);padding-top:6px;margin-top:6px;}
+.vote-rank-line strong{color:#c9a84c;}
+.vote-user-picks{font-size:.74rem;line-height:1.45;color:var(--gris);margin-top:6px;}
+.vote-admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+.vote-admin-tab{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #333;background:transparent;color:var(--gris);border-radius:7px;padding:7px 12px;cursor:pointer;}
+.vote-admin-tab.active{border-color:#c9a84c;color:#f5e6a3;background:rgba(201,168,76,.08);}
 .edition-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:3px;color:#0a0a0a;background:#c9a84c;padding:4px 13px;border-radius:20px;text-transform:uppercase;font-weight:700;margin-bottom:22px;}
 
 /* ── NOTICIAS ── */
@@ -3012,13 +3025,27 @@ var AWARDS4 = [
 ];
 var AWARDS4_FIXED = { name:'Premio Bota de Oro', winners:['Primero: Rvssian','Segundo: Bluex','Tercero: Goteras'] };
 var _awards4MyVote = null;
+var _awards4AllVotes = [];
+var _awards4Config = { closed:false, closedAt:null, closedBy:null };
+var _awardsAdminView = 'results';
 
 async function loadAwards4Vote() {
   _awards4MyVote = null;
-  if (!currentUser || !currentUser.uid) return;
   try {
+    var cfgSnap = await get(ref(db, 'cfineri/awards4Config'));
+    _awards4Config = cfgSnap.exists() ? Object.assign({ closed:false, closedAt:null, closedBy:null }, cfgSnap.val()) : { closed:false, closedAt:null, closedBy:null };
+    if (!currentUser || !currentUser.uid) {
+      _awards4AllVotes = [];
+      return;
+    }
     var snap = await get(ref(db, 'cfineri/awards4Votes/' + currentUser.uid));
     _awards4MyVote = snap.exists() ? snap.val() : null;
+    if (isAdmin()) {
+      var allSnap = await get(ref(db, 'cfineri/awards4Votes'));
+      _awards4AllVotes = allSnap.exists() ? normalizeFirebaseList(allSnap.val()) : [];
+    } else {
+      _awards4AllVotes = [];
+    }
   } catch(e) {
     console.error('Awards vote load error', e);
   }
@@ -3027,12 +3054,13 @@ async function loadAwards4Vote() {
 function renderAwardsVoting() {
   var el = document.getElementById('awards-voting'); if(!el) return;
   var voted = !!_awards4MyVote;
+  var closed = !!(_awards4Config && _awards4Config.closed);
   var header =
     '<div class="vote-header"><div><div class="vote-title">URIELNETA AWARDS 4</div>'+
     '<div class="vote-sub">Elegi top 3 por premio. En Ballon D\'OR elegi top 10.</div></div>'+
-    '<div class="vote-status">'+(currentUser ? (voted ? 'Voto registrado' : 'Cuenta: '+escHtml(currentUser.username)) : 'Necesitas cuenta')+'</div></div>';
+    '<div class="vote-status">'+(closed ? 'Encuesta cerrada' : (currentUser ? (voted ? 'Voto registrado' : 'Cuenta: '+escHtml(currentUser.username)) : 'Necesitas cuenta'))+'</div></div>';
   if (!currentUser) {
-    el.innerHTML = '<div class="vote-panel">'+header+'<div class="vote-login"><a class="vote-link" onclick="openAuthModal()">Inicia sesion</a> o crea una cuenta para votar.</div></div>';
+    el.innerHTML = '<div class="vote-panel">'+header+'<div class="vote-login">'+(closed ? 'La encuesta ya esta cerrada.' : '<a class="vote-link" onclick="openAuthModal()">Inicia sesion</a> o crea una cuenta para votar.')+'</div></div>';
     return;
   }
 
@@ -3044,13 +3072,15 @@ function renderAwardsVoting() {
       '<div class="vote-selects">';
     for (var i=0;i<award.slots;i++) {
       var saved = _awards4MyVote && _awards4MyVote.votes && _awards4MyVote.votes[award.id] ? _awards4MyVote.votes[award.id][i] : '';
-      html += '<div class="vote-select-row"><div class="vote-rank">#'+(i+1)+'</div><select class="vote-select" data-award="'+award.id+'" data-slot="'+i+'" '+(voted?'disabled':'')+'><option value="">Elegir</option>'+
+      html += '<div class="vote-select-row"><div class="vote-rank">#'+(i+1)+'</div><select class="vote-select" data-award="'+award.id+'" data-slot="'+i+'" '+((voted||closed)?'disabled':'')+'><option value="">Elegir</option>'+
         award.nominees.map(function(n){return '<option value="'+escHtml(n)+'"'+(saved===n?' selected':'')+'>'+escHtml(n)+'</option>';}).join('')+
         '</select></div>';
     }
     html += '</div></div>';
   });
-  html += '</div><div class="vote-actions"><span class="vote-error" id="vote-error"></span><button class="vote-btn" onclick="submitAwards4Vote()" '+(voted?'disabled':'')+'>'+(voted?'Ya votaste':'Guardar voto')+'</button></div></div>';
+  html += '</div><div class="vote-actions"><span class="vote-error" id="vote-error"></span><button class="vote-btn" onclick="submitAwards4Vote()" '+((voted||closed)?'disabled':'')+'>'+(closed?'Encuesta cerrada':(voted?'Ya votaste':'Guardar voto'))+'</button></div>';
+  if (isAdmin()) html += renderAwardsAdminPanel();
+  html += '</div>';
   el.innerHTML = html;
 }
 
@@ -3079,6 +3109,7 @@ async function submitAwards4Vote() {
   var err = document.getElementById('vote-error');
   if (err) err.style.display = 'none';
   await loadAwards4Vote();
+  if (_awards4Config && _awards4Config.closed) { showToast('La encuesta ya esta cerrada.', true); renderAwardsVoting(); return; }
   if (_awards4MyVote) { showToast('Ya realizaste las votaciones una vez.', true); renderAwardsVoting(); return; }
   var collected = collectAwards4Vote();
   if (collected.error) {
@@ -3118,6 +3149,92 @@ function buildAwards4Points(votes) {
   return points;
 }
 
+function getAwardNameById(id) {
+  var award = AWARDS4.find(function(a){ return a.id === id; });
+  return award ? award.name : id;
+}
+
+function calculateAwardsResults() {
+  var totals = {};
+  AWARDS4.forEach(function(award){ totals[award.id] = {}; });
+  _awards4AllVotes.forEach(function(vote){
+    AWARDS4.forEach(function(award){
+      var picks = vote.votes && vote.votes[award.id] ? vote.votes[award.id] : [];
+      picks.forEach(function(nominee, index){
+        var pts = award.slots - index;
+        totals[award.id][nominee] = (totals[award.id][nominee] || 0) + pts;
+      });
+    });
+  });
+  return AWARDS4.map(function(award){
+    var ranking = Object.keys(totals[award.id]).map(function(nominee){
+      return { nominee: nominee, points: totals[award.id][nominee] };
+    }).sort(function(a,b){ return b.points - a.points || a.nominee.localeCompare(b.nominee); });
+    return { id: award.id, name: award.name, ranking: ranking };
+  });
+}
+
+function renderAwardsAdminPanel() {
+  var closed = !!(_awards4Config && _awards4Config.closed);
+  var html = '<div class="vote-admin-panel"><div class="vote-admin-top"><div><div class="vote-admin-title">Panel Admin Awards</div><div class="vote-admin-meta">'+_awards4AllVotes.length+' votos registrados'+(closed && _awards4Config.closedAt?' · cerrada '+fmtDate(_awards4Config.closedAt):'')+'</div></div><button class="vote-btn" onclick="toggleAwards4Closed()">'+(closed?'Reabrir encuesta':'Terminar encuesta')+'</button></div>';
+  html += '<div class="vote-admin-tabs"><button class="vote-admin-tab '+(_awardsAdminView==='results'?'active':'')+'" onclick="setAwardsAdminView(\'results\')">Resultados</button><button class="vote-admin-tab '+(_awardsAdminView==='votes'?'active':'')+'" onclick="setAwardsAdminView(\'votes\')">Votos por usuario</button></div>';
+  if (_awardsAdminView === 'votes') html += renderAwardsUserVotes();
+  else html += renderAwardsResults();
+  html += '</div>';
+  return html;
+}
+
+function renderAwardsResults() {
+  var results = calculateAwardsResults();
+  if (!_awards4AllVotes.length) return '<div class="vote-login">Todavia no hay votos cargados.</div>';
+  return '<div class="vote-admin-grid">'+results.map(function(result){
+    var top = result.ranking.slice(0,5);
+    return '<div class="vote-result-card"><div class="vote-result-title">'+escHtml(result.name)+'</div>'+
+      (top.length ? top.map(function(row, idx){
+        return '<div class="vote-rank-line"><span>#'+(idx+1)+' '+escHtml(row.nominee)+'</span><strong>'+row.points+' pts</strong></div>';
+      }).join('') : '<div class="vote-user-picks">Sin votos en este premio.</div>')+
+      '</div>';
+  }).join('')+'</div>';
+}
+
+function renderAwardsUserVotes() {
+  if (!_awards4AllVotes.length) return '<div class="vote-login">Todavia no hay votos cargados.</div>';
+  return '<div class="vote-admin-grid">'+_awards4AllVotes.slice().sort(function(a,b){
+    return (a.username || '').localeCompare(b.username || '');
+  }).map(function(vote){
+    var picks = AWARDS4.map(function(award){
+      var list = vote.votes && vote.votes[award.id] ? vote.votes[award.id] : [];
+      return '<div class="vote-user-picks"><strong>'+escHtml(award.name)+':</strong> '+escHtml(list.join(' | ') || 'Sin voto')+'</div>';
+    }).join('');
+    return '<div class="vote-user-card"><div class="vote-user-name">'+escHtml(vote.username || vote.uid || 'Usuario')+'</div><div class="vote-admin-meta">'+fmtDate(vote.createdAt)+'</div>'+picks+'</div>';
+  }).join('')+'</div>';
+}
+
+function setAwardsAdminView(view) {
+  _awardsAdminView = view;
+  renderAwardsVoting();
+}
+
+async function toggleAwards4Closed() {
+  if (!isAdmin()) { showToast('Solo admins.', true); return; }
+  var closed = !(_awards4Config && _awards4Config.closed);
+  var payload = {
+    closed: closed,
+    closedAt: closed ? new Date().toISOString() : null,
+    closedBy: closed ? currentUser.username : null
+  };
+  try {
+    await set(ref(db, 'cfineri/awards4Config'), payload);
+    _awards4Config = payload;
+    await loadAwards4Vote();
+    renderAwardsVoting();
+    showToast(closed ? 'Encuesta cerrada.' : 'Encuesta reabierta.');
+  } catch(e) {
+    console.error('Awards config save error', e);
+    showToast('No se pudo cambiar el estado de la encuesta.', true);
+  }
+}
+
 // Exponer handlers usados por onclick para navegadores/modos estrictos.
 Object.assign(window, {
   openAuthModal: openAuthModal,
@@ -3155,7 +3272,9 @@ Object.assign(window, {
   flipRevealCard: flipRevealCard,
   closeRevealModal: closeRevealModal,
   filterColeccion: filterColeccion,
-  submitAwards4Vote: submitAwards4Vote
+  submitAwards4Vote: submitAwards4Vote,
+  setAwardsAdminView: setAwardsAdminView,
+  toggleAwards4Closed: toggleAwards4Closed
 });
 
 // INIT
