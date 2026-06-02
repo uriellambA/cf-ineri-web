@@ -464,24 +464,39 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
 
 /* ══ MOBILE ══ */
 @media(max-width:900px){
-  .nav-center{display:none;}
+  nav{padding:0 12px;gap:8px;}
+  .nav-brand{font-size:1.08rem;letter-spacing:1.4px;}
+  .nav-logo{min-width:0;}
+  .nav-logo img{height:34px;}
+  .nav-right{margin-left:auto;}
   .nav-hamburger{display:block;}
+  .nav-center{display:none;}
   .nav-center.open{
-    display:flex;flex-direction:column;
-    position:fixed;top:58px;left:0;right:0;bottom:0;
-    background:rgba(10,10,10,.99);
-    border-bottom:1px solid var(--verde);
-    padding:14px;gap:3px;
-    z-index:250;
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    top:58px;
+    left:10px;
+    right:10px;
+    max-height:calc(100dvh - 72px);
+    background:rgba(10,10,10,.98);
+    border:1px solid var(--verde);
+    border-radius:0 0 12px 12px;
+    padding:10px;
+    gap:4px;
+    z-index:350;
     overflow-y:auto;
+    box-shadow:0 12px 32px rgba(0,0,0,.65);
   }
   .nav-center.open .nav-tab{
-    font-size:1.05rem;
-    padding:13px 16px;
+    width:100%;
+    font-size:.98rem;
+    padding:12px 14px;
     border-radius:8px;
     text-align:left;
     border-bottom:1px solid #1a2a1c;
   }
+  .nav-center.open .nav-tab.active{border-bottom:1px solid var(--verde-brillante);}
   .overview-grid{grid-template-columns:1fr;}
   .nav-username,.nav-right .rank-badge{display:none;}
 }
@@ -497,6 +512,11 @@ nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(10,10,10,0.97);b
   .section-title{font-size:2rem;}
 }
 @media(max-width:480px){
+  nav{height:56px;}
+  .page{padding-top:56px;}
+  .nav-brand{max-width:118px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .nav-user-btn{font-size:.7rem;padding:5px 9px;}
+  .nav-center.open{top:56px;left:6px;right:6px;max-height:calc(100dvh - 64px);}
   .historia-hero h1{font-size:2.8rem;}
   .perfil-stats{gap:12px;}
   .album-grid{grid-template-columns:repeat(3,1fr);}
@@ -1638,6 +1658,11 @@ var _usersCache = [];
 var _noticiasCache = [];
 var _figuritasCache = [];
 var _userDataCache = {};
+var DEFAULT_STICKER_IDS = ['10001','10002','10003','10004','10005','10006','10007','10008'];
+
+function isDefaultSticker(fig) {
+  return fig && DEFAULT_STICKER_IDS.indexOf(String(fig.id)) >= 0 && fig.createdBy === 'system';
+}
 
 // ══════════════════════════════════════
 // STORAGE HELPERS — Firebase
@@ -1683,7 +1708,7 @@ async function loadFirebaseCollections(username) {
 
   var figuritasSnap = await tryLoad('figuritas', function(){ return get(ref(db, 'cfineri/figuritas')); });
   if (figuritasSnap && figuritasSnap.exists()) {
-    _figuritasCache = normalizeFirebaseList(figuritasSnap.val());
+    _figuritasCache = normalizeFirebaseList(figuritasSnap.val()).filter(function(fig){ return !isDefaultSticker(fig); });
   }
 
   if (username) {
@@ -1792,7 +1817,7 @@ async function deleteNoticiaDB(id) {
 
 // FIGURITAS
 function getFiguritas() {
-  return _figuritasCache.slice();
+  return _figuritasCache.filter(function(fig){ return !isDefaultSticker(fig); }).slice();
 }
 async function saveFiguritas(figuritas) {
   _figuritasCache = figuritas;
@@ -2330,6 +2355,7 @@ function changeAlbumTab(tab){
 }
 
 function seedDefaultStickers(){
+  return;
   var figs = getFiguritas();
   if(figs.length === 0){
     var defaultStickers = [
